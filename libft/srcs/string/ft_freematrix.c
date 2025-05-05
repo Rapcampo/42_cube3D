@@ -14,7 +14,7 @@
 
 void	*ft_freematrix(char **matrix)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (matrix[++i])

@@ -15,7 +15,7 @@
 size_t	ft_strcspn(const char *str, const char *reject)
 {
 	size_t	len;
-	
+
 	len = 0;
 	while (str[len] && !ft_strchr(reject, str[len]))
 		len++;

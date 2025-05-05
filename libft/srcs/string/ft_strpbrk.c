@@ -14,7 +14,7 @@
 
 char	*ft_strpbrk(char const *str, char const *accept)
 {
-	char const *res;
+	char const	*res;
 
 	res = str + ft_strcspn(str, accept);
 	if (!*res)

@@ -12,9 +12,11 @@
 
 #include "libft.h"
 
-char	*ft_stpcpy(char *restrict dst, const char *restrict src)
+char	*ft_stpcpy(char *restrict dst, char const *restrict src)
 {
-	char *p;
-	
-	return (p = ft_mempcpy(dst, src, ft_strlen(src)), *p = 0, p);
+	char	*ptr;
+
+	ptr = ft_mempcpy(dst, src, ft_strlen(src));
+	*ptr = 0;
+	return (ptr);
 }
