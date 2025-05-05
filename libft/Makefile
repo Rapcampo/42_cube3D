@@ -8,7 +8,8 @@ DEPFLG	= -MP -MD
 # ============================ Folder Structures ===============================
 
 HEADERS		= ../includes/
-SOURCE_DIR	= srcs/ctype srcs/list srcs/stdio srcs/stdlib srcs/string srcs/printf srcs/gnl
+SOURCE_DIR	= srcs/ctype srcs/list srcs/stdio srcs/stdlib \
+			  srcs/string srcs/printf srcs/gnl
 OBJS_DIR	= objs/
 
 # ============================ Commands & Flags ===============================
@@ -43,7 +44,8 @@ $(NAME): $(OBJS)
 #	echo "[$(PURPLE)$(BLINK)Compiling...$(RESET)] $(YELLOW)libft$(RESET)"
 #	echo "[$(CYAN)$(BLINK)Linking...$(RESET)]"
 	$(AR) $(NAME) $(OBJS)
-	echo "\n*************************$(GREEN)$(BLINK)    [Libft Sucessfull!]    $(RESET)*************************\n"
+	echo "\n*************************$(GREEN)$(BLINK)"\
+		"[Libft Sucessfull!]    $(RESET)*************************\n"
 
 $(OBJS): 
 #	echo "[$(PURPLE)$(BLINK)Compiling...$(RESET)] $(YELLOW)sources$(RESET)"
@@ -54,11 +56,9 @@ $(OBJS):
 clean:
 	$(RM) $(OBJS)
 	$(RM) $(OBJS_DIR)
-#	echo "\n\n++++++++++++++    $(ULINE)$(GREEN)Objects have been removed sucessfully$(RESET)    +++++++++++++++\n\n"
 
 fclean: clean
 	$(RM) $(NAME)
-#	echo "\n\n++++++++++++++    $(ULINE)$(GREEN)Static library and programs removed successfully$(RESET)    +++++++++++++++\n\n"
 
 re: fclean all
 
