@@ -48,6 +48,7 @@ WHITE 	= \e[1;37m
 RESET	= \e[0m
 
 # ================================ Rules =======================================
+#For debug compilation make debug=1
 
 all: $(NAME)
 
