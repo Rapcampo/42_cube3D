@@ -15,13 +15,20 @@
 NAME	= cube3D
 SOURCE	= main.c #cube3D.cpp ICharacter.cpp Character.cpp\
 		  ImateriaSource.cpp Ice.cpp Cure.cpp
-OBJS	= $(addprefix $(OBJS_DIR), $(SOURCE:.c=.o))
+#PARSER	= asda
+#ENGINE	= asdas
+OBJS	= $(addprefix $(OBJS_DIR), $(SOURCE_LST:.c=.o))
+LIBFT	= -L ./libft
+MLX		= -L ./mlx
 
 # ============================ Folder Structures ===============================
 
 HEADERS		= ./includes/
-SOURCE_DIR	= $(addprefix ./src/, $(SOURCE))
+SOURCE_DIR	= $(addprefix ./src/, $(SOURCE)) \
+			  #$(addprefix ./src/engine, $(ENGINE)) \
+			  $(addprefix ./src/parser, $(PARSER)) 
 OBJS_DIR	= ./objs/
+#SOURCE_LST	= $(PARSER) $(ENGINE)
 
 # ============================ Commands & Flags ===============================
 
@@ -32,6 +39,8 @@ FLAGS		= -Wall -Wextra -Werror -std=c++98
 LEAKS		= -g -fsanitize=address
 DEBUG		= -DDEBUG
 MAKE_FLAG	= --no-print-directory
+LDLIBS		= -lft
+MLX_FLAGS	= -lmlx -lX11 -lXext -lm
 
 # =========================== Ansi Escape Codes ================================
 
@@ -53,11 +62,15 @@ RESET	= \e[0m
 all: $(NAME)
 
 $(NAME): $(OBJS)
+	echo "[$(PURPLE)$(BLINK)Compiling...$(RESET)] $(YELLOW)libft$(RESET)"
+	make $(MAKE_FLAG) -C $(LIBFT_DIR)
+	echo "[$(PURPLE)$(BLINK)Compiling...$(RESET)] $(YELLOW)minilibx$(RESET)"
+	make $(MAKE_FLAG) -sC $(MLX_DIR)
 	echo "[$(CYAN)$(BLINK)Linking...$(RESET)]"
 ifdef debug
-	$(CC) $(FLAGS) -o $@ $^ $(LEAKS)
+	$(CC) $(FLAGS) $(LEAKS) $(LIBFT) $(MLX) -o $@ $^ $(LDLIBS) $(MLX_FLAGS)
 else
-	$(CC) $(FLAGS) -o $@ $^
+	$(CC) $(FLAGS) $(LIBFT) $(MLX) -o $@ $^ $(LDLIBS) $(MLX_FLAGS)
 endif
 	echo "\n*************************$(GREEN)$(BLINK)    "\
 		"[Compilation Sucessfull!]    $(RESET)*************************\n"
@@ -73,12 +86,16 @@ endif
 mv $(SOURCE:.c:.o) $(OBJS_DIR)
 
 clean:
+	make clean $(MAKE_FLAG) -C $(LIBFT_DIR)
+	make clean $(MAKE_FLAG) -sC $(MLX_DIR)
 	$(RM) $(OBJS)
 	$(RM) $(OBJS_DIR)
 	echo "\n\n++++++++++++++    $(ULINE)$(GREEN)cube3D's Objects have been" \
 		"removed sucessfully$(RESET)    +++++++++++++++\n\n"
 
 fclean: clean
+	make fclean $(MAKE_FLAG) -C $(LIBFT_DIR)
+	make clean $(MAKE_FLAG) -sC $(MLX_DIR)
 	$(RM) $(NAME)
 	echo "\n\n++++++++++++++    $(ULINE)$(GREEN)cube3D's Static library and "\
 		"programs removed successfully$(RESET)    +++++++++++++++\n\n"
