@@ -13,9 +13,9 @@
 # ================================= Files ======================================
 
 NAME	= cube3D
-SOURCE	= main.cpp #cube3D.cpp ICharacter.cpp Character.cpp\
+SOURCE	= main.c #cube3D.cpp ICharacter.cpp Character.cpp\
 		  ImateriaSource.cpp Ice.cpp Cure.cpp
-OBJS	= $(addprefix $(OBJS_DIR), $(SOURCE:.cpp=.o))
+OBJS	= $(addprefix $(OBJS_DIR), $(SOURCE:.c=.o))
 
 # ============================ Folder Structures ===============================
 
@@ -55,7 +55,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	echo "[$(CYAN)$(BLINK)Linking...$(RESET)]"
 ifdef debug
-	$(CC) $(FLAGS) -o $@ $^ $(LEAK)
+	$(CC) $(FLAGS) -o $@ $^ $(LEAKS)
 else
 	$(CC) $(FLAGS) -o $@ $^
 endif
@@ -66,11 +66,11 @@ $(OBJS):
 	echo "[$(PURPLE)$(BLINK)Compiling...$(RESET)] $(YELLOW)sources$(RESET)"
 	mkdir -p objs
 ifdef debug
-	$(CC) $(FLAGS) -c $(SOURCE_DIR) -I $(HEADERS) $(DEBUG)
+	$(CC) $(FLAGS) $(LEAKS) -c $(SOURCE_DIR) -I $(HEADERS) $(DEBUG)
 else
 	$(CC) $(FLAGS) -c $(SOURCE_DIR) -I $(HEADERS)
 endif
-	mv *.o $(OBJS_DIR)
+mv $(SOURCE:.c:.o) $(OBJS_DIR)
 
 clean:
 	$(RM) $(OBJS)
