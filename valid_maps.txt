@@ -1,0 +1,16 @@
+42.cub
+basic.cub
+big_map.cub
+corridor.cub
+different_order.cub
+double_extension.cub.cub
+double_newline.cub
+some_weird_stuff.cub
+space_between_digits.cub
+spaces_after_path.cub
+spaces_end.cub
+spaces_end2.cub
+spaces_start.cub
+spaces_start2.cub
+subject.cub
+valid_hole.cub

@@ -12,7 +12,7 @@
 
 # ================================= Files ======================================
 
-NAME	= cube3D
+NAME	= cub3d
 SOURCE	= main.c #cube3D.cpp ICharacter.cpp Character.cpp\
 		  ImateriaSource.cpp Ice.cpp Cure.cpp
 #PARSER	= asda
