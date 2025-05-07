@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   Player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 19:23:58 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/07 21:59:43 by tialbert         ###   ########.fr       */
+/*   Created: 2025/05/07 21:37:29 by tialbert          #+#    #+#             */
+/*   Updated: 2025/05/07 21:44:04 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
+#ifndef PLAYER_H
+# define PLAYER_H
 
-int	main(int argc, char **argv)
+typedef struct s_player
 {
-	if (argc != 2)
-	{
-		printf("Not enough arguments!");
-		exit(1);
-	}
-	check_file_exten(argv[1]);
-}
+	int		x;
+	int		y;
+	char	rot;
+	char	*north;
+	char	*south;
+	char	*east;
+	char	*west;
+	int		floor[3];
+	int		ceil[3];
+}			t_player;
+
+#endif

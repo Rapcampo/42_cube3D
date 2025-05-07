@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 19:23:58 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/07 21:59:43 by tialbert         ###   ########.fr       */
+/*   Created: 2025/05/07 21:45:47 by tialbert          #+#    #+#             */
+/*   Updated: 2025/05/07 21:47:05 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
+#include "../../includes/cube3d.h"
 
-int	main(int argc, char **argv)
+int	parsing(int	fd)
 {
-	if (argc != 2)
-	{
-		printf("Not enough arguments!");
-		exit(1);
-	}
-	check_file_exten(argv[1]);
+
 }
