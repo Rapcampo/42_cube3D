@@ -6,8 +6,8 @@ test_file ="invalid_maps.txt"
 echo "\n\n\n \e[1;32mINVALID MAPS!\e[0m"
 
 while IFS= read -r command; do
-    echo "Executing command: $command"
-    echo "$command" | valgrind -q --leak-check=full --show-leak-kinds=all ./cube3d
+    echo "Executing map: $command"
+    echo "maps/invalid/$command" | valgrind -q --leak-check=full --show-leak-kinds=all ./cube3d
     #echo "$command" | ./minishell
 done < "$test_file"
 
@@ -16,7 +16,7 @@ test_file ="valid_maps.txt"
 echo "\n\n\n \e[1;31mVALID MAPS!\e[0m"
 
 while IFS= read -r command; do
-    echo "Executing command: $command"
-    echo "$command" | valgrind -q --leak-check=full --show-leak-kinds=all ./cube3d
+    echo "Executing map: $command"
+    echo "maps/valid/$command" | valgrind -q --leak-check=full --show-leak-kinds=all ./cube3d
     #echo "$command" | ./minishell
 done < "$test_file"
