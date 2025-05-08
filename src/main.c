@@ -16,8 +16,8 @@
 
 static void	loop_initializer(void)
 {
-	mlx_hook(&g()->mlx, E_kEYPRESS, KEYPRESS_MASK, &event_keypress, g());
-	mlx_hook(&g()->mlx, E_KEYLIFT, KEYLIFT_MASK, &event_keypress, g());
+	mlx_hook(&g()->mlx, E_KEYPRESS, KEYPRESS_MASK, &event_keypress, g());
+//	mlx_hook(&g()->mlx, E_KEYLIFT, KEYLIFT_MASK, &event_keylift, g());
 	mlx_hook(&g()->mlx, E_DESTROY, SUBNOTE_MASK, &clean_exit, g());
 	mlx_loop_hook(&g()->mlx, &output_game, g());
 	mlx_loop(&g()->mlx);
@@ -29,11 +29,11 @@ static void	start_mlx_win(void)
 
 	mlx = &g()->mlx;
 	mlx->ptr = mlx_init();
-	if (!mlx->win)
-		ft_putstr_fd("mlx_init fail", 2), exit(1);
+	if (!mlx->ptr)
+		exit_log(RED ER_MLX_INIT RST);
 	mlx->win = mlx_new_window(mlx->ptr, WIDTH, HEIGHT, "cub3d");
 	if (!mlx->win)
-		ft_putstr_fd("mlx_window fail", 2), exit(1);
+		exit_log(RED ER_MLX_WIN RST);
 }
 
 static void	init_game(void)
@@ -52,6 +52,6 @@ int	main(int argc, char **argv)
 		exit_log(YLW WRNG_USE CLR BLU USE_FORMAT RST);
 	}
 //	check_file_exten(argv[1]);
-//	init_game();
+	init_game();
 //	clean_exit();
 }

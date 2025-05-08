@@ -29,10 +29,12 @@ SOURCE_DIR	= $(addprefix ./src/, $(SOURCE)) \
 			  $(addprefix ./src/parser, $(PARSER)) 
 OBJS_DIR	= ./objs/
 #SOURCE_LST	= $(PARSER) $(ENGINE)
+LIBFT_DIR	= ./libft/
+MLX_DIR		= ./mlx/
 
 # ============================ Commands & Flags ===============================
 
-CC			= c++
+CC			= cc
 RM			= rm -rf
 #AR			= ar -rcs
 FLAGS		= -Wall -Wextra -Werror -std=c++98
@@ -83,7 +85,7 @@ ifdef debug
 else
 	$(CC) $(FLAGS) -c $(SOURCE_DIR) -I $(HEADERS)
 endif
-mv $(SOURCE:.c:.o) $(OBJS_DIR)
+	mv $(SOURCE:.c:.o) $(OBJS_DIR)
 
 clean:
 	make clean $(MAKE_FLAG) -C $(LIBFT_DIR)

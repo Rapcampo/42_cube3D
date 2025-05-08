@@ -20,7 +20,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <sys/time.h>
-# include <mlx.h>
+# include "../mlx/mlx.h"
 # include <math.h>
 //# define __USE_MISC
 
@@ -86,7 +86,7 @@ typedef enum e_mask
 
 typedef enum e_event
 {
-	E_kEYPRESS	= 2,
+	E_KEYPRESS	= 2,
 	E_KEYLIFT	= 3,
 	E_DESTROY	= 17
 }	t_event;
