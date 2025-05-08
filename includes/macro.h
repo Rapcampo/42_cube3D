@@ -16,7 +16,7 @@
 /*============================= Usage Msg ====================================*/
 
 # define WRNG_USE "Insuficient Arguments for cub3d!\n"
-# define USE_FORMAT "Usage: ./cub3d [path_to_map]"
+# define USE_FORMAT "Usage: ./cub3d [path_to_map]\n"
 
 /*============================= Error Logs ===================================*/
 

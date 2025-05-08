@@ -13,10 +13,11 @@
 # ================================= Files ======================================
 
 NAME	= cub3d
-SOURCE	= main.c #cube3D.cpp ICharacter.cpp Character.cpp\
-		  ImateriaSource.cpp Ice.cpp Cure.cpp
+SOURCE	= $(SOURCE_DIR)
 #PARSER	= asda
-#ENGINE	= asdas
+ENGINE	= key_events.c
+MEMORY	= fail_exit.c clean_exit.c
+UTILS	= global.c
 OBJS	= $(addprefix $(OBJS_DIR), $(SOURCE_LST:.c=.o))
 LIBFT	= -L ./libft
 MLX		= -L ./mlx
@@ -24,11 +25,12 @@ MLX		= -L ./mlx
 # ============================ Folder Structures ===============================
 
 HEADERS		= ./includes/
-SOURCE_DIR	= $(addprefix ./src/, $(SOURCE)) \
-			  #$(addprefix ./src/engine, $(ENGINE)) \
-			  $(addprefix ./src/parser, $(PARSER)) 
+SOURCE_DIR	= $(addprefix ./src/, main.c) \
+			  $(addprefix ./src/utils/, $(UTILS)) \
+			  $(addprefix ./src/engine/, $(ENGINE)) \
+			  $(addprefix ./src/memory/, $(MEMORY)) 
 OBJS_DIR	= ./objs/
-#SOURCE_LST	= $(PARSER) $(ENGINE)
+SOURCE_LST	= main.c $(ENGINE) $(MEMORY) $(UTILS)
 LIBFT_DIR	= ./libft/
 MLX_DIR		= ./mlx/
 
@@ -37,7 +39,7 @@ MLX_DIR		= ./mlx/
 CC			= cc
 RM			= rm -rf
 #AR			= ar -rcs
-FLAGS		= -Wall -Wextra -Werror -std=c++98
+FLAGS		= -Wall -Wextra -Werror
 LEAKS		= -g -fsanitize=address
 DEBUG		= -DDEBUG
 MAKE_FLAG	= --no-print-directory
@@ -85,7 +87,7 @@ ifdef debug
 else
 	$(CC) $(FLAGS) -c $(SOURCE_DIR) -I $(HEADERS)
 endif
-	mv $(SOURCE:.c:.o) $(OBJS_DIR)
+	mv $(SOURCE_LST:.c=.o) $(OBJS_DIR)
 
 clean:
 	make clean $(MAKE_FLAG) -C $(LIBFT_DIR)

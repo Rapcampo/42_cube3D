@@ -14,6 +14,12 @@
 //adding placeholder error message functions
 //window initialization should be working!
 
+int	output_game(void)
+{
+	while(1);
+	return (0);
+}
+
 static void	loop_initializer(void)
 {
 	mlx_hook(&g()->mlx, E_KEYPRESS, KEYPRESS_MASK, &event_keypress, g());
@@ -47,6 +53,7 @@ static void	init_game(void)
 
 int	main(int argc, char **argv)
 {
+	(void)argv;
 	if (argc != 2)
 	{
 		exit_log(YLW WRNG_USE CLR BLU USE_FORMAT RST);
