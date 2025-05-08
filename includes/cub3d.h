@@ -15,28 +15,32 @@
 
 /*============================ Basic Libraries ===============================*/
 
-# include "libft.h"
-# include "Player.h"
-# include "utils.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <sys/time.h>
 # include <mlx.h>
-
 # include <math.h>
 //# define __USE_MISC
 
 # define WIDTH 800
 # define HEIGHT 600
 
+/*============================ Custom Libraries ==============================*/
+
+# include "memory.h"
+# include "libft.h"
+# include "Player.h"
+# include "utils.h"
+# include "macro.h"
+
 /*=========================== main game struct ===============================*/
 
 typedef struct s_mlx
 {
 	void	*ptr;
-	void	*mlx_win;
+	void	*win;
 	char	*name;
 	int		width;
 	int		height;
@@ -69,6 +73,9 @@ typedef enum s_keys
 	LEFT = 65361
 }	t_key;
 
+// enum for event hook mask
+// defined in x11/x.h 
+// close mask is for substructureNotifyMask for creation or destruction of win
 typedef enum e_mask
 {
 	NOEVENT_MASK	= 0L,
@@ -84,20 +91,6 @@ typedef enum e_event
 	E_DESTROY	= 17
 }	t_event;
 
-/*============================= Ansi colours =================================*/
-
-# define RST "\e[0m"
-# define ULI "\e[4m"
-# define BLN "\e[5m"
-# define BLK "\e[1;30m"
-# define RED "\e[1;31m"
-# define GRN "\e[1;32m"
-# define YLW "\e[1;33m"
-# define BLU "\e[1;34m"
-# define PRP "\e[1;35m"
-# define CYN "\e[1;36m"
-# define WHT "\e[1;37m"
-# define CLR "\e[0;39m"
 
 /*============================= struct access ================================*/
 

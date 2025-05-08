@@ -16,10 +16,10 @@
 
 static void	loop_initializer(void)
 {
-	mlx_hook(&g()->mlx, E_kEYPRESS, KEYPRESS_MASK, &event_keypress, NULL);
-	mlx_hook(&g()->mlx, E_KEYLIFT, KEYLIFT_MASK, &event_keypress, NULL);
-	mlx_hook(&g()->mlx, E_DESTROY, SUBNOTE_MASK, &clean_exit, NULL);
-	mlx_loop_hook(&g()->mlx, &output_game, NULL);
+	mlx_hook(&g()->mlx, E_kEYPRESS, KEYPRESS_MASK, &event_keypress, g());
+	mlx_hook(&g()->mlx, E_KEYLIFT, KEYLIFT_MASK, &event_keypress, g());
+	mlx_hook(&g()->mlx, E_DESTROY, SUBNOTE_MASK, &clean_exit, g());
+	mlx_loop_hook(&g()->mlx, &output_game, g());
 	mlx_loop(&g()->mlx);
 }
 
@@ -29,10 +29,10 @@ static void	start_mlx_win(void)
 
 	mlx = &g()->mlx;
 	mlx->ptr = mlx_init();
-	if (!g()->mlx.mlx_win)
+	if (!mlx->win)
 		ft_putstr_fd("mlx_init fail", 2), exit(1);
-	mlx->mlx_win = mlx_new_window(g()->mlx.ptr, WIDTH, HEIGHT, "cub3d");
-	if (!g()->mlx.mlx_win)
+	mlx->win = mlx_new_window(mlx->ptr, WIDTH, HEIGHT, "cub3d");
+	if (!mlx->win)
 		ft_putstr_fd("mlx_window fail", 2), exit(1);
 }
 
@@ -49,10 +49,9 @@ int	main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		printf("Not enough arguments!");
-		exit(1);
+		exit_log(YLW WRNG_USE CLR BLU USE_FORMAT RST);
 	}
-	check_file_exten(argv[1]);
-	init_game();
+//	check_file_exten(argv[1]);
+//	init_game();
 //	clean_exit();
 }
