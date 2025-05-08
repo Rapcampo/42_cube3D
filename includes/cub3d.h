@@ -57,8 +57,6 @@ typedef struct s_game
 
 /*================================= mlx keys =================================*/
 
-# include "mlx.h"
-
 typedef enum s_keys
 {
 	ESC = 65307,
