@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 21:45:47 by tialbert          #+#    #+#             */
-/*   Updated: 2025/05/08 22:17:59 by tialbert         ###   ########.fr       */
+/*   Created: 2025/05/08 22:10:54 by tialbert          #+#    #+#             */
+/*   Updated: 2025/05/08 22:11:30 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#ifndef PARSE_H
+# define PARSE_H
 
-static void	extract(char *line)
-{
+int	parsing(int	fd);
 
-}
-
-int	parsing(int	fd)
-{
-	char	*line;
-
-	line = get_next_line(fd);
-	while (line)
-	{
-		extract(line);
-		free(line);
-		line = get_next_line(fd);
-	}
-	free(line);
-	close(fd);
-}
+#endif

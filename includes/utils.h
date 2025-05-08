@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:03:17 by tialbert          #+#    #+#             */
-/*   Updated: 2025/05/07 22:04:22 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/05/08 22:09:45 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 
 /*============================ UTIL_FUNCTIONS ===============================*/
 
-void	check_file_exten(char *file);
+int	check_file_exten(char *file);
 
 #endif

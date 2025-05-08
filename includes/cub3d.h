@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.h                                           :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 12:22:12 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/07 22:05:10 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/05/08 22:11:57 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include <unistd.h>
 # include <stdio.h>
+# include <errno.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <sys/time.h>
@@ -34,6 +35,7 @@
 # include "Player.h"
 # include "utils.h"
 # include "macro.h"
+# include "parse.h"
 
 /*=========================== main game struct ===============================*/
 

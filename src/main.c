@@ -6,7 +6,7 @@
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:23:58 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/07 21:59:43 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/05/08 22:18:47 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ int	main(int argc, char **argv)
 {
 	(void)argv;
 	if (argc != 2)
-	{
 		exit_log(YLW WRNG_USE CLR BLU USE_FORMAT RST);
-	}
-//	check_file_exten(argv[1]);
+//	parsing(check_file_exten(argv[1]));
 	init_game();
 	loop_initializer();
 	clean_exit();
