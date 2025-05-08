@@ -53,5 +53,5 @@ int	main(int argc, char **argv)
 	}
 //	check_file_exten(argv[1]);
 	init_game();
-//	clean_exit();
+	clean_exit();
 }
