@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cube3d.h"
+#include "../../includes/cub3d.h"
 
 void	check_file_exten(char *file)
 {
