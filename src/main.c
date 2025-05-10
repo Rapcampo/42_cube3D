@@ -25,7 +25,7 @@ static void	loop_initializer(void)
 
 	mlx = &g()->mlx;
 	mlx_hook(mlx->win, E_KEYPRESS, KEYPRESS_MASK, &event_keypress, g());
-//	mlx_hook(&g()->mlx, E_KEYLIFT, KEYLIFT_MASK, &event_keylift, g());
+	mlx_hook(mlx->win, E_KEYLIFT, KEYLIFT_MASK, &event_keylift, g());
 	mlx_hook(mlx->win, E_DESTROY, SUBNOTE_MASK, &clean_exit, g());
 	mlx_loop_hook(mlx->ptr, &output_game, g());
 	mlx_loop(mlx->ptr);

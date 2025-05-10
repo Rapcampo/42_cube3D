@@ -34,6 +34,7 @@
 # include "Player.h"
 # include "utils.h"
 # include "macro.h"
+# include "engine.h"
 
 /*=========================== main game struct ===============================*/
 
@@ -96,8 +97,5 @@ t_game	*g(void);
 
 /*============================= struct access ================================*/
 
-int		event_keypress(int keycode);
-int		clean_exit();
-int		output_game();
 
 #endif

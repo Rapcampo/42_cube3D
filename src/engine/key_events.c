@@ -15,14 +15,17 @@
 //placeholder eventkeys function just to be able to quit window.
 int	event_keypress(int keycode)
 {
+	(void)keycode;
 	//OBS.: this exit should probably be in keylift
-	if (keycode == ESC || keycode == Q)
-		clean_exit();
-	return (keycode);
+//	if (keycode == ESC || keycode == Q)
+//		clean_exit();
+	return (0);
 }
 
-/*
+
 int	event_keylift(int keycode)
 {
-	if (keycode == W)
-}*/
+	if (keycode == ESC || keycode == Q)
+		clean_exit();
+	return (0);
+}

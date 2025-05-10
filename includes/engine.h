@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory.h                                           :+:      :+:    :+:   */
+/*   engine.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 11:22:31 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/08 11:23:38 by rapcampo         ###   ########.fr       */
+/*   Created: 2025/05/10 19:27:19 by rapcampo          #+#    #+#             */
+/*   Updated: 2025/05/10 19:28:15 by rapcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MEMORY_H
-# define MEMORY_H
+#ifndef ENGINE_H
+# define ENGINE_H
 
-void	exit_log(char *message);
-int	clean_exit(void);
-void	destroy_game(void);
+int		event_keypress(int keycode);
+int		event_keylift(int keycode);
+int		output_game();
 #endif
