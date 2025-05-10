@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Player.h                                           :+:      :+:    :+:   */
+/*   Textures.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 21:37:29 by tialbert          #+#    #+#             */
-/*   Updated: 2025/05/10 21:01:52 by tialbert         ###   ########.fr       */
+/*   Created: 2025/05/10 21:00:37 by tialbert          #+#    #+#             */
+/*   Updated: 2025/05/10 21:01:56 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLAYER_H
-# define PLAYER_H
+#ifndef TEXTURES_H
+# define TEXTURES_H
 
-typedef struct s_player
-{
-	int		x;
-	int		y;
-	char	rot;
-}			t_player;
+typedef struct s_textures {
+	char	*north;
+	char	*south;
+	char	*east;
+	char	*west;
+	int		floor[3];
+	int		ceil[3];
+}			t_textures;
 
 #endif

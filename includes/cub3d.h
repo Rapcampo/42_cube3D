@@ -6,7 +6,7 @@
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 12:22:12 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/08 22:11:57 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/05/10 21:02:58 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # include "memory.h"
 # include "libft.h"
 # include "Player.h"
+# include "Textures.h"
 # include "utils.h"
 # include "macro.h"
 # include "parse.h"

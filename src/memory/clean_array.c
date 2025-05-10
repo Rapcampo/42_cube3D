@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Player.h                                           :+:      :+:    :+:   */
+/*   clean_array.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 21:37:29 by tialbert          #+#    #+#             */
-/*   Updated: 2025/05/10 21:01:52 by tialbert         ###   ########.fr       */
+/*   Created: 2025/05/10 21:44:37 by tialbert          #+#    #+#             */
+/*   Updated: 2025/05/10 21:45:50 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLAYER_H
-# define PLAYER_H
+#include "../../includes/cub3d.h"
 
-typedef struct s_player
+void	clear_arr(char **arr)
 {
-	int		x;
-	int		y;
-	char	rot;
-}			t_player;
-
-#endif
+	if (arr == NULL)
+		return ;
+	while (*arr != NULL)
+		free(*arr);
+	free(arr);
+}
