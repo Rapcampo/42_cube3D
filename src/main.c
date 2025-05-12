@@ -14,11 +14,6 @@
 //adding placeholder error message functions
 //window initialization should be working!
 
-int	output_game(void)
-{
-	return (0);
-}
-
 static void	loop_initializer(void)
 {
 	t_mlx	*mlx;
@@ -48,6 +43,7 @@ static void	init_game(void)
 {
 	ft_bzero(g(), sizeof(t_game));
 	start_mlx_win();
+	init_skybox(&g()->skybox.sky, &g()->skybox.floor);
 	//need to load images here
 	//need to load graphics here
 }
@@ -56,9 +52,7 @@ int	main(int argc, char **argv)
 {
 	(void)argv;
 	if (argc != 2)
-	{
 		exit_log(YLW WRNG_USE CLR BLU USE_FORMAT RST);
-	}
 //	check_file_exten(argv[1]);
 	init_game();
 	loop_initializer();

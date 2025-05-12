@@ -53,7 +53,7 @@ typedef struct s_game
 	t_player	player;
 	t_mlx		mlx;
 	int			debug;
-//	t_assets	*assets;
+	t_box		skybox;
 }	t_game;
 
 /*================================= mlx keys =================================*/

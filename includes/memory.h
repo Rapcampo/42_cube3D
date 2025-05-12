@@ -16,4 +16,5 @@
 void	exit_log(char *message);
 int	clean_exit(void);
 void	destroy_game(void);
+
 #endif
