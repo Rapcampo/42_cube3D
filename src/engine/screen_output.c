@@ -18,14 +18,20 @@ void	pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*offset;
 
+	if ((x < 0 || 0 > y) || (data->width <= x || y >= data->height))
+		return ;
 	offset = data->addr + ((y * data->ll) + (x * (data->bpp >> 3)));
 	*(unsigned int *)offset = color;
 }
 
 int	init_skybox(t_data *sky, t_data *floor)
 {
-	sky->img = mlx_new_image(g()->mlx.ptr, WIDTH, HEIGHT >> 1);
-	floor->img = mlx_new_image(g()->mlx.ptr, WIDTH, HEIGHT >> 1);
+	sky->height = HEIGHT >> 1;
+	floor->height = HEIGHT >> 1;
+	sky->width = WIDTH;
+	floor->width = WIDTH;
+	sky->img = mlx_new_image(g()->mlx.ptr, sky->width, sky->height);
+	floor->img = mlx_new_image(g()->mlx.ptr, floor->width, floor->height);
 	sky->addr = mlx_get_data_addr(sky->img, &sky->bpp, &sky->ll, &sky->endian);
 	floor->addr = mlx_get_data_addr(floor->img, &floor->bpp
 		, &floor->ll, &floor->endian);

@@ -46,6 +46,7 @@ static void	init_game(void)
 	init_skybox(&g()->skybox.sky, &g()->skybox.floor);
 	//need to load images here
 	//need to load graphics here
+	mlx_do_key_autorepeatoff(g()->mlx.ptr);
 }
 
 int	main(int argc, char **argv)
