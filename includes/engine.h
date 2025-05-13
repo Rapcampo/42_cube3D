@@ -20,12 +20,16 @@ typedef struct s_data
 	int	bpp;
 	int	ll;
 	int	endian;
+	int	height;
+	int	width;
 }	t_data;
 
 typedef struct s_box
 {
 	t_data	sky;
 	t_data	floor;
+	int		c_color;
+	int		f_color;
 }	t_box;
 
 int		event_keypress(int keycode);

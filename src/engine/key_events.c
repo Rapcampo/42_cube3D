@@ -41,7 +41,7 @@ static int	sky_part(t_data *sky, t_data *floor)
 int	event_keypress(int keycode)
 {
 	//OBS.: this exit should probably be in keylift
-	if (keycode <= 65000 && keycode != Q)
+	if (keycode <= 65000)
 		sky_part(&g()->skybox.sky, &g()->skybox.floor);
 //		execute_movement();
 //	if (keycode == LEFT || keycode == RIGHT)
@@ -51,7 +51,7 @@ int	event_keypress(int keycode)
 
 int	event_keylift(int keycode)
 {
-	if (keycode == ESC || keycode == Q)
+	if (keycode == ESC)
 		clean_exit();
 //	else if (keycode <= 65000)
 //		stop_movement();

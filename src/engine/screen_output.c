@@ -66,5 +66,6 @@ static int	render_skybox(t_data *sky, t_data *floor)
 int	output_game(void)
 {
 	render_skybox(&g()->skybox.sky, &g()->skybox.floor);
+	mlx_string_put(&g()->mlx.ptr, &g()->mlx.win, 10, 10, 0x00FFFFFF, );
 	return (0);
 }

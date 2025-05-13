@@ -47,6 +47,12 @@ typedef struct s_mlx
 	int		height;
 }	t_mlx;
 
+typedef struct s_time
+{
+	float	fps;
+	float	runtime;
+}	t_time;
+
 //acessed through g() function;
 typedef struct s_game
 {
@@ -54,6 +60,7 @@ typedef struct s_game
 	t_mlx		mlx;
 	int			debug;
 	t_box		skybox;
+	t_time		time;
 }	t_game;
 
 /*================================= mlx keys =================================*/
