@@ -32,5 +32,6 @@ int		event_keypress(int keycode);
 int		event_keylift(int keycode);
 int		output_game(void);
 int		init_skybox(t_data *sky, t_data *floor);
+void	pixel_put(t_data *data, int x, int y, int color);
 
 #endif

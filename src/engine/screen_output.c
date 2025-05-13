@@ -14,35 +14,51 @@
 
 
 
-static void	pixel_put(t_data *data, int x, int y, int color)
+void	pixel_put(t_data *data, int x, int y, int color)
 {
-	char	*dst;
+	char	*offset;
 
-	dst = data->addr + ((y * data->ll) + (x * (data->bpp / 8)));
-	*(unsigned int *)dst = color;
+	offset = data->addr + ((y * data->ll) + (x * (data->bpp >> 3)));
+	*(unsigned int *)offset = color;
 }
 
 int	init_skybox(t_data *sky, t_data *floor)
 {
-	sky->img = mlx_new_image(g()->mlx.ptr, 100, 100);
-	floor->img = mlx_new_image(g()->mlx.ptr, 100, 100);
+	sky->img = mlx_new_image(g()->mlx.ptr, WIDTH, HEIGHT >> 1);
+	floor->img = mlx_new_image(g()->mlx.ptr, WIDTH, HEIGHT >> 1);
 	sky->addr = mlx_get_data_addr(sky->img, &sky->bpp, &sky->ll, &sky->endian);
-	floor->addr = mlx_get_data_addr(floor->img, &floor->bpp, &floor->ll, &floor->endian);
+	floor->addr = mlx_get_data_addr(floor->img, &floor->bpp
+		, &floor->ll, &floor->endian);
+	return (0);
+}
+
+static int	render_skybox(t_data *sky, t_data *floor)
+{
+	t_mlx	*mlx;
+	int		j;
+	int		i;
+
+	mlx = &g()->mlx;
+	j = -1;
+	i = -1;
+	while (++j < HEIGHT >> 1)
+	{
+		pixel_put(sky, 0, 0 + j, 0x0087ceeb);
+		pixel_put(floor, 0, 0 + j, 0x00138510);
+		while (++i < WIDTH)
+		{
+			pixel_put(sky, 0 + i, j, 0x0087ceeb);
+			pixel_put(floor, 0 + i, j, 0x00138510);
+		}
+		i = -1;
+	}
+	mlx_put_image_to_window(mlx->ptr, mlx->win, sky->img, 0, 0);
+	mlx_put_image_to_window(mlx->ptr, mlx->win, floor->img, 0, HEIGHT >> 1);
 	return (0);
 }
 
 int	output_game(void)
 {
-	t_data *sky;
-	t_data *floor;
-	int		i;
-
-	i = 0;
-	sky = &g()->skybox.sky;
-	floor = &g()->skybox.floor;
-	pixel_put(sky, 10, 10, 0x00FF0000);
-	pixel_put(floor, 20, 20, 0x0000FF00);
-	mlx_put_image_to_window(g()->mlx.ptr, g()->mlx.win, sky->img, 0 + i, 0);
-	mlx_put_image_to_window(g()->mlx.ptr, g()->mlx.win, floor->img, 200, 200);
+	render_skybox(&g()->skybox.sky, &g()->skybox.floor);
 	return (0);
 }

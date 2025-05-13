@@ -24,8 +24,8 @@
 # include <math.h>
 //# define __USE_MISC
 
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 1920
+# define HEIGHT 1080
 
 /*============================ Custom Libraries ==============================*/
 
