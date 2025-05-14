@@ -25,9 +25,10 @@ void	destroy_game(void)
 //		destroy_images(game);
 	if (game->mlx.win)
 		mlx_destroy_window(game->mlx.ptr, game->mlx.win);
-	mlx_do_key_autorepeaton(g()->mlx.ptr);
-	if (game->mlx.ptr)
+	if (game->mlx.ptr){
+		mlx_do_key_autorepeaton(g()->mlx.ptr);
 		mlx_destroy_display(game->mlx.ptr);
+	}
 	free(game->mlx.ptr);
 }
 
