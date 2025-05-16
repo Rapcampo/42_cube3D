@@ -36,8 +36,13 @@ typedef struct s_dda
 {
 	int x;
 	int	y;
-	int	xinc;
-	int	yinc;
+	int dy;
+	int dx;
+	int steps;
+	float fx;
+	float fy;
+	float xinc;
+	float yinc;
 }	t_dda;
 
 typedef struct s_box

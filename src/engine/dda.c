@@ -12,6 +12,25 @@
 
 #include "../../includes/cub3d.h"
 
+float	deg_to_rad(float a)
+{
+	return (a * M_PI / 180);
+}
+
+float	fix_angle(float a)
+{
+	if (a > 359)
+		a -= 360;
+	if (a < 0)
+		a += 360;
+	return (a);
+}
+
+float distance(t_dda *dda)
+{
+	return (cos(deg_to_rad(ang)) * (bx-ax)-sin(deg_to_rad(ang)) * (by-ay));
+}
+
 int	dda(t_dda *dda, int x)
 {
 	//lots of math
