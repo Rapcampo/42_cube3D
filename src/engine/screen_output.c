@@ -12,60 +12,29 @@
 
 #include "../../includes/cub3d.h"
 
+//static void	create_frame();
 
-
-void	pixel_put(t_data *data, int x, int y, int color)
+int	init_skybox(t_data *sky)
 {
-	char	*offset;
-
-	if ((x < 0 || 0 > y) || (data->width <= x || y >= data->height))
-		return ;
-	offset = data->addr + ((y * data->ll) + (x * (data->bpp >> 3)));
-	*(unsigned int *)offset = color;
-}
-
-int	init_skybox(t_data *sky, t_data *floor)
-{
-	sky->height = HEIGHT >> 1;
-	floor->height = HEIGHT >> 1;
+	sky->height = HEIGHT;
+//	floor->height = HEIGHT >> 1;
 	sky->width = WIDTH;
-	floor->width = WIDTH;
+//	floor->width = WIDTH;
 	sky->img = mlx_new_image(g()->mlx.ptr, sky->width, sky->height);
-	floor->img = mlx_new_image(g()->mlx.ptr, floor->width, floor->height);
+//	floor->img = mlx_new_image(g()->mlx.ptr, floor->width, floor->height);
 	sky->addr = mlx_get_data_addr(sky->img, &sky->bpp, &sky->ll, &sky->endian);
-	floor->addr = mlx_get_data_addr(floor->img, &floor->bpp
-		, &floor->ll, &floor->endian);
+//	floor->addr = mlx_get_data_addr(floor->img, &floor->bpp
+//		, &floor->ll, &floor->endian);
 	return (0);
 }
 
-static int	render_skybox(t_data *sky, t_data *floor)
+int	gameloop(void)
 {
-	t_mlx	*mlx;
-	int		j;
-	int		i;
-
-	mlx = &g()->mlx;
-	j = -1;
-	i = -1;
-	while (++j < HEIGHT >> 1)
-	{
-		pixel_put(sky, 0, 0 + j, 0x0087ceeb);
-		pixel_put(floor, 0, 0 + j, 0x00138510);
-		while (++i < WIDTH)
-		{
-			pixel_put(sky, 0 + i, j, 0x0087ceeb);
-			pixel_put(floor, 0 + i, j, 0x00138510);
-		}
-		i = -1;
-	}
-	mlx_put_image_to_window(mlx->ptr, mlx->win, sky->img, 0, 0);
-	mlx_put_image_to_window(mlx->ptr, mlx->win, floor->img, 0, HEIGHT >> 1);
-	return (0);
-}
-
-int	output_game(void)
-{
-	render_skybox(&g()->skybox.sky, &g()->skybox.floor);
+//	create_frame();
+	get_time_delta();
+	printf("Current FPS: %f\r", g()->time.fps);
+	render_skybox(&g()->skybox.sky);
 //	mlx_string_put(&g()->mlx.ptr, &g()->mlx.win, 10, 10, 0x00FFFFFF, "this is fine");
+	mlx_put_image_to_window(g()->mlx.ptr, g()->mlx.win, g()->skybox.sky.img, 0, 0);
 	return (0);
 }

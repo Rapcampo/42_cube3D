@@ -51,7 +51,7 @@ typedef struct s_mlx
 typedef struct s_time
 {
 	float	fps;
-	float	runtime;
+	float	delta;
 }	t_time;
 
 //acessed through g() function;

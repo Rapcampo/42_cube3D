@@ -14,6 +14,10 @@
 //adding placeholder error message functions
 //window initialization should be working!
 
+//TODO:: need to put just one image composed of all elements to not get screen
+//tear.
+//TODO:: implement DDA algorythmn, compare with bresenhams.
+//calculate movement rotation with cos and sin of x,y coordinates
 static void	loop_initializer(void)
 {
 	t_mlx	*mlx;
@@ -22,7 +26,7 @@ static void	loop_initializer(void)
 	mlx_hook(mlx->win, E_KEYPRESS, KEYPRESS_MASK, &event_keypress, g());
 	mlx_hook(mlx->win, E_KEYLIFT, KEYLIFT_MASK, &event_keylift, g());
 	mlx_hook(mlx->win, E_DESTROY, SUBNOTE_MASK, &clean_exit, g());
-	mlx_loop_hook(mlx->ptr, &output_game, g());
+	mlx_loop_hook(mlx->ptr, &gameloop, g());
 	mlx_loop(mlx->ptr);
 }
 
@@ -43,7 +47,7 @@ static void	init_game(void)
 {
 	ft_bzero(g(), sizeof(t_game));
 	start_mlx_win();
-	init_skybox(&g()->skybox.sky, &g()->skybox.floor);
+	init_skybox(&g()->skybox.sky);
 	//need to load images here
 	//need to load graphics here
 	mlx_do_key_autorepeatoff(g()->mlx.ptr);

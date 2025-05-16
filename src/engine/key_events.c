@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-static int	sky_part(t_data *sky, t_data *floor)
+/*static int	sky_part(t_data *sky, t_data *floor)
 {
 	t_mlx	*mlx;
 	int		j;
@@ -36,13 +36,14 @@ static int	sky_part(t_data *sky, t_data *floor)
 	mlx_put_image_to_window(mlx->ptr, mlx->win, sky->img, 0, 0);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, floor->img, 0, HEIGHT >> 1);
 	return (0);
-}
+}*/
 //placeholder eventkeys function just to be able to quit window.
 int	event_keypress(int keycode)
 {
 	//OBS.: this exit should probably be in keylift
 	if (keycode <= 65000)
-		sky_part(&g()->skybox.sky, &g()->skybox.floor);
+		return 0;
+//		sky_part(&g()->skybox.sky, &g()->skybox.floor);
 //		execute_movement();
 //	if (keycode == LEFT || keycode == RIGHT)
 //		rot_axis();
