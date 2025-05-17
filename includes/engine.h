@@ -45,13 +45,13 @@ typedef struct s_dda
 	float yinc;
 }	t_dda;
 
-typedef struct s_box
+typedef struct s_map
 {
 	t_data	sky;
 //	t_data	floor;
 	int		c_color;
 	int		f_color;
-}	t_box;
+}	t_map;
 
 int		event_keypress(int keycode);
 int		event_keylift(int keycode);

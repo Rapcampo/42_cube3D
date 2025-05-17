@@ -28,7 +28,7 @@ int	init_skybox(t_data *sky)
 	return (0);
 }
 
-int	gameloop(void)
+/*int	gameloop(void)
 {
 //	create_frame();
 	get_time_delta();
@@ -38,4 +38,4 @@ int	gameloop(void)
 	mlx_put_image_to_window(g()->mlx.ptr, g()->mlx.win, g()->skybox.sky.img, 0, 0);
 	//mlx_string_put(&g()->mlx.ptr, &g()->mlx.win, 10, 10, 0x00FFFFFF, ft_itoa((int)g()->time.fps));
 	return (0);
-}
+}*/
