@@ -6,18 +6,31 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 21:45:47 by tialbert          #+#    #+#             */
-/*   Updated: 2025/05/10 21:43:38 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/05/17 17:32:45 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+// TODO: Allocate memory for map array and define the types of units in the map
+// TODO: Find the best way to allocate the memory
 static void	save_map(char *line, int row)
 {
+	int	col;
+
+	col = 0;
+	while (line && *line != '\n')
+	{
+		if (*line == ' ')
+			main_struct()->map[row][col] = EMPTY;
+		else
+			main_struct()->map[row][col] = *line;
+		col++;
+	}
 }
 
 // TODO: Check if the ints to describe the colour can also be separated by spaces
-// TODO: The strncmp function has been change to avoid past errors. Make sure it actually works correctly
+// TODO: The strncmp function has been changed to avoid past errors. Make sure it actually works correctly
 static void	save_ceil_floor(char **arr)
 {
 	char	**num;
@@ -63,7 +76,7 @@ static void	save_texture(char *line)
 		save_ceil_floor(arr);
 		return ;
 	}
-	// arr[1] doesn't have to be freed because we will use that pointer
+	// arr[1] doesn't have to be freed because are using that pointer
 	// in the texture struct
 	free(arr[0]);
 	free(arr);
