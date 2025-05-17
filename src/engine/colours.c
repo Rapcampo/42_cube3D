@@ -12,17 +12,23 @@
 
 #include "../../includes/cub3d.h"
 
-int	get_alpha(int argb){
+int	get_alpha(int argb)
+{
 	return (argb >> 24 & 0xff);
 }
 
-int	get_red(int argb){
+int	get_red(int argb)
+{
 	return (argb >> 16 & 0xff);
 }
-int	get_green(int argb){
+
+int	get_green(int argb)
+{
 	return (argb >> 8 & 0xff);
 }
-int	get_blue(int argb){
+
+int	get_blue(int argb)
+{
 	return (argb & 0xff);
 }
 
