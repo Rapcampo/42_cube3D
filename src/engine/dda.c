@@ -31,8 +31,26 @@ float distance(t_dda *dda)
 	return (cos(deg_to_rad(ang)) * (bx-ax)-sin(deg_to_rad(ang)) * (by-ay));
 }
 
-int	dda(t_dda *dda, int x)
+int	dda(t_dda *dda)
 {
-	//lots of math
+	int	i;
+	//base of the algorythmn
+	i = -1;
+	dda->dx = dda->x0 - dda->x1;
+	dda->dy = dda->y0 - dda->y1;
+	if (abs(dx) > abs(dy))
+		dda->steps = dda->dx;
+	else
+		dda->steps = dda->dy;
+	dda->xinc = dda->dx / (float)dda->steps;
+	dda->yinc = dda->dy / (float)dda->steps;
+	dda->fx = dda->x0;
+	dda->fy = dda->y0;
+	while (++i <= dda->steps)
+	{
+		pixel_put(&g()->skybox.sky, round(dda->fx), round(dda->fy), 0x0000FF00);
+		dda->fx += dda->xinc;
+		dda->fy += dda->yinc;
+	}
 	return (0);
 }
