@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 21:45:47 by tialbert          #+#    #+#             */
-/*   Updated: 2025/05/17 17:32:45 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/05/18 17:44:43 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,21 @@
 static void	save_map(char *line, int row)
 {
 	int	col;
+	int	map_size;
 
 	col = 0;
+	map_size = map_size(g()->map);
+	if (map_size == -1)
+		g()->map = create_map(ft_strlen(line));
+	else if (map_size % 2 != 0)
+		g()->map = extend_map(map_size, map);
+	g()->map[row] = create_map_line(ft_strlen(line));
 	while (line && *line != '\n')
 	{
 		if (*line == ' ')
-			main_struct()->map[row][col] = EMPTY;
+			g()->map[row][col] = EMPTY;
 		else
-			main_struct()->map[row][col] = *line;
+			g()->map[row][col] = *line;
 		col++;
 	}
 }

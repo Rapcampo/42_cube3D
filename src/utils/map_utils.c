@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:33:23 by tialbert          #+#    #+#             */
-/*   Updated: 2025/05/17 17:56:48 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/05/18 17:40:25 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ short	**extend_map(size_t nb_lines, short **map)
 		new_map[i] = map[i];
 	while (i < nb_lines + 3)
 		new_map[i++] = NULL;
+	free(map);
 	return (new_map);
 }
 
@@ -62,6 +63,8 @@ size_t	map_size(short **map)
 	size_t	i;
 
 	i = 0;
+	if (map == NULL)
+		return (-1);
 	while (map[i] != NULL)
 		i++;
 	return (i);
