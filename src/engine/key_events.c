@@ -37,16 +37,19 @@
 	mlx_put_image_to_window(mlx->ptr, mlx->win, floor->img, 0, HEIGHT >> 1);
 	return (0);
 }*/
-//placeholder eventkeys function just to be able to quit window.
+
+//
 int	event_keypress(int keycode)
 {
-	//OBS.: this exit should probably be in keylift
-	if (keycode <= 65000)
-		return 0;
-//		sky_part(&g()->skybox.sky, &g()->skybox.floor);
-//		execute_movement();
-//	if (keycode == LEFT || keycode == RIGHT)
-//		rot_axis();
+	if (keycode == W || keycode == A || keycode == S || keycode == D)
+	{
+		g()->key[keycode % 7] = 1;
+		printf("%d\n", keycode);
+	}
+	if (keycode == LEFT)
+		g()->key[4] = 1;
+	if (keycode == RIGHT)
+		g()->key[5] = 1;
 	return (0);
 }
 
@@ -54,9 +57,14 @@ int	event_keylift(int keycode)
 {
 	if (keycode == ESC)
 		clean_exit();
-//	else if (keycode <= 65000)
-//		stop_movement();
-//	else if (keycode == LEFT || keycode == RIGHT)
-//		stop_rotation();
+	if (keycode == W || keycode == A || keycode == S || keycode == D)
+	{
+		g()->key[keycode % 7] = 0;
+		printf("%d\n", keycode);
+	}
+	if (keycode == LEFT)
+		g()->key[4] = 0;
+	if (keycode == RIGHT)
+		g()->key[5] = 0;
 	return (0);
 }

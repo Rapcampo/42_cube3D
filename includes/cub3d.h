@@ -63,9 +63,12 @@ typedef struct s_game
 	t_map		skybox;
 	t_data		frame;
 	t_time		time;
+	int			key[7];
 }	t_game;
 
 /*================================= mlx keys =================================*/
+
+//w = 0 a = 6 s = 3 d = 2 left = 4 right = 5
 
 typedef enum s_keys
 {

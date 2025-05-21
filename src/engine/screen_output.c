@@ -28,14 +28,33 @@ int	init_skybox(t_data *sky)
 	return (0);
 }
 
-/*int	gameloop(void)
-{
-//	create_frame();
-	get_time_delta();
-//	printf("Current FPS: %f\r", g()->time.fps);
-	printf("Current FPS: %f\r", M_PI);
-	render_skybox(&g()->skybox.sky);
-	mlx_put_image_to_window(g()->mlx.ptr, g()->mlx.win, g()->skybox.sky.img, 0, 0);
-	//mlx_string_put(&g()->mlx.ptr, &g()->mlx.win, 10, 10, 0x00FFFFFF, ft_itoa((int)g()->time.fps));
-	return (0);
+void	render_mov(){
+	int		j;
+	int		i;
+	t_data *frame;
+
+	if (g()->key[0] || g()->key[6] || g()->key[3] || g()->key[2]){
+		frame = &g()->skybox.sky;
+		j = -1;
+		i = -1;
+		while (++j < HEIGHT >> 1)
+		{
+			pixel_put(frame, 0, 0 + j, 0x0087ceeb >> 1);
+			while (++i < WIDTH)
+				pixel_put(frame, 0 + i, j, 0x0087ceeb >> 1);
+			i = -1;
+		}
+		j = (HEIGHT >> 1) - 1;
+		while (++j < HEIGHT)
+		{
+			pixel_put(frame, 0, 0 + j, FLOOR >> 1);
+			while (++i < WIDTH)
+				pixel_put(frame, 0 + i, j, FLOOR >> 1);
+			i = -1;
+		}
+	}
+}
+
+/*void	render_rot(){
+
 }*/

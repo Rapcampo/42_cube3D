@@ -58,6 +58,8 @@ int		event_keylift(int keycode);
 int		gameloop(void);
 int		init_skybox(t_data *sky);
 int		render_skybox(t_data *sky);
+void	render_mov();
+void	render_rot();
 void	pixel_put(t_data *data, int x, int y, int color);
 
 #endif
