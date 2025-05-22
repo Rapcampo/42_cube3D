@@ -14,17 +14,13 @@
 
 //static void	create_frame();
 
-int	init_skybox(t_data *sky)
+int	init_skybox(t_data *frame)
 {
-	sky->height = HEIGHT;
-//	floor->height = HEIGHT >> 1;
-	sky->width = WIDTH;
-//	floor->width = WIDTH;
-	sky->img = mlx_new_image(g()->mlx.ptr, sky->width, sky->height);
-//	floor->img = mlx_new_image(g()->mlx.ptr, floor->width, floor->height);
-	sky->addr = mlx_get_data_addr(sky->img, &sky->bpp, &sky->ll, &sky->endian);
-//	floor->addr = mlx_get_data_addr(floor->img, &floor->bpp
-//		, &floor->ll, &floor->endian);
+	frame->height = HEIGHT;
+	frame->width = WIDTH;
+	frame->img = mlx_new_image(g()->mlx.ptr, frame->width, frame->height);
+	frame->addr = mlx_get_data_addr(frame->img,
+			&frame->bpp, &frame->ll, &frame->endian);
 	return (0);
 }
 
@@ -34,7 +30,7 @@ void	render_mov(){
 	t_data *frame;
 
 	if (g()->key[0] || g()->key[6] || g()->key[3] || g()->key[2]){
-		frame = &g()->skybox.sky;
+		frame = &g()->frame;
 		j = -1;
 		i = -1;
 		while (++j < HEIGHT >> 1)

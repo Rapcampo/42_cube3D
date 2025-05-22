@@ -23,10 +23,10 @@ int	gameloop(void)
 {
 	get_time_delta();
 	printf("Current FPS: %f\r", g()->time.fps);
-	render_skybox(&g()->skybox.sky);
+	render_skybox(&g()->frame);
 	render_mov();
 //	render_rot();
-	mlx_put_image_to_window(g()->mlx.ptr, g()->mlx.win, g()->skybox.sky.img, 0, 0);
+	mlx_put_image_to_window(g()->mlx.ptr, g()->mlx.win, g()->frame.img, 0, 0);
 	//mlx_string_put(&g()->mlx.ptr, &g()->mlx.win, 10, 10, 0x00FFFFFF, ft_itoa((int)g()->time.fps));
 	return (0);
 }
@@ -51,7 +51,7 @@ static void	init_game(void)
 	ft_bzero(g(), sizeof(t_game));
 	mlx = &g()->mlx;
 	start_mlx_win();
-	init_skybox(&g()->skybox.sky);
+	init_skybox(&g()->frame);
 	//need to load images here
 	//need to load graphics here
 	mlx_do_key_autorepeatoff(g()->mlx.ptr);
