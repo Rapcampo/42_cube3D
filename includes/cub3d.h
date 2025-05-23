@@ -60,7 +60,7 @@ typedef struct s_game
 	t_player	player;
 	t_mlx		mlx;
 	int			debug;
-	t_map		skybox;
+	t_map		map;
 	t_data		frame;
 	t_time		time;
 	int			key[7];

@@ -47,8 +47,13 @@ typedef struct s_dda
 
 typedef struct s_map
 {
-	t_data	sky;
-//	t_data	floor;
+	int		*map_data;
+	int		width;
+	int		height;
+	t_data	east;
+	t_data	west;
+	t_data	north;
+	t_data	south;
 	int		c_color;
 	int		f_color;
 }	t_map;
@@ -56,8 +61,8 @@ typedef struct s_map
 int		event_keypress(int keycode);
 int		event_keylift(int keycode);
 int		gameloop(void);
-int		init_skybox(t_data *sky);
-int		render_skybox(t_data *sky);
+int		init_frame(t_data *frame);
+int		render_frame(t_data *frame);
 void	render_mov();
 void	render_rot();
 void	pixel_put(t_data *data, int x, int y, int color);

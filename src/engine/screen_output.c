@@ -14,7 +14,7 @@
 
 //static void	create_frame();
 
-int	init_skybox(t_data *frame)
+int	init_frame(t_data *frame)
 {
 	frame->height = HEIGHT;
 	frame->width = WIDTH;

@@ -22,7 +22,7 @@ void	pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)offset = color;
 }
 
-int	render_skybox(t_data *sky)
+int	render_frame(t_data *frame)
 {
 	int		j;
 	int		i;
@@ -31,17 +31,17 @@ int	render_skybox(t_data *sky)
 	i = -1;
 	while (++j < HEIGHT >> 1)
 	{
-		pixel_put(sky, 0, 0 + j, 0x0087ceeb);
+		pixel_put(frame, 0, 0 + j, 0x0087ceeb);
 		while (++i < WIDTH)
-			pixel_put(sky, 0 + i, j, 0x0087ceeb);
+			pixel_put(frame, 0 + i, j, 0x0087ceeb);
 		i = -1;
 	}
 	j = (HEIGHT >> 1) - 1;
 	while (++j < HEIGHT)
 	{
-		pixel_put(sky, 0, 0 + j, FLOOR);
+		pixel_put(frame, 0, 0 + j, FLOOR);
 		while (++i < WIDTH)
-			pixel_put(sky, 0 + i, j, FLOOR);
+			pixel_put(frame, 0 + i, j, FLOOR);
 		i = -1;
 	}
 	return (0);
