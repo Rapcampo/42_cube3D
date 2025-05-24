@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 22:10:54 by tialbert          #+#    #+#             */
-/*   Updated: 2025/05/20 22:17:06 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/05/21 21:59:51 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 # define PARSE_H
 
 /*============================ PARSING_FUNCTIONS ============================*/
-int	parsing(int	fd);
+void	parsing(int	fd);
 
 #endif

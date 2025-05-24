@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 22:03:34 by tialbert          #+#    #+#             */
-/*   Updated: 2025/05/20 22:14:33 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/05/24 22:04:52 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,16 @@ void	map_checker(void)
 
 	map_col_size = map_size(g()->map);
 	i = 0;
-	while (g()->*map[i] != 0)
+	while (g()->map[0][i] != 0)
 	{
 		if (g()->map[0][i] != WALL || g()->map[map_col_size][i] != WALL)
-		{
-			printf("Error: Invalid map\n");
-			clear_all();
-		}
+			exit_log("Error: Invalid map\n");
 	}
 	map_line_size = i;
 	i = 0;
 	while (g()->map[i] != 0)
 	{
 		if (g()->map[i][0] != WALL || g()->map[i][map_line_size] != WALL)
-		{
-			printf("Error: Invalid map\n");
-			clear_all();
-		}
+			exit_log("Error: Invalid map\n");
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 12:22:12 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/20 22:17:27 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/05/21 21:50:43 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ typedef struct s_game
 {
 	t_player	player;
 	t_mlx		mlx;
+	t_textures	*textures;
 	int			debug;
+	short		**map;
 //	t_assets	*assets;
 }	t_game;
 
