@@ -1,0 +1,16 @@
+../../maps/valid/42.cub
+../../maps/valid/basic.cub
+../../maps/valid/big_map.cub
+../../maps/valid/corridor.cub
+../../maps/valid/different_order.cub
+../../maps/valid/double_extension.cub.cub
+../../maps/valid/double_newline.cub
+../../maps/valid/some_weird_stuff.cub
+../../maps/valid/space_between_digits.cub
+../../maps/valid/spaces_after_path.cub
+../../maps/valid/spaces_end.cub
+../../maps/valid/spaces_end2.cub
+../../maps/valid/spaces_start.cub
+../../maps/valid/spaces_start2.cub
+../../maps/valid/subject.cub
+../../maps/valid/valid_hole.cub
