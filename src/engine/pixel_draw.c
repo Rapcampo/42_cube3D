@@ -55,10 +55,10 @@ int	render_frame(t_data *frame)
 	int		i;
 	int		m;
 
-	m = 0;	
+	m = -1;	
 	j = -1;
 	i = -1;
-	while (g()->map.map_data[m] < 64){
+	while (g()->map.map_data[++m] < 63 && g()->map.map_data != NULL){
 		if (g()->map.map_data[m]){
 			while (++j < cell_h)
 			{
@@ -68,7 +68,6 @@ int	render_frame(t_data *frame)
 				i = -1;
 			}
 		}
-		m++;
 	}
 	return (0);
 }
