@@ -22,7 +22,7 @@ void	pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)offset = color;
 }
 
-int	render_frame(t_data *frame)
+/*int	render_frame(t_data *frame)
 {
 	int		j;
 	int		i;
@@ -45,4 +45,32 @@ int	render_frame(t_data *frame)
 		i = -1;
 	}
 	return (0);
+}*/
+
+int	render_frame(t_data *frame)
+{
+	const int cell_h = HEIGHT / g()->map.height;
+	const int cell_w = WIDTH / g()->map.width;
+	int		j;
+	int		i;
+	int		m;
+
+	m = 0;	
+	j = -1;
+	i = -1;
+	while (g()->map.map_data[m] < 64){
+		if (g()->map.map_data[m]){
+			while (++j < cell_h)
+			{
+				pixel_put(frame, 0, 0 + j, 0x0087ceeb);
+				while (++i < cell_w)
+					pixel_put(frame, 0 + i, j, 0x0087ceeb);
+				i = -1;
+			}
+		}
+		m++;
+	}
+	return (0);
 }
+
+

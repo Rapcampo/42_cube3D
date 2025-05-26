@@ -29,7 +29,7 @@ void	render_mov(){
 	int		i;
 	t_data *frame;
 
-	if (g()->key[0] || g()->key[6] || g()->key[3] || g()->key[2]){
+	if (g()->key[A] || g()->key[S] || g()->key[W] || g()->key[D]){
 		frame = &g()->frame;
 		j = -1;
 		i = -1;

@@ -63,7 +63,7 @@ typedef struct s_game
 	t_map		map;
 	t_data		frame;
 	t_time		time;
-	int			key[7];
+	int			key[0xFF];
 }	t_game;
 
 /*================================= mlx keys =================================*/
@@ -107,7 +107,8 @@ typedef enum e_event
 
 t_game	*g(void);
 
-/*============================= struct access ================================*/
+/*============================= testing ================================*/
 
+int		temp_map(t_map *imap);
 
 #endif

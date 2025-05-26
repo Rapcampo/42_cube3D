@@ -51,6 +51,7 @@ static void	init_game(void)
 	ft_bzero(g(), sizeof(t_game));
 	mlx = &g()->mlx;
 	start_mlx_win();
+	temp_map(&g()->map);
 	init_frame(&g()->frame);
 	//need to load images here
 	//need to load graphics here

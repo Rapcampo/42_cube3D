@@ -41,15 +41,15 @@
 //
 int	event_keypress(int keycode)
 {
-	if (keycode == W || keycode == A || keycode == S || keycode == D)
+	if (keycode < 0xFF)
 	{
-		g()->key[keycode % 7] = 1;
+		g()->key[keycode & 0xFF] = 1;
 		printf("%d\n", keycode);
 	}
 	if (keycode == LEFT)
-		g()->key[4] = 1;
+		g()->key[1] = 1;
 	if (keycode == RIGHT)
-		g()->key[5] = 1;
+		g()->key[2] = 1;
 	return (0);
 }
 
@@ -57,14 +57,14 @@ int	event_keylift(int keycode)
 {
 	if (keycode == ESC)
 		clean_exit();
-	if (keycode == W || keycode == A || keycode == S || keycode == D)
+	if (keycode < 0xFF)
 	{
-		g()->key[keycode % 7] = 0;
+		g()->key[keycode & 0xFF] = 0;
 		printf("%d\n", keycode);
 	}
 	if (keycode == LEFT)
-		g()->key[4] = 0;
+		g()->key[1] = 0;
 	if (keycode == RIGHT)
-		g()->key[5] = 0;
+		g()->key[2] = 0;
 	return (0);
 }
