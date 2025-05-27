@@ -15,6 +15,9 @@
 ../../maps/invalid/wrong_char_in_colour.cub
 ../../maps/invalid/wrong_extension.ber
 ../../maps/invalid/wrong_extension2.cub.ber
+../../maps/invalid/wrong_extension3.c
+../../maps/invalid/wrong_extension4.cu
+../../maps/invalid/wrong_extension5.cube
 ../../maps/invalid/wrong_input_colours.cub
 ../../maps/invalid/wrong_input_colours2.cub
 ../../maps/invalid/wrong_path.cub
