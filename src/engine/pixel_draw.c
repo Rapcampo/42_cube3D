@@ -96,7 +96,6 @@ static void	put_player(int start_x, int start_y, t_data *frame)
 
 int	render_frame(t_data *frame)
 {
-	mlx_clear_window(g()->mlx.ptr, g()->mlx.win);
 	const int cell_h = HEIGHT / g()->map.height;
 	const int cell_w = WIDTH / g()->map.width;
 	const int limit = g()->map.width * g()->map.height;
