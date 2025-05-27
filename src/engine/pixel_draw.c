@@ -57,9 +57,12 @@ static void	put_block(int start_x, int start_y, t_data *frame, int m)
 	while (++h < cell_h)
 	{
 		w = -1;
-		while (++w < cell_w){
-			if (g()->map.map_data[m])
-				pixel_put(frame, start_x + w, start_y + h, 0x0087ceeb);
+		while (++w < cell_w)
+		{
+			if (h == 0 || h == cell_h || w == 0 || w == cell_w)
+				pixel_put(frame, start_x + w, start_y + h, 0x00FFFFFF);
+			else if (g()->map.map_data[m] == 1)
+				pixel_put(frame, start_x + w, start_y + h, 0x004b0082);
 			else
 				pixel_put(frame, start_x + w, start_y + h, 0x00);
 		}
@@ -67,8 +70,33 @@ static void	put_block(int start_x, int start_y, t_data *frame, int m)
 
 }
 
+static void	put_player(int start_x, int start_y, t_data *frame)
+{
+	const int	cell_h = HEIGHT / g()->map.height;
+	const int	cell_w = WIDTH / g()->map.width;
+	const int	radius = cell_w >> 3;
+	int			h;
+	int			w;
+	int			dw;
+	int			dh;
+
+	h = -1;
+	while (++h < cell_h)
+	{
+		w = -1;
+		while (++w < cell_w)
+		{
+			dw = w - (cell_w >> 1);
+			dh = h - (cell_h >> 1);
+			if (((dw * dw) + (dh * dh)) <= (radius * radius))
+				pixel_put(frame, start_x + w, start_y + h, 0x00FF0000);
+		}
+	}
+}
+
 int	render_frame(t_data *frame)
 {
+	mlx_clear_window(g()->mlx.ptr, g()->mlx.win);
 	const int cell_h = HEIGHT / g()->map.height;
 	const int cell_w = WIDTH / g()->map.width;
 	const int limit = g()->map.width * g()->map.height;
@@ -83,6 +111,8 @@ int	render_frame(t_data *frame)
 		start_x = (m % map->width) * (cell_w);
 		start_y = (m / map->width) * (cell_h);
 		put_block(start_x, start_y, frame, m);
+		if (g()->map.map_data[m] == 2)
+			put_player(start_x, start_y, frame);
 	}
 	return (0);
 }
