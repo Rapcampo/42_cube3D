@@ -46,28 +46,43 @@ void	pixel_put(t_data *data, int x, int y, int color)
 	}
 	return (0);
 }*/
+static void	put_block(int start_x, int start_y, t_data *frame, int m)
+{
+	const int cell_h = HEIGHT / g()->map.height;
+	const int cell_w = WIDTH / g()->map.width;
+	int	h;
+	int	w;
+
+	h = -1;
+	while (++h < cell_h)
+	{
+		w = -1;
+		while (++w < cell_w){
+			if (g()->map.map_data[m])
+				pixel_put(frame, start_x + w, start_y + h, 0x0087ceeb);
+			else
+				pixel_put(frame, start_x + w, start_y + h, 0x00);
+		}
+	}
+
+}
 
 int	render_frame(t_data *frame)
 {
 	const int cell_h = HEIGHT / g()->map.height;
 	const int cell_w = WIDTH / g()->map.width;
-	int		j;
-	int		i;
+	const int limit = g()->map.width * g()->map.height;
+	t_map	*map;
 	int		m;
+	int		start_x;
+	int		start_y;
 
+	map = &g()->map;
 	m = -1;	
-	j = -1;
-	i = -1;
-	while (g()->map.map_data[++m] < 63 && g()->map.map_data != NULL){
-		if (g()->map.map_data[m]){
-			while (++j < cell_h)
-			{
-				pixel_put(frame, 0, 0 + j, 0x0087ceeb);
-				while (++i < cell_w)
-					pixel_put(frame, 0 + i, j, 0x0087ceeb);
-				i = -1;
-			}
-		}
+	while (++m < limit){
+		start_x = (m % map->width) * (cell_w);
+		start_y = (m / map->width) * (cell_h);
+		put_block(start_x, start_y, frame, m);
 	}
 	return (0);
 }
