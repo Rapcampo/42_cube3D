@@ -67,5 +67,6 @@ int		render_frame(t_data *frame);
 void	render_mov();
 void	render_rot();
 void	pixel_put(t_data *data, int x, int y, int color);
+void	bfi(t_data *data);
 
 #endif

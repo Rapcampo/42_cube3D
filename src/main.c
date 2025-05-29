@@ -21,12 +21,16 @@
 
 int	gameloop(void)
 {
+	t_game	*gm;
+
+	gm = g();
 	get_time_delta();
-	printf("Current FPS: %f\r", g()->time.fps);
-	render_frame(&g()->frame);
+	printf("Current FPS: %f\r", gm->time.fps);
+	bfi(&gm->frame);
+	render_frame(&gm->frame);
 	render_mov();
 //	render_rot();
-	mlx_put_image_to_window(g()->mlx.ptr, g()->mlx.win, g()->frame.img, 0, 0);
+	mlx_put_image_to_window(gm->mlx.ptr, gm->mlx.win, gm->frame.img, 0, 0);
 	//mlx_string_put(&g()->mlx.ptr, &g()->mlx.win, 10, 10, 0x00FFFFFF, ft_itoa((int)g()->time.fps));
 	return (0);
 }

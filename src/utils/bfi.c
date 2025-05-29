@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Player.h                                           :+:      :+:    :+:   */
+/*   bfi.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 21:37:29 by tialbert          #+#    #+#             */
-/*   Updated: 2025/05/07 21:44:04 by tialbert         ###   ########.fr       */
+/*   Created: 2025/05/29 16:43:05 by rapcampo          #+#    #+#             */
+/*   Updated: 2025/05/29 16:45:18 by rapcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLAYER_H
-# define PLAYER_H
+#include "../../includes/cub3d.h"
 
-typedef struct s_player
+void	bfi(t_data *data)
 {
-	float	x;
-	float	y;
-	char	rot;
-	char	*north;
-	char	*south;
-	char	*east;
-	char	*west;
-	int		floor[3];
-	int		ceil[3];
-}			t_player;
+	int	h;
+	int	w;
 
-#endif
+	h = -1;
+	w = -1;
+	while (++h < HEIGHT)
+	{
+		while (w++ < WIDTH)
+			pixel_put(data, 0 + w, 0 + h, 0x00);
+		w = -1;
+	}
+}

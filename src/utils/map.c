@@ -28,7 +28,7 @@ int	temp_map(t_map *map)
 
 	if (!map_data)
 		return (-1);
-	memcpy(map_data, imap, map_size);
+	ft_memcpy(map_data, imap, map_size);
 	map->map_data = map_data;
 	map->height = size;
 	map->width = size;
