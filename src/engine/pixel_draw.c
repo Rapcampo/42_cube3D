@@ -22,30 +22,6 @@ void	pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)offset = color;
 }
 
-/*int	render_frame(t_data *frame)
-{
-	int		j;
-	int		i;
-
-	j = -1;
-	i = -1;
-	while (++j < HEIGHT >> 1)
-	{
-		pixel_put(frame, 0, 0 + j, 0x0087ceeb);
-		while (++i < WIDTH)
-			pixel_put(frame, 0 + i, j, 0x0087ceeb);
-		i = -1;
-	}
-	j = (HEIGHT >> 1) - 1;
-	while (++j < HEIGHT)
-	{
-		pixel_put(frame, 0, 0 + j, FLOOR);
-		while (++i < WIDTH)
-			pixel_put(frame, 0 + i, j, FLOOR);
-		i = -1;
-	}
-	return (0);
-}*/
 static void	put_block(int start_x, int start_y, t_data *frame, int m)
 {
 	const int cell_h = HEIGHT / g()->map.height;
@@ -115,4 +91,27 @@ int	render_frame(t_data *frame)
 	return (0);
 }
 
+/*int	render_frame(t_data *frame)
+{
+	int		j;
+	int		i;
 
+	j = -1;
+	i = -1;
+	while (++j < HEIGHT >> 1)
+	{
+		pixel_put(frame, 0, 0 + j, 0x0087ceeb);
+		while (++i < WIDTH)
+			pixel_put(frame, 0 + i, j, 0x0087ceeb);
+		i = -1;
+	}
+	j = (HEIGHT >> 1) - 1;
+	while (++j < HEIGHT)
+	{
+		pixel_put(frame, 0, 0 + j, FLOOR);
+		while (++i < WIDTH)
+			pixel_put(frame, 0 + i, j, FLOOR);
+		i = -1;
+	}
+	return (0);
+}*/
