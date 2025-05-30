@@ -37,6 +37,19 @@ void	render_mov()
 		p->y += ymov * MOV_SPEED * g()->time.delta;
 }
 
+void	render_rot()
+{
+	const float	rot_dir = g()->key[1] - g()->key[2];
+	const float	velo = rot_dir * ROT_SPEED * g()->time.delta;
+	const float	org_dx = g()->player.dirx;
+	const float	org_px = g()->player.px;
+
+	g()->player.dirx = org_dx * cos(velo) - g()->player.diry * sin(velo);
+	g()->player.diry = org_dx * sin(velo) + g()->player.diry * cos(velo);
+	g()->player.px = org_px * cos(velo) - g()->player.py * sin(velo);
+	g()->player.py = org_px * sin(velo) + g()->player.py * cos(velo);
+}
+
 /*void	render_mov(){
 	int		j;
 	int		i;
@@ -62,8 +75,4 @@ void	render_mov()
 			i = -1;
 		}
 	}
-}*/
-
-/*void	render_rot(){
-
 }*/
