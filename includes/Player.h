@@ -21,13 +21,6 @@ typedef struct s_player
 	float	diry;
 	float	px;
 	float	py;
-	char	rot;
-	char	*north;
-	char	*south;
-	char	*east;
-	char	*west;
-	int		floor[3];
-	int		ceil[3];
 }			t_player;
 
 

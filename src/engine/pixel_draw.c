@@ -65,7 +65,7 @@ static void	put_player(int start_x, int start_y, t_data *frame)
 			dw = w - (cell_w >> 1);
 			dh = h - (cell_h >> 1);
 			if (((dw * dw) + (dh * dh)) <= (radius * radius))
-				pixel_put(frame, start_x + w, start_y + h, 0x00FF0000);
+				pixel_put(frame, start_x + w, start_y + h, 0x00e6003a);
 		}
 	}
 }
