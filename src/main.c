@@ -26,7 +26,7 @@ int	gameloop(void)
 	gm = g();
 	get_time_delta();
 	printf("Current FPS: %f\r", gm->time.fps);
-	bfi(&gm->frame);
+//	bfi(&gm->frame);
 	render_frame(&gm->frame);
 	render_mov();
 //	render_rot();

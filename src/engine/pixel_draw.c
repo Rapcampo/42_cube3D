@@ -110,9 +110,8 @@ int	render_frame(t_data *frame)
 		start_x = (m % map->width) * (cell_w);
 		start_y = (m / map->width) * (cell_h);
 		put_block(start_x, start_y, frame, m);
-		if (map->map_data[m] == 2)
-			put_player(start_x, start_y, frame);
 	}
+	put_player(g()->player.x * cell_w, g()->player.y * cell_h, frame);
 	return (0);
 }
 

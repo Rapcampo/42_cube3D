@@ -17,6 +17,10 @@ typedef struct s_player
 {
 	float	x;
 	float	y;
+	float	dirx;
+	float	diry;
+	float	px;
+	float	py;
 	char	rot;
 	char	*north;
 	char	*south;
@@ -25,5 +29,6 @@ typedef struct s_player
 	int		floor[3];
 	int		ceil[3];
 }			t_player;
+
 
 #endif

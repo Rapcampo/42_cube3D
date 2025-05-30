@@ -22,11 +22,9 @@
 # include <sys/time.h>
 # include "../mlx/mlx.h"
 # include <math.h>
-//# define __USE_MISC
 
-# define WIDTH 800 
-# define HEIGHT 600 
-# define PI 3.1415
+# define WIDTH 640
+# define HEIGHT	480 
 
 /*============================ Custom Libraries ==============================*/
 

@@ -24,7 +24,20 @@ int	init_frame(t_data *frame)
 	return (0);
 }
 
-void	render_mov(){
+void	render_mov()
+{
+	const	int xmov = g()->key[D] - g()->key[A];
+	const	int ymov = g()->key[S] - g()->key[W];
+	t_player *p;
+
+	p = &g()->player;
+	if (xmov != 0)
+		p->x += xmov * MOV_SPEED * g()->time.delta;
+	if (ymov != 0)
+		p->y += ymov * MOV_SPEED * g()->time.delta;
+}
+
+/*void	render_mov(){
 	int		j;
 	int		i;
 	t_data *frame;
@@ -49,7 +62,7 @@ void	render_mov(){
 			i = -1;
 		}
 	}
-}
+}*/
 
 /*void	render_rot(){
 
