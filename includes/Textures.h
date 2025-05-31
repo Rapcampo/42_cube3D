@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   Textures.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rapcampo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/05 18:11:14 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/10 21:35:30 by tialbert         ###   ########.fr       */
+/*   Created: 2025/05/10 21:00:37 by tialbert          #+#    #+#             */
+/*   Updated: 2025/05/10 21:01:56 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef TEXTURES_H
+# define TEXTURES_H
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	while ((*s1) && *s1 == *s2 && n > 0)
-	{
-		s1++;
-		s2++;
-		n--;
-	}
-	if (n == 0 && *s1 == *s2)
-		return (0);
-	return (*(unsigned char *)s1 - *(unsigned char *)s2);
-}
+typedef struct s_textures {
+	char	*north;
+	char	*south;
+	char	*east;
+	char	*west;
+	int		floor[3];
+	int		ceil[3];
+}			t_textures;
+
+#endif

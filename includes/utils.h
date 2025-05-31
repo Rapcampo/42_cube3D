@@ -6,13 +6,15 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:03:17 by tialbert          #+#    #+#             */
-/*   Updated: 2025/05/07 22:04:22 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/05/18 17:48:04 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #ifndef UTILS_H
 # define UTILS_H
+
+# include <stdlib.h>
 
 /*============================ UTIL_FUNCTIONS ===============================*/
 

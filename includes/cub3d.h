@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.h                                           :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 12:22:12 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/07 22:05:10 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/05/21 21:50:43 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include <unistd.h>
 # include <stdio.h>
+# include <errno.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <sys/time.h>
@@ -31,6 +32,7 @@
 # include "memory.h"
 # include "libft.h"
 # include "Player.h"
+# include "Textures.h"
 # include "utils.h"
 # include "macro.h"
 # include "engine.h"
@@ -57,11 +59,8 @@ typedef struct s_game
 {
 	t_player	player;
 	t_mlx		mlx;
+	t_textures	*textures;
 	int			debug;
-	t_map		map;
-	t_data		frame;
-	t_time		time;
-	int			key[0xFF];
 }	t_game;
 
 /*================================= mlx keys =================================*/

@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rapcampo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/05 18:11:14 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/10 21:35:30 by tialbert         ###   ########.fr       */
+/*   Created: 2025/05/08 22:10:54 by tialbert          #+#    #+#             */
+/*   Updated: 2025/05/21 21:59:51 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef PARSE_H
+# define PARSE_H
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	while ((*s1) && *s1 == *s2 && n > 0)
-	{
-		s1++;
-		s2++;
-		n--;
-	}
-	if (n == 0 && *s1 == *s2)
-		return (0);
-	return (*(unsigned char *)s1 - *(unsigned char *)s2);
-}
+/*============================ PARSING_FUNCTIONS ============================*/
+void	parsing(int	fd);
+
+#endif
