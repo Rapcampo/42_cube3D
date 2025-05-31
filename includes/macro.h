@@ -39,4 +39,15 @@
 # define WHT "\e[1;37m"
 # define CLR "\e[0;39m"
 
+/*============================== Hex colours =================================*/
+
+typedef enum s_hex
+{
+	HEX_RED = 0x00e6003a,
+	HEX_BLK = 0x00,
+	HEX_PRP = 0x004b0082,
+	HEX_WHT = 0x00FFFFFF
+}	t_hex;
+
 #endif
+

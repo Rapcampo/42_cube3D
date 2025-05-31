@@ -21,6 +21,7 @@ int	init_frame(t_data *frame)
 	frame->img = mlx_new_image(g()->mlx.ptr, frame->width, frame->height);
 	frame->addr = mlx_get_data_addr(frame->img,
 			&frame->bpp, &frame->ll, &frame->endian);
+	render_frame(frame);
 	return (0);
 }
 
@@ -32,22 +33,22 @@ void	render_mov()
 
 	p = &g()->player;
 	if (xmov != 0)
-		p->x += xmov * MOV_SPEED * g()->time.delta;
+		p->pos.x += xmov * MOV_SPEED * g()->time.delta;
 	if (ymov != 0)
-		p->y += ymov * MOV_SPEED * g()->time.delta;
+		p->pos.y += ymov * MOV_SPEED * g()->time.delta;
 }
 
 void	render_rot()
 {
 	const float	rot_dir = g()->key[1] - g()->key[2];
 	const float	velo = rot_dir * ROT_SPEED * g()->time.delta;
-	const float	org_dx = g()->player.dirx;
-	const float	org_px = g()->player.px;
+	const float	org_dx = g()->player.dir.x;
+	const float	org_px = g()->player.plane.x;
 
-	g()->player.dirx = org_dx * cos(velo) - g()->player.diry * sin(velo);
-	g()->player.diry = org_dx * sin(velo) + g()->player.diry * cos(velo);
-	g()->player.px = org_px * cos(velo) - g()->player.py * sin(velo);
-	g()->player.py = org_px * sin(velo) + g()->player.py * cos(velo);
+	g()->player.dir.x = org_dx * cos(velo) - g()->player.dir.y * sin(velo);
+	g()->player.dir.y = org_dx * sin(velo) + g()->player.dir.y * cos(velo);
+	g()->player.plane.x = org_px * cos(velo) - g()->player.plane.y * sin(velo);
+	g()->player.plane.y = org_px * sin(velo) + g()->player.plane.y * cos(velo);
 }
 
 /*void	render_mov(){

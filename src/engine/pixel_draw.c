@@ -6,7 +6,7 @@
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 11:48:56 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/16 11:49:57 by rapcampo         ###   ########.fr       */
+/*   Updated: 2025/05/31 20:49:57 by rapcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ static void	put_block(int start_x, int start_y, t_data *frame, int m)
 		while (++w < cell_w)
 		{
 			if (h == 0 || h == cell_h || w == 0 || w == cell_w)
-				pixel_put(frame, start_x + w, start_y + h, 0x00FFFFFF);
+				pixel_put(frame, start_x + w, start_y + h, HEX_WHT);
 			else if (m == 1)
-				pixel_put(frame, start_x + w, start_y + h, 0x004b0082);
+				pixel_put(frame, start_x + w, start_y + h, HEX_PRP);
 			else
-				pixel_put(frame, start_x + w, start_y + h, 0x00);
+				pixel_put(frame, start_x + w, start_y + h, HEX_BLK);
 		}
 	}
 
 }
 
-static void	put_player(int start_x, int start_y, t_data *frame)
+static void	put_player(int start_x, int start_y, t_data *frame, int color)
 {
 	const int	cell_h = HEIGHT / g()->map.height;
 	const int	cell_w = WIDTH / g()->map.width;
@@ -65,7 +65,7 @@ static void	put_player(int start_x, int start_y, t_data *frame)
 			dw = w - (cell_w >> 1);
 			dh = h - (cell_h >> 1);
 			if (((dw * dw) + (dh * dh)) <= (radius * radius))
-				pixel_put(frame, start_x + w, start_y + h, 0x00e6003a);
+				pixel_put(frame, start_x + w, start_y + h, color);
 		}
 	}
 }
@@ -74,20 +74,33 @@ int	render_frame(t_data *frame)
 {
 	const int cell_h = HEIGHT / g()->map.height;
 	const int cell_w = WIDTH / g()->map.width;
-	t_map	*map;
-	int		h;
-	int		w;
+	t_map			*map;
+	t_point			screen;
+	static t_fpoint	player;
+	static int r;
 
 	map = &g()->map;
-	h = -1;	
-	w = -1;
-	while (++h < map->height)
-	{
-		w = -1;
-		while (++w < map->width)
-			put_block(w * cell_w, h * cell_h, frame, map->map_data[h][w]);
+	screen.y = -1;	
+	screen.x = -1;
+	if (r == 25){
+		while (++screen.y < map->height)
+		{
+			screen.x = -1;
+			while (++screen.x < map->width)
+				put_block(screen.x * cell_w, screen.y * cell_h,
+						frame, map->map_data[screen.y][screen.x]);
+		}
+		r = 0;
 	}
-	put_player(g()->player.x * cell_w, g()->player.y * cell_h, frame);
+	r++;
+	if (player.x != g()->player.pos.x || player.y != g()->player.pos.y)
+	{
+		put_player(player.x * cell_w, player.y * cell_h, frame,	HEX_BLK);
+		player.x = g()->player.pos.x;
+		player.y = g()->player.pos.y;
+	}
+	put_player(g()->player.pos.x * cell_w, g()->player.pos.y * cell_h, frame,
+			HEX_RED);
 	return (0);
 }
 
