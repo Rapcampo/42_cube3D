@@ -47,7 +47,7 @@ typedef struct s_dda
 
 typedef struct s_map
 {
-	int		*map_data;
+	int		**map_data;
 	int		map_size;
 	int		width;
 	int		height;

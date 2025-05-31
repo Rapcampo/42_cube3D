@@ -37,7 +37,7 @@ static void	put_block(int start_x, int start_y, t_data *frame, int m)
 		{
 			if (h == 0 || h == cell_h || w == 0 || w == cell_w)
 				pixel_put(frame, start_x + w, start_y + h, 0x00FFFFFF);
-			else if (g()->map.map_data[m] == 1)
+			else if (m == '1')
 				pixel_put(frame, start_x + w, start_y + h, 0x004b0082);
 			else
 				pixel_put(frame, start_x + w, start_y + h, 0x00);
@@ -74,18 +74,18 @@ int	render_frame(t_data *frame)
 {
 	const int cell_h = HEIGHT / g()->map.height;
 	const int cell_w = WIDTH / g()->map.width;
-	const int limit = g()->map.width * g()->map.height;
 	t_map	*map;
-	int		m;
-	int		start_x;
-	int		start_y;
+	int		h;
+	int		w;
 
 	map = &g()->map;
-	m = -1;	
-	while (++m < limit){
-		start_x = (m % map->width) * (cell_w);
-		start_y = (m / map->width) * (cell_h);
-		put_block(start_x, start_y, frame, m);
+	h = -1;	
+	w = -1;
+	while (++h < map->height)
+	{
+		w = -1;
+		while (++w < map->width)
+			put_block(w * cell_w, h * cell_h, frame, map->map_data[h][w]);
 	}
 	put_player(g()->player.x * cell_w, g()->player.y * cell_h, frame);
 	return (0);

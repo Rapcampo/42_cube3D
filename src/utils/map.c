@@ -15,20 +15,28 @@
 int	temp_map(t_map *map)
 {
 	const int size = 8;
-	const int imap[] = {	1, 1, 1, 1, 1, 1, 1, 1,
-							1, 0, 0, 0, 0, 1, 0, 1,
-							1, 0, 0, 1, 1, 1, 0, 1,
-							1, 0, 0, 0, 0, 0, 0, 1,
-							1, 0, 0, 1, 0, 0, 0, 1,
-							1, 0, 1, 0, 0, 1, 0, 1,
-							1, 0, 1, 0, 0, 0, 0, 1,
-							1, 1, 1, 1, 1, 1, 1, 1};
-	const size_t	map_size = sizeof(imap);
-	int *const		map_data = ft_calloc(map_size, sizeof(int));
+	const int imap[8][8] = {
+		{P, P, P, P, P, P, P, P},
+		{P, V, V, V, V, P, V, P},
+		{P, V, V, P, P, P, V, P},
+		{P, V, V, V, V, V, V, P},
+		{P, V, V, P, V, V, V, P},
+		{P, V, P, V, V, P, V, P},
+		{P, V, P, V, V, V, V, P},
+		{P, P, P, P, P, P, P, P}
+	};
+	const size_t	map_size = size * size;
+	int **const		map_data = ft_calloc(8, sizeof(int*));
+	int	i;
 
+	i = -1;
 	if (!map_data)
 		return (-1);
-	ft_memcpy(map_data, imap, map_size);
+	while (++i < 8)
+	{
+		map_data[i] = ft_calloc(8, sizeof(int));
+		ft_memcpy(map_data[i], imap[i], sizeof(int) * 8);
+	}
 	map->map_data = map_data;
 	map->height = size;
 	map->width = size;
