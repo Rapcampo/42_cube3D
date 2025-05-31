@@ -17,5 +17,6 @@
 /*============================ UTIL_FUNCTIONS ===============================*/
 
 void	check_file_exten(char *file);
+void	get_time_delta(void);
 
 #endif

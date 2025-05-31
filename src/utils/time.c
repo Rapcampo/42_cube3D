@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_exit.c                                       :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 12:11:09 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/08 12:15:19 by rapcampo         ###   ########.fr       */
+/*   Created: 2025/05/13 17:39:00 by rapcampo          #+#    #+#             */
+/*   Updated: 2025/05/13 20:28:26 by rapcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	destroy_game(void)
+void	get_time_delta(void)
 {
-	t_game *game;
-
-	game = g();
-	if (!game)
-		return ;
-//	if (game->map)
-//		destroy_map(game->map);
-//	if (game->assets)
-//		destroy_images(game);
-	if (game->mlx.win)
-		mlx_destroy_window(game->mlx.ptr, game->mlx.win);
-	if (game->mlx.ptr){
-		mlx_do_key_autorepeaton(g()->mlx.ptr);
-		mlx_destroy_display(game->mlx.ptr);
-	}
-	free(game->mlx.ptr);
-}
-
-int	clean_exit(void)
-{
-	destroy_game();
-	exit(0);
+	static struct timeval c_tv = {0};
+	static struct timeval p_tv = {0};
+	t_time		*time;
+	
+	time = &g()->time;
+	if (gettimeofday(&c_tv, NULL) < 0)
+		exit_log(RED ERR_TIME RST);
+	time->delta = (c_tv.tv_sec - p_tv.tv_sec) + (c_tv.tv_usec - p_tv.tv_usec)
+		/ 1000000.0;
+	if (time->delta > 0)
+		time->fps = 1.0 / time->delta;
+	else
+		time->fps = 0;
+	p_tv = c_tv;
 }

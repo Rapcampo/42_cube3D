@@ -14,21 +14,25 @@
 //adding placeholder error message functions
 //window initialization should be working!
 
-int	output_game(void)
+//TODO:: need to put just one image composed of all elements to not get screen
+//tear.
+//TODO:: implement DDA algorythmn, compare with bresenhams.
+//calculate movement rotation with cos and sin of x,y coordinates
+
+int	gameloop(void)
 {
+	t_game	*gm;
+
+	gm = g();
+	get_time_delta();
+	printf("Current FPS: %f\r", gm->time.fps);
+//	bfi(&gm->frame);
+	render_frame(&gm->frame);
+	render_mov();
+	render_rot();
+	mlx_put_image_to_window(gm->mlx.ptr, gm->mlx.win, gm->frame.img, 0, 0);
+//	mlx_string_put(&g()->mlx.ptr, &g()->mlx.win, 10, 10, 0x00FFFFFF, ft_itoa((int)g()->time.fps));
 	return (0);
-}
-
-static void	loop_initializer(void)
-{
-	t_mlx	*mlx;
-
-	mlx = &g()->mlx;
-	mlx_hook(mlx->win, E_KEYPRESS, KEYPRESS_MASK, &event_keypress, g());
-//	mlx_hook(&g()->mlx, E_KEYLIFT, KEYLIFT_MASK, &event_keylift, g());
-	mlx_hook(mlx->win, E_DESTROY, SUBNOTE_MASK, &clean_exit, g());
-	mlx_loop_hook(mlx->ptr, &output_game, g());
-	mlx_loop(mlx->ptr);
 }
 
 static void	start_mlx_win(void)
@@ -46,21 +50,30 @@ static void	start_mlx_win(void)
 
 static void	init_game(void)
 {
+	t_mlx	*mlx;
+
 	ft_bzero(g(), sizeof(t_game));
+	mlx = &g()->mlx;
 	start_mlx_win();
+	temp_map(&g()->map);
+	init_frame(&g()->frame);
 	//need to load images here
 	//need to load graphics here
+	mlx_do_key_autorepeatoff(g()->mlx.ptr);
+	mlx_hook(mlx->win, E_KEYPRESS, KEYPRESS_MASK, &event_keypress, g());
+	mlx_hook(mlx->win, E_KEYLIFT, KEYLIFT_MASK, &event_keylift, g());
+	mlx_hook(mlx->win, E_DESTROY, SUBNOTE_MASK, &clean_exit, g());
+	mlx_loop_hook(mlx->ptr, &gameloop, g());
+	mlx_loop(mlx->ptr);
 }
 
 int	main(int argc, char **argv)
 {
 	(void)argv;
 	if (argc != 2)
-	{
 		exit_log(YLW WRNG_USE CLR BLU USE_FORMAT RST);
-	}
 //	check_file_exten(argv[1]);
 	init_game();
-	loop_initializer();
+	gameloop();
 	clean_exit();
 }

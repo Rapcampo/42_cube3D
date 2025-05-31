@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_exit.c                                       :+:      :+:    :+:   */
+/*   colours.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 12:11:09 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/08 12:15:19 by rapcampo         ###   ########.fr       */
+/*   Created: 2025/05/16 17:07:15 by rapcampo          #+#    #+#             */
+/*   Updated: 2025/05/16 17:49:12 by rapcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	destroy_game(void)
+int	get_alpha(int argb)
 {
-	t_game *game;
-
-	game = g();
-	if (!game)
-		return ;
-//	if (game->map)
-//		destroy_map(game->map);
-//	if (game->assets)
-//		destroy_images(game);
-	if (game->mlx.win)
-		mlx_destroy_window(game->mlx.ptr, game->mlx.win);
-	if (game->mlx.ptr){
-		mlx_do_key_autorepeaton(g()->mlx.ptr);
-		mlx_destroy_display(game->mlx.ptr);
-	}
-	free(game->mlx.ptr);
+	return (argb >> 24 & 0xff);
 }
 
-int	clean_exit(void)
+int	get_red(int argb)
 {
-	destroy_game();
-	exit(0);
+	return (argb >> 16 & 0xff);
+}
+
+int	get_green(int argb)
+{
+	return (argb >> 8 & 0xff);
+}
+
+int	get_blue(int argb)
+{
+	return (argb & 0xff);
+}
+
+int	get_argb(int t, int r, int g, int b)
+{
+	return ((t << 24) | (r << 16) | (g << 8) | b);
 }

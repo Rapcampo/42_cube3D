@@ -15,15 +15,13 @@
 
 typedef struct s_player
 {
-	int		x;
-	int		y;
-	char	rot;
-	char	*north;
-	char	*south;
-	char	*east;
-	char	*west;
-	int		floor[3];
-	int		ceil[3];
+	float	x;
+	float	y;
+	float	dirx;
+	float	diry;
+	float	px;
+	float	py;
 }			t_player;
+
 
 #endif
