@@ -23,10 +23,9 @@
 # include <sys/time.h>
 # include "../mlx/mlx.h"
 # include <math.h>
-//# define __USE_MISC
 
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 640
+# define HEIGHT	480 
 
 /*============================ Custom Libraries ==============================*/
 
@@ -36,8 +35,12 @@
 # include "Textures.h"
 # include "utils.h"
 # include "macro.h"
+<<<<<<< HEAD
 # include "parse.h"
 # include "map.h"
+=======
+# include "engine.h"
+>>>>>>> main
 
 /*=========================== main game struct ===============================*/
 
@@ -50,6 +53,12 @@ typedef struct s_mlx
 	int		height;
 }	t_mlx;
 
+typedef struct s_time
+{
+	float	fps;
+	float	delta;
+}	t_time;
+
 //acessed through g() function;
 typedef struct s_game
 {
@@ -57,11 +66,20 @@ typedef struct s_game
 	t_mlx		mlx;
 	t_textures	*textures;
 	int			debug;
+<<<<<<< HEAD
 	short		**map;
 //	t_assets	*assets;
+=======
+	t_map		map;
+	t_data		frame;
+	t_time		time;
+	int			key[0xFF];
+>>>>>>> main
 }	t_game;
 
 /*================================= mlx keys =================================*/
+
+//w = 0 a = 6 s = 3 d = 2 left = 4 right = 5
 
 typedef enum s_keys
 {
@@ -100,10 +118,8 @@ typedef enum e_event
 
 t_game	*g(void);
 
-/*============================= struct access ================================*/
+/*============================= testing ================================*/
 
-int		event_keypress(int keycode);
-int		clean_exit();
-int		output_game();
+int		temp_map(t_map *imap);
 
 #endif

@@ -18,6 +18,7 @@
 
 /*============================ UTIL_FUNCTIONS ===============================*/
 
+<<<<<<< HEAD
 /*============================== FILE_UTILS =================================*/
 int		check_file_exten(char *file);
 
@@ -26,5 +27,9 @@ short	**create_map(size_t col);
 short	*create_map_line(size_t col);
 short	**extend_map(size_t nb_lines, short **map);
 size_t	map_size(short **map);
+=======
+void	check_file_exten(char *file);
+void	get_time_delta(void);
+>>>>>>> main
 
 #endif

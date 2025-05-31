@@ -20,8 +20,9 @@
 
 /*============================= Error Logs ===================================*/
 
-# define ER_MLX_INIT "Error: mlx_init failed!"
-# define ER_MLX_WIN "Error: mlx_win failed to initialize!"
+# define ER_MLX_INIT "Error: mlx_init failed!\n"
+# define ER_MLX_WIN "Error: mlx_win failed to initialize!\n"
+# define ERR_TIME "Error: gettimeofday failure\n"
 
 /*============================= Ansi colours =================================*/
 
