@@ -15,7 +15,7 @@
 int	temp_map(t_map *map)
 {
 	const int size = 24;
-	const int imap[24][24] = {
+	const char imap[24][24] = {
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -42,7 +42,7 @@ int	temp_map(t_map *map)
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 	const size_t	map_size = size * size;
-	int **const		map_data = ft_calloc(size, sizeof(int*));
+	char **	map_data = ft_calloc(size, sizeof(char*));
 	int	i;
 
 	i = -1;
@@ -50,8 +50,8 @@ int	temp_map(t_map *map)
 		return (-1);
 	while (++i < size)
 	{
-		map_data[i] = ft_calloc(size, sizeof(int));
-		ft_memcpy(map_data[i], imap[i], sizeof(int) * size);
+		map_data[i] = ft_calloc(size, sizeof(char));
+		ft_memcpy(map_data[i], imap[i], sizeof(char) * size);
 	}
 	map->map_data = map_data;
 	map->height = size;
