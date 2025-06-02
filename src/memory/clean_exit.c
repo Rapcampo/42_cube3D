@@ -12,6 +12,24 @@
 
 #include "../../includes/cub3d.h"
 
+void	destroy_images(t_game *game)
+{
+	mlx_destroy_image(game->mlx.ptr, game->mlx.win);
+}
+
+void	destroy_map(t_map *map)
+{
+	int	i;
+
+	i = -1;
+	if (*map->map_data != 0)
+	{
+		while (map->map_data[++i] != NULL)
+			free(map->map_data[i]);
+		free(map->map_data);
+	}
+}
+
 static void	destroy_textures(t_textures *textures)
 {
 	if (textures->north)
@@ -32,8 +50,14 @@ void	destroy_game(void)
 	game = g();
 	if (!game)
 		return ;
-	if (game->map)
-		clear_arr((void **) game->map);
+//	if (game->map)
+//		clear_arr((void **) game->map);
+	if (game->map.map_data != NULL)
+		destroy_map(&game->map);
+	//if (game->frame.img != NULL)
+	//	destroy_images(game);
+//	if (game->map != 0)
+//		clear_arr((void **) game->map);
 	if (game->textures)
 		destroy_textures(game->textures);
 //	if (game->assets)

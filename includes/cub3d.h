@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 12:22:12 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/21 21:50:43 by tialbert         ###   ########.fr       */
+/*   Created: 2025/06/02 14:06:32 by rapcampo          #+#    #+#             */
+/*   Updated: 2025/06/02 14:07:18 by rapcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include "../mlx/mlx.h"
 # include <math.h>
 
-# define WIDTH 640
-# define HEIGHT	480 
+# define WIDTH 800
+# define HEIGHT	600
 
 /*============================ Custom Libraries ==============================*/
 
@@ -61,6 +61,10 @@ typedef struct s_game
 	t_mlx		mlx;
 	t_textures	*textures;
 	int			debug;
+	t_map		map;
+	t_data		frame;
+	t_time		time;
+	int			key[0xFF];
 }	t_game;
 
 /*================================= mlx keys =================================*/

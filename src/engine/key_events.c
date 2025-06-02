@@ -42,10 +42,7 @@
 int	event_keypress(int keycode)
 {
 	if (keycode < 0xFF)
-	{
 		g()->key[keycode & 0xFF] = 1;
-		printf("%d\n", keycode);
-	}
 	if (keycode == LEFT)
 		g()->key[1] = 1;
 	if (keycode == RIGHT)
@@ -58,10 +55,7 @@ int	event_keylift(int keycode)
 	if (keycode == ESC)
 		clean_exit();
 	if (keycode < 0xFF)
-	{
 		g()->key[keycode & 0xFF] = 0;
-		printf("%d\n", keycode);
-	}
 	if (keycode == LEFT)
 		g()->key[1] = 0;
 	if (keycode == RIGHT)
