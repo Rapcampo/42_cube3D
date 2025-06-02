@@ -1,44 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Player.h                                           :+:      :+:    :+:   */
+/*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 21:37:29 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/02 13:43:00 by rapcampo         ###   ########.fr       */
+/*   Created: 2025/05/20 22:14:57 by tialbert          #+#    #+#             */
+/*   Updated: 2025/05/27 22:31:17 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLAYER_H
-# define PLAYER_H
+#ifndef MAP_H
+# define MAP_H
 
-typedef struct s_point
-{
-	int	x;
-	int	y;
-}	t_point;
+/*============================ MAP_DEFINITIONS ==============================*/
+# define CORR '0'
+# define WALL '1'
+# define EMPTY 2
+# define NORTH 'N'
+# define SOUTH 'S'
+# define WEST 'W'
+# define EAST 'E'
 
-typedef struct s_fpoint
-{
-	float x;
-	float y;
-}	t_fpoint;
+/*============================= MAP_FUNCTIONS ===============================*/
 
-typedef struct s_player
-{
-	t_fpoint	pos;
-	t_fpoint	dir;
-	t_fpoint	plane;
-}			t_player;
-
-typedef struct s_dda
-{
-	t_point		player;
-	t_point		delta;
-	int 		steps;
-	t_fpoint	fcord;
-	t_fpoint	inc;
-}	t_dda;
+void	map_checker(void);
 
 #endif

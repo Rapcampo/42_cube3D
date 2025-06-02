@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   clean_array.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rapcampo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/05 18:11:14 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/10 21:35:30 by tialbert         ###   ########.fr       */
+/*   Created: 2025/05/10 21:44:37 by tialbert          #+#    #+#             */
+/*   Updated: 2025/05/21 22:01:40 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/cub3d.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void	clear_arr(void **arr)
 {
-	while ((*s1) && *s1 == *s2 && n > 0)
-	{
-		s1++;
-		s2++;
-		n--;
-	}
-	if (n == 0 && *s1 == *s2)
-		return (0);
-	return (*(unsigned char *)s1 - *(unsigned char *)s2);
+	if (arr == NULL)
+		return ;
+	while (*arr != NULL)
+		free(*arr);
+	free(arr);
 }
