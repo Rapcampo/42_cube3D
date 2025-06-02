@@ -90,6 +90,8 @@ int	render_frame(t_data *frame)
 				put_block(screen.x * cell_w, screen.y * cell_h,
 						frame, map->map_data[screen.y][screen.x]);
 		}
+		put_player(g()->player.pos.x * cell_w, g()->player.pos.y * cell_h, frame,
+			HEX_RED);
 		r = 0;
 	}
 	r++;
@@ -98,9 +100,9 @@ int	render_frame(t_data *frame)
 		put_player(player.x * cell_w, player.y * cell_h, frame,	HEX_BLK);
 		player.x = g()->player.pos.x;
 		player.y = g()->player.pos.y;
-	}
-	put_player(g()->player.pos.x * cell_w, g()->player.pos.y * cell_h, frame,
+		put_player(g()->player.pos.x * cell_w, g()->player.pos.y * cell_h, frame,
 			HEX_RED);
+	}
 	return (0);
 }
 
