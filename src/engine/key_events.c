@@ -38,7 +38,52 @@
 	return (0);
 }*/
 
-//
+/*static int	is_invalid_move(int xmov, int ymov)
+{
+	const int x = (int)round(xmov * MOV_SPEED * g()->time.delta);
+	const int y = (int)round(ymov * MOV_SPEED * g()->time.delta);
+	t_map		*m;
+	t_player	*p;
+
+	p = &g()->player;
+	m = &g()->map;
+	if (x)
+		if (m->map_data[(int)round(p->pos.y)][(int)round(p->pos.x + x)] == 1)
+			return (1);
+	if (y)
+		if (m->map_data[(int)round(p->pos.y + y)][(int)round(p->pos.x)] == 1)
+			return (1);
+	return (0);
+}*/
+
+void	render_mov()
+{
+	const	int xmov = g()->key[D] - g()->key[A];
+	const	int ymov = g()->key[S] - g()->key[W];
+	t_player *p;
+
+	p = &g()->player;
+	if (xmov != 0)
+		p->pos.x += xmov * MOV_SPEED * g()->time.delta;
+	if (ymov != 0)
+		p->pos.y += ymov * MOV_SPEED * g()->time.delta;
+}
+
+void	render_rot()
+{
+	const float	rot_dir = g()->key[1] - g()->key[2];
+	const float	velo = rot_dir * ROT_SPEED * g()->time.delta;
+	const float	org_dx = g()->player.dir.x;
+	const float	org_px = g()->player.plane.x;
+	t_player	*player;
+
+	player = &g()->player;
+	player->dir.x = org_dx * cos(velo) - player->dir.y * sin(velo);
+	player->dir.y = org_dx * sin(velo) + player->dir.y * cos(velo);
+	player->plane.x = org_px * cos(velo) - player->plane.y * sin(velo);
+	player->plane.y = org_px * sin(velo) + player->plane.y * cos(velo);
+}
+
 int	event_keypress(int keycode)
 {
 	if (keycode < 0xFF)

@@ -48,7 +48,7 @@ int	dda(t_dda *dda)
 	dda->fy = dda->y0;
 	while (++i <= dda->steps)
 	{
-		pixel_put(&g()->skybox.sky, round(dda->fx), round(dda->fy), 0x0000FF00);
+		pixel_put(&g()->frame, round(dda->fx), round(dda->fy), 0x0000FF00);
 		dda->fx += dda->xinc;
 		dda->fy += dda->yinc;
 	}

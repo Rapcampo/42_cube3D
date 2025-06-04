@@ -25,31 +25,6 @@ int	init_frame(t_data *frame)
 	return (0);
 }
 
-void	render_mov()
-{
-	const	int xmov = g()->key[D] - g()->key[A];
-	const	int ymov = g()->key[S] - g()->key[W];
-	t_player *p;
-
-	p = &g()->player;
-	if (xmov != 0)
-		p->pos.x += xmov * MOV_SPEED * g()->time.delta;
-	if (ymov != 0)
-		p->pos.y += ymov * MOV_SPEED * g()->time.delta;
-}
-
-void	render_rot()
-{
-	const float	rot_dir = g()->key[1] - g()->key[2];
-	const float	velo = rot_dir * ROT_SPEED * g()->time.delta;
-	const float	org_dx = g()->player.dir.x;
-	const float	org_px = g()->player.plane.x;
-
-	g()->player.dir.x = org_dx * cos(velo) - g()->player.dir.y * sin(velo);
-	g()->player.dir.y = org_dx * sin(velo) + g()->player.dir.y * cos(velo);
-	g()->player.plane.x = org_px * cos(velo) - g()->player.plane.y * sin(velo);
-	g()->player.plane.y = org_px * sin(velo) + g()->player.plane.y * cos(velo);
-}
 
 /*void	render_mov(){
 	int		j;

@@ -90,7 +90,7 @@ int	render_frame(t_data *frame)
 	map = &g()->map;
 	screen.y = -1;	
 	screen.x = -1;
-	if (r == 10){
+	if (r == 20){
 		while (++screen.y < map->height)
 		{
 			screen.x = -1;
@@ -99,7 +99,7 @@ int	render_frame(t_data *frame)
 				put_block(screen.x * cell_w, screen.y * cell_h, frame);
 		}
 		put_player(g()->player.pos.x * cell_w, g()->player.pos.y * cell_h,
-				frame, HEX_RED);
+				frame,HEX_RED);
 		r = 0;
 	}
 	r++;
