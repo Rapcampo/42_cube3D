@@ -42,7 +42,7 @@ int	temp_map(t_map *map)
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 	const size_t	map_size = size * size;
-	char **	map_data = ft_calloc(size, sizeof(char*));
+	char **	map_data = ft_calloc(size, sizeof(char*) + 1);
 	int	i;
 
 	i = -1;
@@ -50,7 +50,7 @@ int	temp_map(t_map *map)
 		return (-1);
 	while (++i < size)
 	{
-		map_data[i] = ft_calloc(size, sizeof(char));
+		map_data[i] = ft_calloc(size + 1, sizeof(char));
 		ft_memcpy(map_data[i], imap[i], sizeof(char) * size);
 	}
 	map->map_data = map_data;
