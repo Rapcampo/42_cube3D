@@ -36,7 +36,7 @@ static t_dda	cast_ray(int x, t_player *p)
 	else
 	{
 		dda.step.x = 1;
-		dda.s_inc.x = (g()->player.pos.x + 1 - dda.map.x) * dda.delta.x;
+		dda.s_inc.x = (dda.map.x + 1 - g()->player.pos.x) * dda.delta.x;
 	}
 	if (dda.ray.y < 0)
 	{
@@ -46,7 +46,7 @@ static t_dda	cast_ray(int x, t_player *p)
 	else
 	{
 		dda.step.y = 1;
-		dda.s_inc.y = (g()->player.pos.y + 1 - dda.map.y) * dda.delta.y;
+		dda.s_inc.y = (dda.map.y + 1 - g()->player.pos.y) * dda.delta.y;
 	}
 	return (dda);
 }
@@ -68,7 +68,7 @@ static void	ray_touch(t_dda *dda)
 			dda->map.y += dda->step.y;
 			dda->side = 1;
 		}
-		pixel_put(&g()->frame, dda->s_inc.x * g()->map.width, dda->s_inc.y * g()->map.height, HEX_WHT);
+		pixel_put(&g()->frame, dda->map.x, dda->map.y, HEX_WHT);
 		if (map_coord(dda->map.x, dda->map.y) > 0)
 			dda->touch = 1;
 		else if (map_coord(dda->map.x, dda->map.y) < 0)
