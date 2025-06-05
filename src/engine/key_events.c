@@ -38,23 +38,21 @@
 	return (0);
 }*/
 
-/*static int	is_invalid_move(int xmov, int ymov)
+static int	is_invalid_move(int xmov, int ymov)
 {
-	const int x = (int)round(xmov * MOV_SPEED * g()->time.delta);
-	const int y = (int)round(ymov * MOV_SPEED * g()->time.delta);
-	t_map		*m;
+	const int x = (int)round(xmov * MOV_SPEED * g()->player.dir.x * g()->time.delta);
+	const int y = (int)round(ymov * MOV_SPEED * g()->player.dir.y * g()->time.delta);
 	t_player	*p;
 
 	p = &g()->player;
-	m = &g()->map;
 	if (x)
-		if (m->map_data[(int)round(p->pos.y)][(int)round(p->pos.x + x)] == 1)
+		if (map_coord((int)p->pos.y, (int)p->pos.x + x) == 1)
 			return (1);
 	if (y)
-		if (m->map_data[(int)round(p->pos.y + y)][(int)round(p->pos.x)] == 1)
+		if (map_coord((int)p->pos.y + y, (int)p->pos.x) == 1)
 			return (1);
 	return (0);
-}*/
+}
 
 void	render_mov()
 {
@@ -63,9 +61,9 @@ void	render_mov()
 	t_player *p;
 
 	p = &g()->player;
-	if (xmov != 0)
+	if (xmov != 0 && !is_invalid_move(xmov, ymov))
 		p->pos.x += xmov * MOV_SPEED * g()->time.delta;
-	if (ymov != 0)
+	if (ymov != 0 && !is_invalid_move(xmov, ymov))
 		p->pos.y += ymov * MOV_SPEED * g()->time.delta;
 }
 

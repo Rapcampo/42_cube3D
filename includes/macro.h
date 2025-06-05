@@ -46,7 +46,8 @@ typedef enum s_hex
 	HEX_RED = 0x00e6003a,
 	HEX_BLK = 0x00,
 	HEX_PRP = 0x004b0082,
-	HEX_WHT = 0x00FFFFFF
+	HEX_WHT = 0x00FFFFFF,
+	HEX_COB = 0x00003888
 }	t_hex;
 
 #endif

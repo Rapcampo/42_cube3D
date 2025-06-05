@@ -12,6 +12,13 @@
 
 #include "../../includes/cub3d.h"
 
+int	map_coord(int x, int y)
+{
+	if (x < 0 || x >= g()->map.width || y < 0 || y >= g()->map.height)
+		return (-1);
+	return (g()->map.map_data[y][x]);
+}
+
 int	temp_map(t_map *map)
 {
 	const int size = 24;

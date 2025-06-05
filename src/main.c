@@ -28,6 +28,7 @@ int	gameloop(void)
 	printf("Current FPS: %f\r", gm->time.fps);
 //	bfi(&gm->frame);
 	render_frame(&gm->frame);
+	raycaster();
 	render_mov();
 	render_rot();
 	mlx_put_image_to_window(gm->mlx.ptr, gm->mlx.win, gm->frame.img, 0, 0);

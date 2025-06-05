@@ -13,7 +13,7 @@
 #ifndef ENGINE_H
 # define ENGINE_H
 
-# define MOV_SPEED 3.5
+# define MOV_SPEED 5.5
 # define ROT_SPEED 3.5
 
 # ifdef DEBUG
@@ -39,10 +39,6 @@ typedef struct s_map
 	int		map_size;
 	int		width;
 	int		height;
-	t_data	east;
-	t_data	west;
-	t_data	north;
-	t_data	south;
 	int		c_color;
 	int		f_color;
 }	t_map;
@@ -55,5 +51,7 @@ int		render_frame(t_data *frame);
 void	render_mov();
 void	render_rot();
 void	pixel_put(t_data *data, int x, int y, int color);
+int		map_coord(int x, int y);
+void	raycaster(void);
 
 #endif
