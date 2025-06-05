@@ -53,5 +53,6 @@ void	render_rot();
 void	pixel_put(t_data *data, int x, int y, int color);
 int		map_coord(int x, int y);
 void	raycaster(void);
+void	put_player(int x, int y, t_data *frame, int color);
 
 #endif

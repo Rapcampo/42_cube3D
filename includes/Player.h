@@ -46,4 +46,5 @@ typedef struct s_dda
 	float		wdist;
 }	t_dda;
 
+
 #endif

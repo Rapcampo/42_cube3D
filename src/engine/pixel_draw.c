@@ -49,7 +49,7 @@ static void	put_block(int start_x, int start_y, t_data *frame, int m)
 
 }
 
-static void	put_player(int start_x, int start_y, t_data *frame, int color)
+void	put_player(int start_x, int start_y, t_data *frame, int color)
 {
 	const int	cell_h = (int)ceil(HEIGHT / g()->map.height);
 	const int	cell_w = (int)ceil(WIDTH / g()->map.width);
