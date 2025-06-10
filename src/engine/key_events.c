@@ -69,7 +69,7 @@ void	render_mov()
 
 void	render_rot()
 {
-	const float	rot_dir = g()->key[1] - g()->key[2];
+	const float	rot_dir = g()->key[2] - g()->key[1];
 	const float	velo = rot_dir * ROT_SPEED * g()->time.delta;
 	const float	org_dx = g()->player.dir.x;
 	const float	org_px = g()->player.plane.x;

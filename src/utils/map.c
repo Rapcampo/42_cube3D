@@ -64,8 +64,8 @@ int	temp_map(t_map *map)
 	map->height = size;
 	map->width = size;
 	map->map_size = map_size;
-	g()->player.pos.x = 4.5;
-	g()->player.pos.y = 4.5;
+	g()->player.pos.x = 12.0;
+	g()->player.pos.y = 12.0;
 	g()->player.dir.x = 1.0;
 	g()->player.plane.y = 0.66;
 	return (0);
