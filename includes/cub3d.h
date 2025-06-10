@@ -6,7 +6,7 @@
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 12:22:12 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/21 21:50:43 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/07 09:05:02 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # include "utils.h"
 # include "macro.h"
 # include "engine.h"
+# include "map.h"
+# include "parse.h"
 
 /*=========================== main game struct ===============================*/
 
@@ -61,6 +63,7 @@ typedef struct s_game
 	t_mlx		mlx;
 	t_textures	*textures;
 	int			debug;
+	short		**map;
 }	t_game;
 
 /*================================= mlx keys =================================*/

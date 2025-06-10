@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 21:45:47 by tialbert          #+#    #+#             */
-/*   Updated: 2025/05/27 22:32:03 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/07 09:07:26 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	save_map(char *line, int row)
 
 	col = 0;
 	size = map_size(g()->map);
-	if (size == -1)
+	if (size == 0)
 		g()->map = create_map(ft_strlen(line));
 	else if (size % 2 != 0)
 		g()->map = extend_map(size, g()->map);

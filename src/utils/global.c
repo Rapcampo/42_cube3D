@@ -6,7 +6,7 @@
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:40:13 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/08 09:43:42 by rapcampo         ###   ########.fr       */
+/*   Updated: 2025/06/07 09:08:25 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 t_game *g(void)
 {
-	static t_game	g = {0};
+	static t_game	g = {};
 	return (&g);
 }

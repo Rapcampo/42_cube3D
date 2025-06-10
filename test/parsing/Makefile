@@ -6,7 +6,7 @@
 #    By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/06 13:52:55 by rapcampo          #+#    #+#              #
-#    Updated: 2025/05/25 18:13:43 by tialbert         ###   ########.fr        #
+#    Updated: 2025/06/07 14:46:03 by tialbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@
 
 NAME	= map_test
 SOURCE	= $(SOURCE_DIR)
+TESTER	= parse_test.c valid_map_arrays.c
 PARSER	= parse.c
 MEMORY	= fail_exit.c clean_exit.c clean_array.c
 UTILS	= global.c file_checks.c map_utils.c
@@ -25,13 +26,13 @@ LIBFT	= -L ../../libft
 # ============================ Folder Structures ===============================
 
 HEADERS		= ../../includes/
-SOURCE_DIR	= $(addprefix ./, parse_test.c) \
+SOURCE_DIR	= $(addprefix ./, $(TESTER)) \
 			  $(addprefix ../../src/utils/, $(UTILS)) \
 			  $(addprefix ../../src/parsing/, $(PARSER)) \
 			  $(addprefix ../../src/map/, $(MAP)) \
 			  $(addprefix ../../src/memory/, $(MEMORY)) 
 OBJS_DIR	= ./objs/
-SOURCE_LST	= parse_test.c $(PARSER) $(MAP) $(MEMORY) $(UTILS)
+SOURCE_LST	= $(TESTER) $(PARSER) $(MAP) $(MEMORY) $(UTILS)
 LIBFT_DIR	= ../../libft/
 # MLX_DIR		= ./mlx/
 
@@ -92,7 +93,7 @@ endif
 
 clean:
 	make clean $(MAKE_FLAG) -C $(LIBFT_DIR)
-	make clean $(MAKE_FLAG) -sC $(MLX_DIR)
+	# make clean $(MAKE_FLAG) -sC $(MLX_DIR)
 	$(RM) $(OBJS)
 	$(RM) $(OBJS_DIR)
 	echo "\n\n++++++++++++++    $(ULINE)$(GREEN)cube3D's Objects have been" \
@@ -100,7 +101,7 @@ clean:
 
 fclean: clean
 	make fclean $(MAKE_FLAG) -C $(LIBFT_DIR)
-	make clean $(MAKE_FLAG) -sC $(MLX_DIR)
+	# make clean $(MAKE_FLAG) -sC $(MLX_DIR)
 	$(RM) $(NAME)
 	echo "\n\n++++++++++++++    $(ULINE)$(GREEN)cube3D's Static library and "\
 		"programs removed successfully$(RESET)    +++++++++++++++\n\n"
