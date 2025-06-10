@@ -16,7 +16,7 @@
 static void	ray_touch(t_dda *dda);
 static t_dda	cast_ray(int x, t_player *p);
 static t_dda	*ray_angle(t_dda *dda);
-//static void		raydraw(t_dda *dda);
+static void		raydraw(t_dda *dda);
 
 static t_dda	*ray_angle(t_dda *dda)
 {
@@ -78,11 +78,9 @@ static void	ray_touch(t_dda *dda)
 		}
 		pixel_put(&g()->frame, dda->map.x * (float)(g()->frame.width / g()->map.width),
 				dda->map.y * (float)(g()->frame.height / g()->map.height) , HEX_GRN);
-		pixel_put(&g()->frame, dda->map.x + 0.5 * (float)(g()->frame.width / g()->map.width),
-				dda->map.y + 0.5 * (float)(g()->frame.height / g()->map.height) , HEX_GRN);
 		if (map_coord(dda->map.x, dda->map.y) > 0)
 			dda->touch = 1;
-		else if (map_coord(dda->map.x, dda->map.y) < 0)
+		else if (map_coord(dda->map.x, dda->map.y) != 0)
 			break ;
 	}
 	if (dda->side == 0)
@@ -90,18 +88,28 @@ static void	ray_touch(t_dda *dda)
 	else
 		dda->wdist = (dda->map.y - g()->player.pos.y + ((1 - dda->step.y) >> 1)) / dda->ray.y;
 }
-/*
+
 static void	raydraw(t_dda *dda)
 {
 	int		line_height;
 	t_point	tex;
 	int		y;
 	int		color;
+	int		drawstart;
+	int		drawend;
 
 	line_height = (int)round(g()->frame.height / dda->wdist);
-	dda->
+	drawstart = (-(line_height >> 1) + (g()->frame.height >> 1));
+	drawend = (line_height >> 1) + (g()->frame.height >> 1);
+	if (drawend >= g()->map.height)
+		drawend = g()->map.height -1;
+	y = drawstart;
+	while (y < drawend)
+	{
 
-}*/
+	}
+
+}
 
 void	raycaster(void)
 {
@@ -113,7 +121,7 @@ void	raycaster(void)
 	{
 		dda = cast_ray(dda.x, &g()->player);
 		ray_touch(&dda);
-//		raydraw(&dda);
+		raydraw(&dda);
 		dda.x++;
 	}
 }

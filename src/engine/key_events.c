@@ -40,8 +40,8 @@
 
 static int	is_invalid_move(int xmov, int ymov)
 {
-	const int x = (int)round(xmov * MOV_SPEED * g()->player.dir.x * g()->time.delta);
-	const int y = (int)round(ymov * MOV_SPEED * g()->player.dir.y * g()->time.delta);
+	const int x = (int)xmov * MOV_SPEED * g()->player.dir.x * g()->time.delta;
+	const int y = (int)ymov * MOV_SPEED * g()->player.dir.y * g()->time.delta;
 	t_player	*p;
 
 	p = &g()->player;

@@ -39,6 +39,9 @@
 
 /*=========================== main game struct ===============================*/
 
+//NOTE N = dirx = 0, diry = -1; S x = 0, y = 1; E x = 1, y = 0; W x = -1, y = 0
+//NOTE plane N x = 0.66; S x = -0.66; E y = 0.66; W y = -0.66
+
 typedef struct s_mlx
 {
 	void	*ptr;
