@@ -76,40 +76,64 @@ static void	ray_touch(t_dda *dda)
 			dda->map.y += dda->step.y;
 			dda->side = 1;
 		}
-		pixel_put(&g()->frame, dda->map.x * (float)(g()->frame.width / g()->map.width),
-				dda->map.y * (float)(g()->frame.height / g()->map.height) , HEX_GRN);
+//		pixel_put(&g()->frame, dda->map.x * (float)round(g()->frame.width / g()->map.width),
+//				dda->map.y * (float)round(g()->frame.height / g()->map.height) , HEX_GRN);
 		if (map_coord(dda->map.x, dda->map.y) > 0)
 			dda->touch = 1;
 		else if (map_coord(dda->map.x, dda->map.y) != 0)
 			break ;
 	}
 	if (dda->side == 0)
-		dda->wdist = (dda->map.x - g()->player.pos.x + ((1 - dda->step.x) >> 1)) / dda->ray.x;
+	//	dda->wdist = (dda->map.x - g()->player.pos.x + ((1 - dda->step.x) >> 1)) / dda->ray.x;
+		dda->wdist = 2;
 	else
-		dda->wdist = (dda->map.y - g()->player.pos.y + ((1 - dda->step.y) >> 1)) / dda->ray.y;
+		dda->wdist = 1;
+	//	dda->wdist = (dda->map.y - g()->player.pos.y + ((1 - dda->step.y) >> 1)) / dda->ray.y;
 }
 
 static void	raydraw(t_dda *dda)
 {
 	int		line_height;
-	t_point	tex;
-	int		y;
-	int		color;
 	int		drawstart;
 	int		drawend;
 
 	line_height = (int)round(g()->frame.height / dda->wdist);
-	drawstart = (-(line_height >> 1) + (g()->frame.height >> 1));
+	printf("%d\n", line_height);
+	drawstart = fmax(-(line_height >> 1) + (g()->frame.height >> 1), 0);
 	drawend = (line_height >> 1) + (g()->frame.height >> 1);
-	if (drawend >= g()->map.height)
-		drawend = g()->map.height -1;
-	y = drawstart;
-	while (y < drawend)
+	if (drawend >= g()->frame.height)
+		drawend = g()->frame.height -1;
+	if (drawstart == 0)
+		drawstart = (-(line_height >> 1) + (g()->frame.height >> 1));
+	while (drawstart < drawend)
 	{
-
+		if (dda->side == 1)
+			pixel_put(&g()->vframe, dda->x, drawstart, HEX_WHT >> 1);
+		else
+			pixel_put(&g()->vframe, dda->x, drawstart, HEX_WHT);
+		drawstart++;
 	}
 
 }
+
+/*void	verline(int x, int ystart, int yend, int color)
+{
+	t_data *frame;
+
+	frame = &g()->vframe;
+	if (ystart > yend)
+	{
+		ystart ^= yend;
+		yend ^= ystart;
+		ystart ^= yend;
+	}
+	if (ystart < 0)
+		ystart = 0;
+	else if (ystart >= frame->height)
+		yend = frame->height;
+	while (ystart < yend)
+		pixel_put(frame, x, ystart++, HEX_PRP);
+}*/
 
 void	raycaster(void)
 {

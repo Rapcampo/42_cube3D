@@ -112,27 +112,25 @@ int	render_frame(t_data *frame)
 	return (0);
 }
 
-/*int	render_frame(t_data *frame)
-  {
-  int		j;
-  int		i;
+int	render_game(t_data *frame)
+{
+	int		j;
+	int		i;
 
-  j = -1;
-  i = -1;
-  while (++j < HEIGHT >> 1)
-  {
-  pixel_put(frame, 0, 0 + j, 0x0087ceeb);
-  while (++i < WIDTH)
-  pixel_put(frame, 0 + i, j, 0x0087ceeb);
-  i = -1;
-  }
-  j = (HEIGHT >> 1) - 1;
-  while (++j < HEIGHT)
-  {
-  pixel_put(frame, 0, 0 + j, FLOOR);
-  while (++i < WIDTH)
-  pixel_put(frame, 0 + i, j, FLOOR);
-  i = -1;
-  }
-  return (0);
-  }*/
+	j = -1;
+	i = -1;
+	while (++j < HEIGHT >> 1)
+	{
+		while (++i < WIDTH)
+			pixel_put(frame, 0 + i, 0 + j, HEX_COB);
+		i = -1;
+	}
+	j = (HEIGHT >> 1) - 1;
+	while (++j < HEIGHT)
+	{
+		while (++i < WIDTH)
+			pixel_put(frame, 0 + i,0 + j, HEX_GRN);
+		i = -1;
+	}
+	return (0);
+}

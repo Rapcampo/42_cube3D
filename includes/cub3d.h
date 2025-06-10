@@ -66,6 +66,7 @@ typedef struct s_game
 	int			debug;
 	t_map		map;
 	t_data		frame;
+	t_data		vframe;
 	t_time		time;
 	int			key[0xFF];
 }	t_game;
