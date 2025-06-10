@@ -32,22 +32,10 @@ typedef struct s_data
 	int	width;
 }	t_data;
 
-typedef struct s_dda
-{
-	int x;
-	int	y;
-	int dy;
-	int dx;
-	int steps;
-	float fx;
-	float fy;
-	float xinc;
-	float yinc;
-}	t_dda;
 
 typedef struct s_map
 {
-	int		*map_data;
+	char	**map_data;
 	int		map_size;
 	int		width;
 	int		height;

@@ -24,8 +24,8 @@
 # include "../mlx/mlx.h"
 # include <math.h>
 
-# define WIDTH 640
-# define HEIGHT	480 
+# define WIDTH 800
+# define HEIGHT	600
 
 /*============================ Custom Libraries ==============================*/
 
@@ -63,7 +63,10 @@ typedef struct s_game
 	t_mlx		mlx;
 	t_textures	*textures;
 	int			debug;
-	short		**map;
+	t_map		map;
+	t_data		frame;
+	t_time		time;
+	int			key[0xFF];
 }	t_game;
 
 /*================================= mlx keys =================================*/
