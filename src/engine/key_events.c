@@ -12,36 +12,10 @@
 
 #include "../../includes/cub3d.h"
 
-/*static int	sky_part(t_data *sky, t_data *floor)
-{
-	t_mlx	*mlx;
-	int		j;
-	int		i;
-
-	mlx = &g()->mlx;
-	j = -1;
-	i = -1;
-	//mlx_clear_window(mlx->ptr, mlx->win);
-	while (++j < HEIGHT >> 1)
-	{
-		pixel_put(sky, 0, 0 + j, 0x00FF0000);
-		pixel_put(floor, 0, 0 + j, 0x0000FF);
-		while (++i < WIDTH)
-		{
-			pixel_put(sky, 0 + i, j, 0x00FF0000);
-			pixel_put(floor, 0 + i, j, 0x000000FF);
-		}
-		i = -1;
-	}
-	mlx_put_image_to_window(mlx->ptr, mlx->win, sky->img, 0, 0);
-	mlx_put_image_to_window(mlx->ptr, mlx->win, floor->img, 0, HEIGHT >> 1);
-	return (0);
-}*/
-
 static int	is_invalid_move(int xmov, int ymov)
 {
-	const int x = (int)xmov * MOV_SPEED * g()->player.dir.x * g()->time.delta;
-	const int y = (int)ymov * MOV_SPEED * g()->player.dir.y * g()->time.delta;
+	const float x = xmov * MOV_SPEED * g()->player.pos.x * g()->player.dir.x * g()->time.delta;
+	const float y = ymov * MOV_SPEED * g()->player.pos.y * g()->player.dir.y * g()->time.delta;
 	t_player	*p;
 
 	p = &g()->player;
@@ -56,8 +30,8 @@ static int	is_invalid_move(int xmov, int ymov)
 
 void	render_mov()
 {
-	const	int xmov = g()->key[D] - g()->key[A];
-	const	int ymov = g()->key[S] - g()->key[W];
+	const	float	xmov = g()->key[D] - g()->key[A];
+	const	float	ymov = g()->key[S] - g()->key[W];
 	t_player *p;
 
 	p = &g()->player;
@@ -72,14 +46,16 @@ void	render_rot()
 	const float	rot_dir = g()->key[2] - g()->key[1];
 	const float	velo = rot_dir * ROT_SPEED * g()->time.delta;
 	const float	org_dx = g()->player.dir.x;
+	const float	org_dy = g()->player.dir.y;
 	const float	org_px = g()->player.plane.x;
+	const float	org_py = g()->player.plane.y;
 	t_player	*player;
 
 	player = &g()->player;
-	player->dir.x = org_dx * cos(velo) - player->dir.y * sin(velo);
-	player->dir.y = org_dx * sin(velo) + player->dir.y * cos(velo);
-	player->plane.x = org_px * cos(velo) - player->plane.y * sin(velo);
-	player->plane.y = org_px * sin(velo) + player->plane.y * cos(velo);
+	player->dir.x = org_dx * cos(velo) - org_dy * sin(velo);
+	player->dir.y = org_dx * sin(velo) + org_dy * cos(velo);
+	player->plane.x = org_px * cos(velo) - org_py * sin(velo);
+	player->plane.y = org_px * sin(velo) + org_py * cos(velo);
 }
 
 int	event_keypress(int keycode)

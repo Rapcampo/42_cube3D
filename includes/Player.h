@@ -35,11 +35,10 @@ typedef struct s_player
 typedef struct s_dda
 {
 	t_point		map;
-	t_point		delta;
 	t_point		step;
 	t_fpoint	ray;
-	t_fpoint	fcord;
-	t_fpoint	s_inc;
+	t_fpoint	delta;
+	t_fpoint	sdist;
 	int			side;
 	int			x;
 	int			touch;
