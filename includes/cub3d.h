@@ -111,6 +111,8 @@ typedef enum e_event
 /*============================= struct access ================================*/
 
 t_game	*g(void);
+void	raydraw(t_dda *dda);
+void	verline(int x, int y0, int y1, int color);
 
 /*============================= testing ================================*/
 

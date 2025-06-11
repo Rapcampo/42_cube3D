@@ -27,7 +27,6 @@ typedef struct s_data
 	int	width;
 }	t_data;
 
-
 typedef struct s_map
 {
 	char	**map_data;

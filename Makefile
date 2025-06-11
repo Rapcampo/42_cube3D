@@ -15,7 +15,7 @@
 NAME	= cub3d
 SOURCE	= $(SOURCE_DIR)
 #PARSER	= asda
-ENGINE	= key_events.c screen_output.c pixel_draw.c raycaster.c
+ENGINE	= key_events.c screen_output.c pixel_draw.c raycaster.c raydraw.c
 MEMORY	= fail_exit.c clean_exit.c clean_array.c
 UTILS	= global.c time.c map.c bfi.c
 OBJS	= $(addprefix $(OBJS_DIR), $(SOURCE_LST:.c=.o))

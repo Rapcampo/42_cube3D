@@ -13,11 +13,10 @@
 #include "../../includes/cub3d.h"
 
 //todo: dda propper implementation
-static void		ray_touch(t_dda *dda);
+static void		ray_touch(t_dda *dda, t_player *p);
 static t_dda	cast_ray(int x, t_player *p);
 static t_dda	*ray_angle(t_dda *dda);
-static void		raydraw(t_dda *dda);
-void			verline(int x, int ystart, int yend, int color);
+static float	calculate_distance(t_dda *dda, t_player *p, int side);
 
 static t_dda	*ray_angle(t_dda *dda)
 {
@@ -60,7 +59,7 @@ static t_dda	cast_ray(int x, t_player *p)
 	return (*ray_angle(&dda));
 }
 
-static void	ray_touch(t_dda *dda)
+static void	ray_touch(t_dda *dda, t_player *p)
 {
 	dda->touch = 0;
 	while (dda->touch == 0)
@@ -77,70 +76,41 @@ static void	ray_touch(t_dda *dda)
 			dda->map.y += dda->step.y;
 			dda->side = 1;
 		}
-//		pixel_put(&g()->frame, dda->map.x * (float)round(g()->frame.width / g()->map.width),
-//				dda->map.y * (float)round(g()->frame.height / g()->map.height) , HEX_GRN);
 		if (map_coord(dda->map.x, dda->map.y) > 0)
 			dda->touch = 1;
 		else if (map_coord(dda->map.x, dda->map.y) < 0)
 			break ;
 	}
-	if (dda->side == 0)
-		dda->wdist = (dda->map.x - g()->player.pos.x + 
-				((1 - dda->step.x) >> 1)) / dda->ray.x;
-	else
-		dda->wdist = (dda->map.y - g()->player.pos.y +
-				((1 - dda->step.y) >> 1)) / dda->ray.y;
+	dda->wdist = calculate_distance(dda, p, dda->side);
 }
 
-static void	raydraw(t_dda *dda)
+static float	calculate_distance(t_dda *dda, t_player *p, int side)
 {
-	int		line_height;
-	int		drawstart;
-	int		drawend;
-
-	line_height = (int)(g()->frame.height / dda->wdist);
-//	printf("%d\n", line_height);
-	drawstart = fmax(-(line_height >> 1) + (g()->frame.height >> 1), 0);
-	drawend = (line_height >> 1) + (g()->frame.height >> 1);
-	if (drawend >= g()->frame.height)
-		drawend = g()->frame.height -1;
-	if (drawstart == 0)
-		drawstart = (-(line_height >> 1) + (g()->frame.height >> 1));
-	if (dda->side == 1)
-		verline(dda->x, drawstart, drawend, HEX_COB >> 1);
+	if (side == 0)
+		return ((dda->map.x - p->pos.x +
+					((1 - dda->step.x) >> 1)) / dda->ray.x);
 	else
-		verline(dda->x, drawstart, drawend, HEX_PRP);
+		return ((dda->map.y - p->pos.y +
+				((1 - dda->step.y) >> 1)) / dda->ray.y);
 }
 
-void	verline(int x, int ystart, int yend, int color)
-{
-	t_data *frame;
+//FOR RAYTOUCH DDA EDGE DETECTION TESTING
+//		pixel_put(&g()->frame, dda->map.x * (float)round(g()->frame.width / g()->map.width),
+//				dda->map.y * (float)round(g()->frame.height / g()->map.height) , HEX_GRN);
 
-	frame = &g()->frame;
-	if (ystart > yend)
-	{
-		ystart ^= yend;
-		yend ^= ystart;
-		ystart ^= yend;
-	}
-	if (ystart < 0)
-		ystart = 0;
-	else if (ystart >= frame->height)
-		yend = frame->height;
-	while (ystart < yend)
-		pixel_put(frame, x, ystart++, color);
-}
 
 void	raycaster(void)
 {
 	t_dda	dda;
+	t_player *p;
 
+	p = &g()->player;
 	ft_bzero(&dda, sizeof(t_dda));
 	dda.x = 0;
 	while (dda.x < g()->frame.width)
 	{
-		dda = cast_ray(dda.x, &g()->player);
-		ray_touch(&dda);
+		dda = cast_ray(dda.x, p);
+		ray_touch(&dda, p);
 		raydraw(&dda);
 		dda.x++;
 	}
