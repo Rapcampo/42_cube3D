@@ -14,31 +14,35 @@
 
 static int	is_invalid_move(int xmov, int ymov)
 {
-	const float x = xmov * MOV_SPEED * g()->player.pos.x * g()->player.dir.x * g()->time.delta;
-	const float y = ymov * MOV_SPEED * g()->player.pos.y * g()->player.dir.y * g()->time.delta;
 	t_player	*p;
 
 	p = &g()->player;
-	if (x)
-		if (map_coord((int)p->pos.y, (int)p->pos.x + x) == 1)
-			return (1);
-	if (y)
-		if (map_coord((int)p->pos.y + y, (int)p->pos.x) == 1)
-			return (1);
+	if (xmov != 0)
+	{
+		return (map_coord((int)(p->pos.x += xmov * MOV_SPEED * -p->dir.y * g()->time.delta),		(int)(p->pos.y += xmov * MOV_SPEED * p->dir.x * g()->time.delta)));
+	}
+	if (ymov != 0)
+		return (map_coord((int)(p->pos.x += ymov * MOV_SPEED * -p->dir.x * g()->time.delta),(int)(p->pos.y += ymov * MOV_SPEED * p->dir.y * g()->time.delta)));
 	return (0);
 }
 
 void	render_mov()
 {
 	const	float	xmov = g()->key[D] - g()->key[A];
-	const	float	ymov = g()->key[S] - g()->key[W];
+	const	float	ymov = g()->key[W] - g()->key[S];
 	t_player *p;
 
 	p = &g()->player;
 	if (xmov != 0 && !is_invalid_move(xmov, ymov))
-		p->pos.x += xmov * MOV_SPEED * g()->time.delta;
+	{
+		p->pos.x += xmov * MOV_SPEED * -p->dir.y * g()->time.delta;
+		p->pos.y += xmov * MOV_SPEED * p->dir.x * g()->time.delta;
+	}
 	if (ymov != 0 && !is_invalid_move(xmov, ymov))
-		p->pos.y += ymov * MOV_SPEED * g()->time.delta;
+	{
+		p->pos.x += ymov * MOV_SPEED * p->dir.x * g()->time.delta;
+		p->pos.y += ymov * MOV_SPEED * p->dir.y * g()->time.delta;
+	}
 }
 
 void	render_rot()
@@ -46,16 +50,14 @@ void	render_rot()
 	const float	rot_dir = g()->key[2] - g()->key[1];
 	const float	velo = rot_dir * ROT_SPEED * g()->time.delta;
 	const float	org_dx = g()->player.dir.x;
-	const float	org_dy = g()->player.dir.y;
 	const float	org_px = g()->player.plane.x;
-	const float	org_py = g()->player.plane.y;
 	t_player	*player;
 
 	player = &g()->player;
-	player->dir.x = org_dx * cos(velo) - org_dy * sin(velo);
-	player->dir.y = org_dx * sin(velo) + org_dy * cos(velo);
-	player->plane.x = org_px * cos(velo) - org_py * sin(velo);
-	player->plane.y = org_px * sin(velo) + org_py * cos(velo);
+	player->dir.x = player->dir.x* cos(velo) - player->dir.y * sin(velo);
+	player->dir.y = org_dx * sin(velo) + player->dir.y * cos(velo);
+	player->plane.x = player->plane.x * cos(velo) - player->plane.y * sin(velo);
+	player->plane.y = org_px * sin(velo) + player->plane.y * cos(velo);
 }
 
 int	event_keypress(int keycode)
