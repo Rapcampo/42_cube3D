@@ -32,17 +32,18 @@ void	render_mov()
 {
 	const	float	xmov = g()->key[D] - g()->key[A];
 	const	float	ymov = g()->key[W] - g()->key[S];
+	const	float	dt = g()->time.delta;
 	t_player *p;
-
+	
 	p = &g()->player;
 	if (xmov != 0 && !is_invalid_move(xmov, ymov))
-		p->pos.x += xmov * MOV_SPEED * -p->dir.y * g()->time.delta;
+		p->pos.x += xmov * MOV_SPEED * -p->dir.y * dt;
 	if (xmov != 0 && !is_invalid_move(xmov, ymov))
-		p->pos.y += xmov * MOV_SPEED * p->dir.x * g()->time.delta;
+		p->pos.y += xmov * MOV_SPEED * p->dir.x * dt;
 	if (ymov != 0 && !is_invalid_move(xmov, ymov))
-		p->pos.x += ymov * MOV_SPEED * p->dir.x * g()->time.delta;
+		p->pos.x += ymov * MOV_SPEED * p->dir.x * dt;
 	if (ymov != 0 && !is_invalid_move(xmov, ymov))
-		p->pos.y += ymov * MOV_SPEED * p->dir.y * g()->time.delta;
+		p->pos.y += ymov * MOV_SPEED * p->dir.y * dt;
 }
 
 void	render_rot()

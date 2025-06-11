@@ -98,7 +98,6 @@ static float	calculate_distance(t_dda *dda, t_player *p, int side)
 //		pixel_put(&g()->frame, dda->map.x * (float)round(g()->frame.width / g()->map.width),
 //				dda->map.y * (float)round(g()->frame.height / g()->map.height) , HEX_GRN);
 
-
 void	raycaster(void)
 {
 	t_dda	dda;

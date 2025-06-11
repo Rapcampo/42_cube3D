@@ -114,22 +114,19 @@ int	render_frame(t_data *frame)
 
 int	render_game(t_data *frame)
 {
+	const int	halfscreen = frame->height >> 1;
 	int		j;
 	int		i;
 
 	j = -1;
 	i = -1;
-	while (++j < HEIGHT >> 1)
+	while (++j < frame->height)
 	{
-		while (++i < WIDTH)
-			pixel_put(frame, 0 + i, 0 + j, HEX_COB);
-		i = -1;
-	}
-	j = (HEIGHT >> 1) - 1;
-	while (++j < HEIGHT)
-	{
-		while (++i < WIDTH)
-			pixel_put(frame, 0 + i,0 + j, HEX_GRN);
+		while (++i < frame->width)
+			if (j < halfscreen)
+				pixel_put(frame, 0 + i, 0 + j, HEX_COB);
+			else
+				pixel_put(frame, 0 + i,0 + j, HEX_GRN);
 		i = -1;
 	}
 	return (0);

@@ -12,43 +12,44 @@
 
 #include "../../includes/cub3d.h"
 
-void	verline(int x, int ystart, int yend, int color);
+void	verline(int x, int y0, int y1, int color);
 
 void	raydraw(t_dda *dda)
 {
+	const int	h = g()->frame.height;
 	int		line_height;
-	int		drawstart;
-	int		drawend;
+	int		dstart;
+	int		dend;
 
 	line_height = (int)(g()->frame.height / dda->wdist);
 //	printf("%d\n", line_height);
-	drawstart = fmax(-(line_height >> 1) + (g()->frame.height >> 1), 0);
-	drawend = (line_height >> 1) + (g()->frame.height >> 1);
-	if (drawend >= g()->frame.height)
-		drawend = g()->frame.height -1;
-	if (drawstart == 0)
-		drawstart = (-(line_height >> 1) + (g()->frame.height >> 1));
+	dstart = fmax(-(line_height >> 1) + (h >> 1), 0);
+	dend = (line_height >> 1) + (h >> 1);
+	if (dend >= h)
+		dend = h - 1;
+	if (dstart == 0)
+		dstart = (-(line_height >> 1) + (h >> 1));
 	if (dda->side == 1)
-		verline(dda->x, drawstart, drawend, HEX_COB >> 1);
+		verline(dda->x, dstart, dend, HEX_COB >> 1);
 	else
-		verline(dda->x, drawstart, drawend, HEX_PRP);
+		verline(dda->x, dstart, dend, HEX_PRP);
 }
 
-void	verline(int x, int ystart, int yend, int color)
+void	verline(int x, int y0, int y1, int color)
 {
 	t_data *frame;
 
 	frame = &g()->frame;
-	if (ystart > yend)
+	if (y0 > y1)
 	{
-		ystart ^= yend;
-		yend ^= ystart;
-		ystart ^= yend;
+		y0 ^= y1;
+		y1 ^= y0;
+		y0 ^= y1;
 	}
-	if (ystart < 0)
-		ystart = 0;
-	else if (ystart >= frame->height)
-		yend = frame->height;
-	while (ystart < yend)
-		pixel_put(frame, x, ystart++, color);
+	if (y0 < 0)
+		y0 = 0;
+	else if (y0 >= frame->height)
+		y1 = frame->height;
+	while (y0 < y1)
+		pixel_put(frame, x, y0++, color);
 }
