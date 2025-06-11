@@ -14,15 +14,17 @@
 
 static int	is_invalid_move(int xmov, int ymov)
 {
-	t_player	*p;
+//	t_player	*p;
+	(void)ymov, (void)xmov;
 
-	p = &g()->player;
-	if (xmov != 0)
+//	p = &g()->player;
+/*	if (xmov != 0)
 	{
-		return (map_coord((int)(p->pos.x += xmov * MOV_SPEED * -p->dir.y * g()->time.delta),		(int)(p->pos.y += xmov * MOV_SPEED * p->dir.x * g()->time.delta)));
+		return (map_coord((int)(p->pos.x + xmov * MOV_SPEED * -p->dir.y * g()->time.delta),		(int)(p->pos.y += xmov * MOV_SPEED * p->dir.x * g()->time.delta)));
 	}
 	if (ymov != 0)
-		return (map_coord((int)(p->pos.x += ymov * MOV_SPEED * -p->dir.x * g()->time.delta),(int)(p->pos.y += ymov * MOV_SPEED * p->dir.y * g()->time.delta)));
+		return (map_coord((int)(p->pos.x + ymov * MOV_SPEED * -p->dir.x * g()->time.delta),(int)(p->pos.y += ymov * MOV_SPEED * p->dir.y * g()->time.delta)));
+		*/
 	return (0);
 }
 
@@ -34,15 +36,13 @@ void	render_mov()
 
 	p = &g()->player;
 	if (xmov != 0 && !is_invalid_move(xmov, ymov))
-	{
 		p->pos.x += xmov * MOV_SPEED * -p->dir.y * g()->time.delta;
+	if (xmov != 0 && !is_invalid_move(xmov, ymov))
 		p->pos.y += xmov * MOV_SPEED * p->dir.x * g()->time.delta;
-	}
 	if (ymov != 0 && !is_invalid_move(xmov, ymov))
-	{
 		p->pos.x += ymov * MOV_SPEED * p->dir.x * g()->time.delta;
+	if (ymov != 0 && !is_invalid_move(xmov, ymov))
 		p->pos.y += ymov * MOV_SPEED * p->dir.y * g()->time.delta;
-	}
 }
 
 void	render_rot()
@@ -54,7 +54,7 @@ void	render_rot()
 	t_player	*player;
 
 	player = &g()->player;
-	player->dir.x = player->dir.x* cos(velo) - player->dir.y * sin(velo);
+	player->dir.x = player->dir.x * cos(velo) - player->dir.y * sin(velo);
 	player->dir.y = org_dx * sin(velo) + player->dir.y * cos(velo);
 	player->plane.x = player->plane.x * cos(velo) - player->plane.y * sin(velo);
 	player->plane.y = org_px * sin(velo) + player->plane.y * cos(velo);

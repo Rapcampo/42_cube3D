@@ -13,13 +13,8 @@
 #ifndef ENGINE_H
 # define ENGINE_H
 
-# define MOV_SPEED 5.5
+# define MOV_SPEED 3.5
 # define ROT_SPEED 3.5
-
-# ifdef DEBUG
-# define CEILING 0x0087ceeb
-# define FLOOR 0x00138510
-# endif
 
 typedef struct s_data
 {
