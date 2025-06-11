@@ -24,7 +24,7 @@
 # include "../mlx/mlx.h"
 # include <math.h>
 
-# define WIDTH 800
+# define WIDTH 800 
 # define HEIGHT	600
 
 /*============================ Custom Libraries ==============================*/
@@ -38,6 +38,9 @@
 # include "engine.h"
 
 /*=========================== main game struct ===============================*/
+
+//NOTE N = dirx = 0, diry = -1; S x = 0, y = 1; E x = 1, y = 0; W x = -1, y = 0
+//NOTE plane N x = 0.66; S x = -0.66; E y = 0.66; W y = -0.66
 
 typedef struct s_mlx
 {
@@ -63,6 +66,7 @@ typedef struct s_game
 	int			debug;
 	t_map		map;
 	t_data		frame;
+	t_data		vframe;
 	t_time		time;
 	int			key[0xFF];
 }	t_game;
@@ -107,6 +111,8 @@ typedef enum e_event
 /*============================= struct access ================================*/
 
 t_game	*g(void);
+void	raydraw(t_dda *dda);
+void	verline(int x, int y0, int y1, int color);
 
 /*============================= testing ================================*/
 

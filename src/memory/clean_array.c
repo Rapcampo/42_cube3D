@@ -17,6 +17,6 @@ void	clear_arr(void **arr)
 	if (arr == NULL)
 		return ;
 	while (*arr != NULL)
-		free(*arr);
+		free(*arr++);
 	free(arr);
 }

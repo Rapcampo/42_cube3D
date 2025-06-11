@@ -16,11 +16,6 @@
 # define MOV_SPEED 3.5
 # define ROT_SPEED 3.5
 
-# ifdef DEBUG
-# define CEILING 0x0087ceeb
-# define FLOOR 0x00138510
-# endif
-
 typedef struct s_data
 {
 	void	*img;
@@ -32,17 +27,12 @@ typedef struct s_data
 	int	width;
 }	t_data;
 
-
 typedef struct s_map
 {
 	char	**map_data;
 	int		map_size;
 	int		width;
 	int		height;
-	t_data	east;
-	t_data	west;
-	t_data	north;
-	t_data	south;
 	int		c_color;
 	int		f_color;
 }	t_map;
@@ -55,5 +45,10 @@ int		render_frame(t_data *frame);
 void	render_mov();
 void	render_rot();
 void	pixel_put(t_data *data, int x, int y, int color);
+int		map_coord(int x, int y);
+void	raycaster(void);
+void	put_player(int x, int y, t_data *frame, int color);
+int		render_game(t_data *frame);
+void	bfi(t_data *frame);
 
 #endif

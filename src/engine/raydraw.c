@@ -12,45 +12,44 @@
 
 #include "../../includes/cub3d.h"
 
-float	deg_to_rad(float a)
-{
-	return (a * M_PI / 180);
-}
+void	verline(int x, int y0, int y1, int color);
 
-float	fix_angle(float a)
+void	raydraw(t_dda *dda)
 {
-	if (a > 359)
-		a -= 360;
-	if (a < 0)
-		a += 360;
-	return (a);
-}
+	const int	h = g()->frame.height;
+	int		line_height;
+	int		dstart;
+	int		dend;
 
-float distance(t_dda *dda)
-{
-	return (cos(deg_to_rad(ang)) * (bx-ax)-sin(deg_to_rad(ang)) * (by-ay));
-}
-
-int	dda(t_dda *dda)
-{
-	int	i;
-	//base of the algorythmn
-	i = -1;
-	dda->dx = dda->x0 - dda->x1;
-	dda->dy = dda->y0 - dda->y1;
-	if (abs(dx) > abs(dy))
-		dda->steps = dda->dx;
+	line_height = (int)(g()->frame.height / dda->wdist);
+//	printf("%d\n", line_height);
+	dstart = fmax(-(line_height >> 1) + (h >> 1), 0);
+	dend = (line_height >> 1) + (h >> 1);
+	if (dend >= h)
+		dend = h - 1;
+	if (dstart == 0)
+		dstart = (-(line_height >> 1) + (h >> 1));
+	if (dda->side == 1)
+		verline(dda->x, dstart, dend, HEX_COB >> 1);
 	else
-		dda->steps = dda->dy;
-	dda->xinc = dda->dx / (float)dda->steps;
-	dda->yinc = dda->dy / (float)dda->steps;
-	dda->fx = dda->x0;
-	dda->fy = dda->y0;
-	while (++i <= dda->steps)
+		verline(dda->x, dstart, dend, HEX_PRP);
+}
+
+void	verline(int x, int y0, int y1, int color)
+{
+	t_data *frame;
+
+	frame = &g()->frame;
+	if (y0 > y1)
 	{
-		pixel_put(&g()->skybox.sky, round(dda->fx), round(dda->fy), 0x0000FF00);
-		dda->fx += dda->xinc;
-		dda->fy += dda->yinc;
+		y0 ^= y1;
+		y1 ^= y0;
+		y0 ^= y1;
 	}
-	return (0);
+	if (y0 < 0)
+		y0 = 0;
+	else if (y0 >= frame->height)
+		y1 = frame->height;
+	while (y0 < y1)
+		pixel_put(frame, x, y0++, color);
 }

@@ -12,6 +12,13 @@
 
 #include "../../includes/cub3d.h"
 
+int	map_coord(int x, int y)
+{
+	if (x < 0 || x >= g()->map.width || y < 0 || y >= g()->map.height)
+		return (-1);
+	return (g()->map.map_data[y][x]);
+}
+
 int	temp_map(t_map *map)
 {
 	const int size = 24;
@@ -42,7 +49,7 @@ int	temp_map(t_map *map)
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 	const size_t	map_size = size * size;
-	char **	map_data = ft_calloc(size, sizeof(char*));
+	char **	map_data = ft_calloc(size, sizeof(char*) + 1);
 	int	i;
 
 	i = -1;
@@ -50,15 +57,15 @@ int	temp_map(t_map *map)
 		return (-1);
 	while (++i < size)
 	{
-		map_data[i] = ft_calloc(size, sizeof(char));
+		map_data[i] = ft_calloc(size + 1, sizeof(char));
 		ft_memcpy(map_data[i], imap[i], sizeof(char) * size);
 	}
 	map->map_data = map_data;
 	map->height = size;
 	map->width = size;
 	map->map_size = map_size;
-	g()->player.pos.x = 5.5;
-	g()->player.pos.y = 5.5;
+	g()->player.pos.x = 12.0;
+	g()->player.pos.y = 12.0;
 	g()->player.dir.x = 1.0;
 	g()->player.plane.y = 0.66;
 	return (0);

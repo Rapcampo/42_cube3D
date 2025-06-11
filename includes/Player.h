@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 21:37:29 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/02 14:06:20 by rapcampo         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:39:18 by rapcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,16 @@ typedef struct s_player
 
 typedef struct s_dda
 {
-	t_point		player;
-	t_point		delta;
-	int 		steps;
-	t_fpoint	fcord;
-	t_fpoint	inc;
+	t_point		map;
+	t_point		step;
+	t_fpoint	ray;
+	t_fpoint	delta;
+	t_fpoint	sdist;
+	int			side;
+	int			x;
+	int			touch;
+	float		wdist;
 }	t_dda;
+
 
 #endif

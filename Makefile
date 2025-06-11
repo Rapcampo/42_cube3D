@@ -15,8 +15,8 @@
 NAME	= cub3d
 SOURCE	= $(SOURCE_DIR)
 #PARSER	= asda
-ENGINE	= key_events.c screen_output.c pixel_draw.c
-MEMORY	= fail_exit.c clean_exit.c
+ENGINE	= key_events.c screen_output.c pixel_draw.c raycaster.c raydraw.c
+MEMORY	= fail_exit.c clean_exit.c clean_array.c
 UTILS	= global.c time.c map.c bfi.c
 OBJS	= $(addprefix $(OBJS_DIR), $(SOURCE_LST:.c=.o))
 LIBFT	= -L ./libft
@@ -107,10 +107,10 @@ fclean: clean
 re: fclean all
 
 leak: all
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) test.cub
 
 run: re
-	./$(NAME)
+	./$(NAME) test.cub
 
 .SILENT:
 
