@@ -63,7 +63,7 @@ static void	init_game(void)
 	mlx = &g()->mlx;
 	start_mlx_win();
 	temp_map(&g()->map);
-	init_frame(&g()->frame);
+	init_frame(&g()->frame, mlx);
 //	init_frame(&g()->vframe);
 	//need to load images here
 	//need to load graphics here

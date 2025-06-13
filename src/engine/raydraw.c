@@ -21,8 +21,7 @@ void	raydraw(t_dda *dda)
 	int		dstart;
 	int		dend;
 
-	line_height = (int)(g()->frame.height / dda->wdist);
-//	printf("%d\n", line_height);
+	line_height = (int)(h / dda->wdist);
 	dstart = fmax(-(line_height >> 1) + (h >> 1), 0);
 	dend = (line_height >> 1) + (h >> 1);
 	if (dend >= h)

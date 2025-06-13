@@ -16,6 +16,8 @@
 # define MOV_SPEED 3.5
 # define ROT_SPEED 3.5
 
+struct s_mlx;
+
 typedef struct s_data
 {
 	void	*img;
@@ -40,7 +42,7 @@ typedef struct s_map
 int		event_keypress(int keycode);
 int		event_keylift(int keycode);
 int		gameloop(void);
-int		init_frame(t_data *frame);
+int		init_frame(t_data *frame, struct s_mlx *mlx);
 int		render_frame(t_data *frame);
 void	render_mov();
 void	render_rot();

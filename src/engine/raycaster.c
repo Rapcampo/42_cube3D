@@ -76,6 +76,8 @@ static void	ray_touch(t_dda *dda, t_player *p)
 			dda->map.y += dda->step.y;
 			dda->side = 1;
 		}
+		pixel_put(&g()->frame, dda->map.x * (float)round(g()->frame.width / g()->map.width),
+				dda->map.y * (float)round(g()->frame.height / g()->map.height) , HEX_GRN);
 		if (map_coord(dda->map.x, dda->map.y) > 0)
 			dda->touch = 1;
 		else if (map_coord(dda->map.x, dda->map.y) < 0)
@@ -91,7 +93,7 @@ static float	calculate_distance(t_dda *dda, t_player *p, int side)
 					((1 - dda->step.x) >> 1)) / dda->ray.x);
 	else
 		return ((dda->map.y - p->pos.y +
-				((1 - dda->step.y) >> 1)) / dda->ray.y);
+					((1 - dda->step.y) >> 1)) / dda->ray.y);
 }
 
 //FOR RAYTOUCH DDA EDGE DETECTION TESTING
