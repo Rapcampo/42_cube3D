@@ -111,16 +111,18 @@ int	render_game(t_data *frame)
 	const int	halfscreen = frame->height >> 1;
 	int			j;
 	int			i;
+	t_map		*m;
 
 	j = -1;
 	i = -1;
+	m = &g()->map;
 	while (++j < frame->height)
 	{
 		while (++i < frame->width)
 			if (j < halfscreen)
-				pixel_put(frame, 0 + i, 0 + j, HEX_COB);
+				pixel_put(frame, 0 + i, 0 + j, m->c_color);
 			else
-				pixel_put(frame, 0 + i,0 + j, HEX_GRN);
+				pixel_put(frame, 0 + i,0 + j, m->f_color);
 		i = -1;
 	}
 	return (0);

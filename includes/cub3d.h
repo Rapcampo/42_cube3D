@@ -112,12 +112,14 @@ typedef enum e_event
 
 t_game	*g(void);
 int		gameloop(t_game *gm);
+void	set_skybox(t_textures *tex);
+void	set_player(t_player *p, t_point *pos, char dir);
 
 /*============================= game =========================================*/
-
-void	raydraw(t_dda *dda);
-void	verline(int x, int y0, int y1, int color);
-int		init_minimap(t_data *frame, t_mlx *mlx);
+int		get_red(int argb);
+int		get_green(int argb);
+int		get_blue(int argb);
+int		get_argb(int t, int r, int g, int b);
 int		temp_map(t_map *imap);
 
 #endif

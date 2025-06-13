@@ -18,6 +18,7 @@
 
 struct s_mlx;
 struct s_game;
+struct s_dda;
 
 typedef struct s_data
 {
@@ -43,6 +44,7 @@ typedef struct s_map
 int		event_keypress(int keycode, struct s_game *g);
 int		event_keylift(int keycode, struct s_game *g);
 int		init_frame(t_data *frame, struct s_mlx *mlx);
+int		init_minimap(t_data *minimap, struct s_mlx *mlx, t_data *frame);
 int		render_frame(t_data *frame);
 void	render_mov(struct s_player *p);
 void	render_rot(struct s_player *p);
@@ -52,5 +54,7 @@ void	raycaster(void);
 void	put_player(int x, int y, t_data *frame, int color);
 int		render_game(t_data *frame);
 void	bfi(t_data *frame);
+void	raydraw(struct s_dda *dda);
+void	verline(int x, int y0, int y1, int color);
 
 #endif

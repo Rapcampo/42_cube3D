@@ -60,9 +60,9 @@ static void	init_game(t_game *g)
 	start_mlx_win();
 	temp_map(&g->map);
 	init_frame(&g->frame, mlx);
-	init_minimap(&g->minimap, mlx);
+	init_minimap(&g->minimap, mlx, &g->frame);
 	//need to load images here
-	//need to load graphics here
+//	set_skybox(&g->textures);
 	mlx_do_key_autorepeatoff(g->mlx.ptr);
 	mlx_hook(mlx->win, E_KEYPRESS, KEYPRESS_MASK, &event_keypress, g);
 	mlx_hook(mlx->win, E_KEYLIFT, KEYLIFT_MASK, &event_keylift, g);

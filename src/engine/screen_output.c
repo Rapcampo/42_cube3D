@@ -22,15 +22,15 @@ int	init_frame(t_data *frame, t_mlx *mlx)
 	return (0);
 }
  
-int	init_minimap(t_data *frame, t_mlx *mlx)
+int	init_minimap(t_data *minimap, t_mlx *mlx, t_data *frame)
 {
 	(void)mlx;
-	frame->height = HEIGHT >> 2;
-	frame->width = WIDTH >> 2;
-	frame->img = g()->frame.img;
-	frame->addr = g()->frame.addr;
-	frame->bpp = g()->frame.bpp;
-	frame->endian = g()->frame.endian;
-	frame->ll = g()->frame.ll;
+	minimap->height = HEIGHT >> 2;
+	minimap->width = WIDTH >> 2;
+	minimap->img = frame->img;
+	minimap->addr = frame->addr;
+	minimap->bpp = frame->bpp;
+	minimap->endian = frame->endian;
+	minimap->ll = frame->ll;
 	return (0);
 }
