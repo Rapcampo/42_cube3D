@@ -27,18 +27,18 @@ int	gameloop(void)
 	gm = g();
 	get_time_delta();
 	printf("Current FPS: %f\r", gm->time.fps);
-//	render_frame(&gm->frame);
 	if (framesave == 6)
 	{
 		render_game(&gm->frame);
+		render_frame(&gm->minimap);
 		raycaster();
 		framesave = 0;
 	}
 	framesave++;
 	render_mov();
 	render_rot();
-//	mlx_put_image_to_window(gm->mlx.ptr, gm->mlx.win, gm->vframe.img, 0, 0);
 	mlx_put_image_to_window(gm->mlx.ptr, gm->mlx.win, gm->frame.img, 0, 0);
+//	mlx_put_image_to_window(gm->mlx.ptr, gm->mlx.win, gm->minimap.img, 0, 0);
 	return (0);
 }
 
@@ -64,7 +64,7 @@ static void	init_game(void)
 	start_mlx_win();
 	temp_map(&g()->map);
 	init_frame(&g()->frame, mlx);
-//	init_frame(&g()->vframe);
+	init_minimap(&g()->minimap, mlx);
 	//need to load images here
 	//need to load graphics here
 	mlx_do_key_autorepeatoff(g()->mlx.ptr);

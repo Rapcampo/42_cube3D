@@ -24,8 +24,8 @@ void	pixel_put(t_data *data, int x, int y, int color)
 
 static void	put_block(int start_x, int start_y, t_data *frame, int m)
 {
-	const int cell_h = (int)ceil(HEIGHT / g()->map.height);
-	const int cell_w = (int)ceil(WIDTH / g()->map.width);
+	const int cell_h = (int)ceil(frame->height / g()->map.height);
+	const int cell_w = (int)ceil(frame->width/ g()->map.width);
 	int	h;
 	int	w;
 
@@ -38,12 +38,12 @@ static void	put_block(int start_x, int start_y, t_data *frame, int m)
 			if (m == 1)
 			{
 				if (h == 0 || h == cell_h || w == 0 || w == cell_w)
-					pixel_put(frame, start_x + w, start_y + h, HEX_WHT);
+					pixel_put(frame, start_x + w, start_y + h, (HEX_TRN | HEX_WHT));
 				else
-					pixel_put(frame, start_x + w, start_y + h, HEX_PRP);
+					pixel_put(frame, start_x + w, start_y + h, (HEX_TRN | HEX_PRP));
 			}
 			else
-				pixel_put(frame, start_x + w, start_y + h, HEX_BLK);
+				pixel_put(frame, start_x + w, start_y + h, (HEX_TRN | HEX_BLK));
 		}
 	}
 
@@ -51,8 +51,8 @@ static void	put_block(int start_x, int start_y, t_data *frame, int m)
 
 void	put_player(int start_x, int start_y, t_data *frame, int color)
 {
-	const int	cell_h = (int)ceil(HEIGHT / g()->map.height);
-	const int	cell_w = (int)ceil(WIDTH / g()->map.width);
+	const int	cell_h = (int)ceil(frame->height / g()->map.height);
+	const int	cell_w = (int)ceil(frame->height / g()->map.width);
 	const int	radius = cell_w >> 3;
 	int			h;
 	int			w;
@@ -77,25 +77,22 @@ static void	player_pos_opt(int cell_w, int cell_h, t_player *p, t_data *frame)
 {
 	static t_fpoint	player;
 
-	put_player(player.x * cell_w, player.y * cell_h, frame,	HEX_BLK);
+	put_player(player.x * cell_w, player.y * cell_h, frame,	(HEX_TRN | HEX_BLK));
 	player.x = p->pos.x;
 	player.y = p->pos.y;
-	put_player(p->pos.x * cell_w, p->pos.y * cell_h, frame,
-			HEX_RED);
+	put_player(p->pos.x * cell_w, p->pos.y * cell_h, frame,(HEX_TRN | HEX_RED));
 }
 
 int	render_frame(t_data *frame)
 {
-	const int cell_h = (int)ceil(HEIGHT / g()->map.height);
-	const int cell_w = (int)ceil(WIDTH / g()->map.width);
+	const int cell_h = (int)ceil(frame->height / g()->map.height);
+	const int cell_w = (int)ceil(frame->width / g()->map.width);
 	t_map			*map;
 	t_point			screen;
-	static int r;
 
 	map = &g()->map;
 	screen.y = -1;	
 	screen.x = -1;
-	if (r == 20){
 		while (++screen.y < map->height)
 		{
 			screen.x = -1;
@@ -104,10 +101,7 @@ int	render_frame(t_data *frame)
 					frame, map->map_data[screen.y][screen.x]);
 		}
 		put_player(g()->player.pos.x * cell_w, g()->player.pos.y * cell_h,
-				frame,HEX_RED);
-		r = 0;
-	}
-	r++;
+				frame,(HEX_TRN | HEX_RED));
 	player_pos_opt(cell_w,cell_h, &g()->player, frame);
 	return (0);
 }

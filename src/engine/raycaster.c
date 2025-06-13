@@ -76,8 +76,6 @@ static void	ray_touch(t_dda *dda, t_player *p)
 			dda->map.y += dda->step.y;
 			dda->side = 1;
 		}
-		pixel_put(&g()->frame, dda->map.x * (float)round(g()->frame.width / g()->map.width),
-				dda->map.y * (float)round(g()->frame.height / g()->map.height) , HEX_GRN);
 		if (map_coord(dda->map.x, dda->map.y) > 0)
 			dda->touch = 1;
 		else if (map_coord(dda->map.x, dda->map.y) < 0)

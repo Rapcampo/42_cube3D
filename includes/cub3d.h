@@ -66,7 +66,7 @@ typedef struct s_game
 	int			debug;
 	t_map		map;
 	t_data		frame;
-	t_data		vframe;
+	t_data		minimap;
 	t_time		time;
 	int			key[0xFF];
 }	t_game;
@@ -111,11 +111,12 @@ typedef enum e_event
 /*============================= struct access ================================*/
 
 t_game	*g(void);
+
+/*============================= game =========================================*/
+
 void	raydraw(t_dda *dda);
 void	verline(int x, int y0, int y1, int color);
-
-/*============================= testing ================================*/
-
+int		init_minimap(t_data *frame, t_mlx *mlx);
 int		temp_map(t_map *imap);
 
 #endif

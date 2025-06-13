@@ -52,6 +52,8 @@ void	destroy_game(void)
 		return ;
 	if (game->map.map_data != 0)
 		destroy_map((void **) game->map.map_data);
+//	if (game->minimap.img != NULL)
+//		destroy_images(game, &game->minimap);
 	if (game->frame.img != NULL)
 		destroy_images(game, &game->frame);
 	if (game->textures)
