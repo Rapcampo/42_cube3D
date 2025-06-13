@@ -15,30 +15,30 @@
 //todo: dda propper implementation
 static void		ray_touch(t_dda *dda, t_player *p);
 static t_dda	cast_ray(int x, t_player *p);
-static t_dda	*ray_angle(t_dda *dda);
+static t_dda	*ray_angle(t_dda *dda, t_fpoint *pos);
 static float	calculate_distance(t_dda *dda, t_player *p, int side);
 
-static t_dda	*ray_angle(t_dda *dda)
+static t_dda	*ray_angle(t_dda *dda, t_fpoint *pos)
 {
 	if (dda->ray.x < 0)
 	{
 		dda->step.x = -1;
-		dda->sdist.x = (g()->player.pos.x - dda->map.x) * dda->delta.x;
+		dda->sdist.x = (pos->x - dda->map.x) * dda->delta.x;
 	}
 	else
 	{
 		dda->step.x = 1;
-		dda->sdist.x = (dda->map.x + 1 - g()->player.pos.x) * dda->delta.x;
+		dda->sdist.x = (dda->map.x + 1 - pos->x) * dda->delta.x;
 	}
 	if (dda->ray.y < 0)
 	{
 		dda->step.y = -1;
-		dda->sdist.y = (g()->player.pos.y - dda->map.y) * dda->delta.y;
+		dda->sdist.y = (pos->y - dda->map.y) * dda->delta.y;
 	}
 	else
 	{
 		dda->step.y = 1;
-		dda->sdist.y = (dda->map.y + 1 - g()->player.pos.y) * dda->delta.y;
+		dda->sdist.y = (dda->map.y + 1 - pos->y) * dda->delta.y;
 	}
 	return (dda);
 }
@@ -56,7 +56,7 @@ static t_dda	cast_ray(int x, t_player *p)
 	dda.map.y = (int)(p->pos.y);
 	dda.delta.x = fabs(1 / dda.ray.x);
 	dda.delta.y = fabs(1 / dda.ray.y);
-	return (*ray_angle(&dda));
+	return (*ray_angle(&dda, &p->pos));
 }
 
 void	put_los(t_data *minimap, t_dda *dda, t_map *map)

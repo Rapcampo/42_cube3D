@@ -24,8 +24,8 @@ void	pixel_put(t_data *data, int x, int y, int color)
 
 static void	put_block(int start_x, int start_y, t_data *frame, int m)
 {
-	const int cell_h = (int)ceil(frame->height / g()->map.height);
-	const int cell_w = (int)ceil(frame->width/ g()->map.width);
+	const int cell_h = (int)(frame->height / g()->map.height);
+	const int cell_w = (int)(frame->width/ g()->map.width);
 	int	h;
 	int	w;
 
@@ -51,8 +51,8 @@ static void	put_block(int start_x, int start_y, t_data *frame, int m)
 
 void	put_player(int start_x, int start_y, t_data *frame, int color)
 {
-	const int	cell_h = (int)ceil(frame->height / g()->map.height);
-	const int	cell_w = (int)ceil(frame->height / g()->map.width);
+	const int	cell_h = (int)(frame->height / g()->map.height);
+	const int	cell_w = (int)(frame->height / g()->map.width);
 	const int	radius = cell_w >> 3;
 	int			h;
 	int			w;
@@ -85,8 +85,8 @@ static void	player_pos_opt(int cell_w, int cell_h, t_player *p, t_data *frame)
 
 int	render_frame(t_data *frame)
 {
-	const int cell_h = (int)ceil(frame->height / g()->map.height);
-	const int cell_w = (int)ceil(frame->width / g()->map.width);
+	const int		cell_h = (int)(frame->height / g()->map.height);
+	const int		cell_w = (int)(frame->width / g()->map.width);
 	t_map			*map;
 	t_point			screen;
 
@@ -109,8 +109,8 @@ int	render_frame(t_data *frame)
 int	render_game(t_data *frame)
 {
 	const int	halfscreen = frame->height >> 1;
-	int		j;
-	int		i;
+	int			j;
+	int			i;
 
 	j = -1;
 	i = -1;

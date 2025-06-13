@@ -13,10 +13,11 @@
 #ifndef ENGINE_H
 # define ENGINE_H
 
-# define MOV_SPEED 3.5
-# define ROT_SPEED 3.5
+# define MOV_SPEED 3 
+# define ROT_SPEED 4
 
 struct s_mlx;
+struct s_game;
 
 typedef struct s_data
 {
@@ -39,9 +40,8 @@ typedef struct s_map
 	int		f_color;
 }	t_map;
 
-int		event_keypress(int keycode);
-int		event_keylift(int keycode);
-int		gameloop(void);
+int		event_keypress(int keycode, struct s_game *g);
+int		event_keylift(int keycode, struct s_game *g);
 int		init_frame(t_data *frame, struct s_mlx *mlx);
 int		render_frame(t_data *frame);
 void	render_mov(struct s_player *p);

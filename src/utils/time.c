@@ -12,13 +12,11 @@
 
 #include "../../includes/cub3d.h"
 
-void	get_time_delta(void)
+void	get_time_delta(struct s_time *time)
 {
 	static struct timeval c_tv = {0};
 	static struct timeval p_tv = {0};
-	t_time		*time;
 	
-	time = &g()->time;
 	if (gettimeofday(&c_tv, NULL) < 0)
 		exit_log(RED ERR_TIME RST);
 	time->delta = (c_tv.tv_sec - p_tv.tv_sec) + (c_tv.tv_usec - p_tv.tv_usec)
