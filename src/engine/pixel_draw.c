@@ -38,12 +38,12 @@ static void	put_block(int start_x, int start_y, t_data *frame, int m)
 			if (m == 1)
 			{
 				if (h == 0 || h == cell_h || w == 0 || w == cell_w)
-					pixel_put(frame, start_x + w, start_y + h, (HEX_TRN | HEX_WHT));
+					pixel_put(frame, start_x + w, start_y + h, HEX_WHT);
 				else
-					pixel_put(frame, start_x + w, start_y + h, (HEX_TRN | HEX_PRP));
+					pixel_put(frame, start_x + w, start_y + h, HEX_PRP);
 			}
 			else
-				pixel_put(frame, start_x + w, start_y + h, (HEX_TRN | HEX_BLK));
+				pixel_put(frame, start_x + w, start_y + h, HEX_BLK);
 		}
 	}
 
@@ -77,10 +77,10 @@ static void	player_pos_opt(int cell_w, int cell_h, t_player *p, t_data *frame)
 {
 	static t_fpoint	player;
 
-	put_player(player.x * cell_w, player.y * cell_h, frame,	(HEX_TRN | HEX_BLK));
+	put_player(player.x * cell_w, player.y * cell_h, frame,	HEX_BLK);
 	player.x = p->pos.x;
 	player.y = p->pos.y;
-	put_player(p->pos.x * cell_w, p->pos.y * cell_h, frame,(HEX_TRN | HEX_RED));
+	put_player(p->pos.x * cell_w, p->pos.y * cell_h, frame,HEX_RED);
 }
 
 int	render_frame(t_data *frame)

@@ -30,8 +30,8 @@ int	gameloop(void)
 	if (framesave == 6)
 	{
 		render_game(&gm->frame);
-		render_frame(&gm->minimap);
 		raycaster();
+//		render_frame(&gm->minimap);
 		framesave = 0;
 	}
 	framesave++;
