@@ -19,6 +19,32 @@ int	map_coord(int x, int y)
 	return (g()->map.map_data[y][x]);
 }
 
+void	set_player(t_player *p, t_point *pos, char dir)
+{
+	p->pos.x = pos->x;
+	p->pos.y = pos->y;
+	if (dir == 'N')
+	{
+		p->dir.y = -1;
+		p->plane.x = 0.66;
+	}
+	else if (dir == 'S')
+	{
+		p->dir.y = 1;
+		p->plane.x = -0.66;
+	}
+	else if (dir == 'E')
+	{
+		p->dir.x = 1;
+		p->plane.y = 0.66;
+	}
+	else if (dir == 'W')
+	{
+		p->dir.x = -1;
+		p->plane.y = -0.66;
+	}
+}
+
 int	temp_map(t_map *map)
 {
 	const int size = 24;
@@ -51,6 +77,7 @@ int	temp_map(t_map *map)
 	const size_t	map_size = size * size;
 	char **	map_data = ft_calloc(size, sizeof(char*) + 1);
 	int	i;
+	t_point	pos;
 
 	i = -1;
 	if (!map_data)
@@ -64,9 +91,8 @@ int	temp_map(t_map *map)
 	map->height = size;
 	map->width = size;
 	map->map_size = map_size;
-	g()->player.pos.x = 12.0;
-	g()->player.pos.y = 12.0;
-	g()->player.dir.x = 1.0;
-	g()->player.plane.y = 0.66;
+	pos.x = 12;
+	pos.y = 12;
+	set_player(&g()->player, &pos, 'S');
 	return (0);
 }
