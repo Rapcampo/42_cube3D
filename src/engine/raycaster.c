@@ -59,6 +59,13 @@ static t_dda	cast_ray(int x, t_player *p)
 	return (*ray_angle(&dda));
 }
 
+void	put_los(t_data *minimap, t_dda *dda, t_map *map)
+{
+	const float	scale_x = minimap->width / map->width;
+	const float	scale_y = minimap->height / map->height;
+	pixel_put(minimap, dda->map.x * scale_x, dda->map.y * scale_y , HEX_GRN);
+}
+
 static void	ray_touch(t_dda *dda, t_player *p)
 {
 	dda->touch = 0;
@@ -76,8 +83,7 @@ static void	ray_touch(t_dda *dda, t_player *p)
 			dda->map.y += dda->step.y;
 			dda->side = 1;
 		}
-		pixel_put(&g()->minimap, dda->map.x * (float)round(g()->minimap.width / g()->map.width),
-				dda->map.y * (float)round(g()->minimap.height / g()->map.height) , HEX_GRN);
+		put_los(&g()->minimap, dda, &g()->map);
 		if (map_coord(dda->map.x, dda->map.y) > 0)
 			dda->touch = 1;
 		else if (map_coord(dda->map.x, dda->map.y) < 0)
@@ -96,10 +102,6 @@ static float	calculate_distance(t_dda *dda, t_player *p, int side)
 					((1 - dda->step.y) >> 1)) / dda->ray.y);
 }
 
-//FOR RAYTOUCH DDA EDGE DETECTION TESTING
-//		pixel_put(&g()->frame, dda->map.x * (float)round(g()->frame.width / g()->map.width),
-//				dda->map.y * (float)round(g()->frame.height / g()->map.height) , HEX_GRN);
-
 void	raycaster(void)
 {
 	t_dda	dda;
@@ -107,13 +109,12 @@ void	raycaster(void)
 
 	p = &g()->player;
 	ft_bzero(&dda, sizeof(t_dda));
-	dda.x = 0;
+	dda.x = -1;
 	render_frame(&g()->minimap);
-	while (dda.x < g()->frame.width)
+	while (++dda.x < g()->frame.width)
 	{
 		dda = cast_ray(dda.x, p);
 		ray_touch(&dda, p);
 		raydraw(&dda);
-		dda.x++;
 	}
 }

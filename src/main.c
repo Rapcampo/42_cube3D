@@ -35,8 +35,8 @@ int	gameloop(void)
 		framesave = 0;
 	}
 	framesave++;
-	render_mov();
-	render_rot();
+	render_mov(&gm->player);
+	render_rot(&gm->player);
 	mlx_put_image_to_window(gm->mlx.ptr, gm->mlx.win, gm->frame.img, 0, 0);
 //	mlx_put_image_to_window(gm->mlx.ptr, gm->mlx.win, gm->minimap.img, 0, 0);
 	return (0);
