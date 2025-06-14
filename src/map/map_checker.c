@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 22:03:34 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/14 11:26:29 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/14 11:58:21 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	map_checker(void)
 	int	*j;
 
 	j = check_limit_lines(g()->map.map_data[0]);
-	bottom_corners = check_limit_lines(g()->map.map_data[g()->map.height]);
+	bottom_corners = check_limit_lines(g()->map.map_data[g()->map.height - 1]);
 	i[0] = check_col(j[0]);
 	i[1] = check_col(j[1]);
 	while (i[0] < g()->map.height || i[1] < g()->map.height)

@@ -6,34 +6,27 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 21:45:47 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/07 09:07:26 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/14 12:01:10 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-// TODO: Allocate memory for map array and define the types of units in the map
-// TODO: Find the best way to allocate the memory
 static void	save_map(char *line, int row)
 {
-	int		col;
-	size_t	size;
+	int	line_size;
 
-	col = 0;
-	size = map_size(g()->map);
-	if (size == 0)
-		g()->map = create_map(ft_strlen(line));
-	else if (size % 2 != 0)
-		g()->map = extend_map(size, g()->map);
-	g()->map[row] = create_map_line(ft_strlen(line));
-	while (line && *line != '\n')
-	{
-		if (*line == ' ')
-			g()->map[row][col] = EMPTY;
-		else
-			g()->map[row][col] = *line;
-		col++;
-	}
+	if (g()->map.height == 0)
+		g()->map.map_data = create_map();
+	else if (g()->map.height % 2 != 0)
+		g()->map.map_data = extend_map(g()->map.height, g()->map.map_data);
+	line_size = ft_strlen(line);
+	g()->map.map_data[row] = malloc(line_size);
+	// This removes the line break character from the line
+	ft_strlcpy(g()->map.map_data[row], line, line_size);
+	if ((line_size - 1) > g()->map.width)
+		g()->map.width = line_size - 1;
+	g()->map.height++;
 }
 
 // TODO: Check if the ints to describe the colour can also be separated by spaces
