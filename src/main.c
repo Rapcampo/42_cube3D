@@ -1,6 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
@@ -24,9 +21,9 @@ int	gameloop(t_game *gm)
 	static int	framesave;
 
 	get_time_delta(&gm->time);
-	printf("Current FPS: %f\r", gm->time.fps);
-//	if (framesave == 6)
+	if (framesave == 6)
 	{
+		printf("Current FPS: %f\r", gm->time.fps);
 		render_game(&gm->frame);
 		raycaster();
 //		render_frame(&gm->minimap);

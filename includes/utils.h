@@ -22,5 +22,6 @@ struct s_time;
 
 void	check_file_exten(char *file);
 void	get_time_delta(struct s_time *time);
+int		darken(int side, int color);
 
 #endif

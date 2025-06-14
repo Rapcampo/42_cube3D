@@ -31,3 +31,10 @@ int	get_argb(int t, int r, int g, int b)
 {
 	return ((t << 24) | (r << 16) | (g << 8) | b);
 }
+
+int	darken(int side, int color)
+{
+	if (side == 1)
+		return (color >> 1);
+	return (color);
+}
