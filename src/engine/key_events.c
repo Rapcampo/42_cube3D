@@ -12,75 +12,66 @@
 
 #include "../../includes/cub3d.h"
 
-static int	is_invalid_move(int xmov, int ymov)
+void	render_mov(t_player *p)
 {
-//	t_player	*p;
-	(void)ymov, (void)xmov;
+	const float	xmov = g()->key[D] - g()->key[A];
+	const float	ymov = g()->key[W] - g()->key[S];
+	const double dt = g()->time.delta;
+	const double xform = (xmov * MOV_SPEED * dt);
+	const double yform = (ymov * MOV_SPEED * dt);
 
-//	p = &g()->player;
+	if (xmov != 0 && !map_coord((int)(p->pos.x + xform * -p->dir.y), p->pos.y))
+		p->pos.x += xform * -p->dir.y;
+	if (xmov != 0 && !map_coord(p->pos.x, (int)(p->pos.y + xform * p->dir.x)))
+		p->pos.y += xform * p->dir.x;
+	if (ymov != 0 && !map_coord((int)(p->pos.x + yform * p->dir.x), p->pos.y))
+		p->pos.x += yform * p->dir.x;
+	if (ymov != 0 && !map_coord(p->pos.x, (int)(p->pos.y + yform * p->dir.y)))
+		p->pos.y += yform * p->dir.y;
 /*	if (xmov != 0)
-	{
-		return (map_coord((int)(p->pos.x + xmov * MOV_SPEED * -p->dir.y * g()->time.delta),		(int)(p->pos.y += xmov * MOV_SPEED * p->dir.x * g()->time.delta)));
-	}
+		p->pos.x += xform * -p->dir.y;
+	if (xmov != 0)
+		p->pos.y += xform * p->dir.x;
 	if (ymov != 0)
-		return (map_coord((int)(p->pos.x + ymov * MOV_SPEED * -p->dir.x * g()->time.delta),(int)(p->pos.y += ymov * MOV_SPEED * p->dir.y * g()->time.delta)));
+		p->pos.x += yform * p->dir.x;
+	if (ymov != 0)
+		p->pos.y += yform * p->dir.y;
 		*/
-	return (0);
 }
 
-void	render_mov()
-{
-	const	float	xmov = g()->key[D] - g()->key[A];
-	const	float	ymov = g()->key[W] - g()->key[S];
-	const	float	dt = g()->time.delta;
-	t_player *p;
-	
-	p = &g()->player;
-	if (xmov != 0 && !is_invalid_move(xmov, ymov))
-		p->pos.x += xmov * MOV_SPEED * -p->dir.y * dt;
-	if (xmov != 0 && !is_invalid_move(xmov, ymov))
-		p->pos.y += xmov * MOV_SPEED * p->dir.x * dt;
-	if (ymov != 0 && !is_invalid_move(xmov, ymov))
-		p->pos.x += ymov * MOV_SPEED * p->dir.x * dt;
-	if (ymov != 0 && !is_invalid_move(xmov, ymov))
-		p->pos.y += ymov * MOV_SPEED * p->dir.y * dt;
-}
-
-void	render_rot()
+void	render_rot(t_player *player)
 {
 	const float	rot_dir = g()->key[2] - g()->key[1];
 	const float	velo = rot_dir * ROT_SPEED * g()->time.delta;
-	const float	org_dx = g()->player.dir.x;
-	const float	org_px = g()->player.plane.x;
-	t_player	*player;
+	const float	org_dx = player->dir.x;
+	const float	org_px = player->plane.x;
 
-	player = &g()->player;
 	player->dir.x = player->dir.x * cos(velo) - player->dir.y * sin(velo);
 	player->dir.y = org_dx * sin(velo) + player->dir.y * cos(velo);
 	player->plane.x = player->plane.x * cos(velo) - player->plane.y * sin(velo);
 	player->plane.y = org_px * sin(velo) + player->plane.y * cos(velo);
 }
 
-int	event_keypress(int keycode)
+int	event_keypress(int keycode, t_game *g)
 {
 	if (keycode < 0xFF)
-		g()->key[keycode & 0xFF] = 1;
+		g->key[keycode & 0xFF] = 1;
 	if (keycode == LEFT)
-		g()->key[1] = 1;
+		g->key[1] = 1;
 	if (keycode == RIGHT)
-		g()->key[2] = 1;
+		g->key[2] = 1;
 	return (0);
 }
 
-int	event_keylift(int keycode)
+int	event_keylift(int keycode, t_game *g)
 {
 	if (keycode == ESC)
 		clean_exit();
 	if (keycode < 0xFF)
-		g()->key[keycode & 0xFF] = 0;
+		g->key[keycode & 0xFF] = 0;
 	if (keycode == LEFT)
-		g()->key[1] = 0;
+		g->key[1] = 0;
 	if (keycode == RIGHT)
-		g()->key[2] = 0;
+		g->key[2] = 0;
 	return (0);
 }

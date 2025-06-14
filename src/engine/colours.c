@@ -12,11 +12,6 @@
 
 #include "../../includes/cub3d.h"
 
-int	get_alpha(int argb)
-{
-	return (argb >> 24 & 0xff);
-}
-
 int	get_red(int argb)
 {
 	return (argb >> 16 & 0xff);
@@ -35,4 +30,11 @@ int	get_blue(int argb)
 int	get_argb(int t, int r, int g, int b)
 {
 	return ((t << 24) | (r << 16) | (g << 8) | b);
+}
+
+int	darken(int side, int color)
+{
+	if (side == 1)
+		return (color >> 1);
+	return (color);
 }

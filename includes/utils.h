@@ -16,9 +16,12 @@
 
 # include <stdlib.h>
 
+struct s_time;
+
 /*============================ UTIL_FUNCTIONS ===============================*/
 
 void	check_file_exten(char *file);
-void	get_time_delta(void);
+void	get_time_delta(struct s_time *time);
+int		darken(int side, int color);
 
 #endif

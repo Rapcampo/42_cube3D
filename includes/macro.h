@@ -48,6 +48,7 @@ typedef enum s_hex
 	HEX_PRP = 0x004b0082,
 	HEX_WHT = 0x00FFFFFF,
 	HEX_COB = 0x00003888,
+	HEX_TRN = 0xFF000000,
 	HEX_GRN = 0x0098fb98
 }	t_hex;
 

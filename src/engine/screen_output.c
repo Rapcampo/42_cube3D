@@ -12,15 +12,25 @@
 
 #include "../../includes/cub3d.h"
 
-//static void	create_frame();
-
-int	init_frame(t_data *frame)
+int	init_frame(t_data *frame, t_mlx *mlx)
 {
 	frame->height = HEIGHT;
 	frame->width = WIDTH;
-	frame->img = mlx_new_image(g()->mlx.ptr, frame->width, frame->height);
+	frame->img = mlx_new_image(mlx->ptr, frame->width, frame->height);
 	frame->addr = mlx_get_data_addr(frame->img,
 			&frame->bpp, &frame->ll, &frame->endian);
-	render_frame(frame);
+	return (0);
+}
+ 
+int	init_minimap(t_data *minimap, t_mlx *mlx, t_data *frame)
+{
+	(void)mlx;
+	minimap->height = HEIGHT >> 2;
+	minimap->width = WIDTH >> 2;
+	minimap->img = frame->img;
+	minimap->addr = frame->addr;
+	minimap->bpp = frame->bpp;
+	minimap->endian = frame->endian;
+	minimap->ll = frame->ll;
 	return (0);
 }

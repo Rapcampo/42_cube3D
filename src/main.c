@@ -1,6 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
@@ -19,25 +16,22 @@
 //TODO:: implement DDA algorythmn, compare with bresenhams.
 //calculate movement rotation with cos and sin of x,y coordinates
 
-int	gameloop(void)
+int	gameloop(t_game *gm)
 {
-	t_game	*gm;
 	static int	framesave;
 
-	gm = g();
-	get_time_delta();
-	printf("Current FPS: %f\r", gm->time.fps);
-//	render_frame(&gm->frame);
+	get_time_delta(&gm->time);
 	if (framesave == 6)
 	{
+		printf("Current FPS: %f\r", gm->time.fps);
 		render_game(&gm->frame);
 		raycaster();
+//		render_frame(&gm->minimap);
 		framesave = 0;
 	}
 	framesave++;
-	render_mov();
-	render_rot();
-//	mlx_put_image_to_window(gm->mlx.ptr, gm->mlx.win, gm->vframe.img, 0, 0);
+	render_mov(&gm->player);
+	render_rot(&gm->player);
 	mlx_put_image_to_window(gm->mlx.ptr, gm->mlx.win, gm->frame.img, 0, 0);
 	return (0);
 }
@@ -55,23 +49,22 @@ static void	start_mlx_win(void)
 		exit_log(RED ER_MLX_WIN RST);
 }
 
-static void	init_game(void)
+static void	init_game(t_game *g)
 {
 	t_mlx	*mlx;
 
-	ft_bzero(g(), sizeof(t_game));
-	mlx = &g()->mlx;
+	mlx = &g->mlx;
 	start_mlx_win();
-	temp_map(&g()->map);
-	init_frame(&g()->frame);
-//	init_frame(&g()->vframe);
+	temp_map(&g->map);
+	init_frame(&g->frame, mlx);
+	init_minimap(&g->minimap, mlx, &g->frame);
 	//need to load images here
-	//need to load graphics here
-	mlx_do_key_autorepeatoff(g()->mlx.ptr);
-	mlx_hook(mlx->win, E_KEYPRESS, KEYPRESS_MASK, &event_keypress, g());
-	mlx_hook(mlx->win, E_KEYLIFT, KEYLIFT_MASK, &event_keylift, g());
-	mlx_hook(mlx->win, E_DESTROY, SUBNOTE_MASK, &clean_exit, g());
-	mlx_loop_hook(mlx->ptr, &gameloop, g());
+//	set_skybox(&g->textures);
+	mlx_do_key_autorepeatoff(g->mlx.ptr);
+	mlx_hook(mlx->win, E_KEYPRESS, KEYPRESS_MASK, &event_keypress, g);
+	mlx_hook(mlx->win, E_KEYLIFT, KEYLIFT_MASK, &event_keylift, g);
+	mlx_hook(mlx->win, E_DESTROY, SUBNOTE_MASK, &clean_exit, g);
+	mlx_loop_hook(mlx->ptr, &gameloop, g);
 	mlx_loop(mlx->ptr);
 }
 
@@ -81,7 +74,6 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		exit_log(YLW WRNG_USE CLR BLU USE_FORMAT RST);
 	//	check_file_exten(argv[1]);
-	init_game();
-	gameloop();
+	init_game(g());
 	clean_exit();
 }

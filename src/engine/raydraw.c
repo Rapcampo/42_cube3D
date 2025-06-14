@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-void	verline(int x, int y0, int y1, int color);
+void	verline(t_dda *dda, int y0, int y1, int color);
 
 void	raydraw(t_dda *dda)
 {
@@ -21,21 +21,17 @@ void	raydraw(t_dda *dda)
 	int		dstart;
 	int		dend;
 
-	line_height = (int)(g()->frame.height / dda->wdist);
-//	printf("%d\n", line_height);
+	line_height = (int)(h / dda->wdist);
 	dstart = fmax(-(line_height >> 1) + (h >> 1), 0);
 	dend = (line_height >> 1) + (h >> 1);
 	if (dend >= h)
 		dend = h - 1;
 	if (dstart == 0)
 		dstart = (-(line_height >> 1) + (h >> 1));
-	if (dda->side == 1)
-		verline(dda->x, dstart, dend, HEX_COB >> 1);
-	else
-		verline(dda->x, dstart, dend, HEX_PRP);
+	verline(dda, dstart, dend, HEX_RED);
 }
 
-void	verline(int x, int y0, int y1, int color)
+void	verline(t_dda *dda, int y0, int y1, int color)
 {
 	t_data *frame;
 
@@ -51,5 +47,5 @@ void	verline(int x, int y0, int y1, int color)
 	else if (y0 >= frame->height)
 		y1 = frame->height;
 	while (y0 < y1)
-		pixel_put(frame, x, y0++, color);
+		pixel_put(frame, dda->x, y0++, darken(dda->side, color));
 }

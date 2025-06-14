@@ -53,8 +53,8 @@ typedef struct s_mlx
 
 typedef struct s_time
 {
-	float	fps;
-	float	delta;
+	double fps;
+	double delta;
 }	t_time;
 
 //acessed through g() function;
@@ -66,7 +66,7 @@ typedef struct s_game
 	int			debug;
 	t_map		map;
 	t_data		frame;
-	t_data		vframe;
+	t_data		minimap;
 	t_time		time;
 	int			key[0xFF];
 }	t_game;
@@ -111,11 +111,15 @@ typedef enum e_event
 /*============================= struct access ================================*/
 
 t_game	*g(void);
-void	raydraw(t_dda *dda);
-void	verline(int x, int y0, int y1, int color);
+int		gameloop(t_game *gm);
+void	set_skybox(t_textures *tex);
+void	set_player(t_player *p, t_point *pos, char dir);
 
-/*============================= testing ================================*/
-
+/*============================= game =========================================*/
+int		get_red(int argb);
+int		get_green(int argb);
+int		get_blue(int argb);
+int		get_argb(int t, int r, int g, int b);
 int		temp_map(t_map *imap);
 
 #endif
