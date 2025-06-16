@@ -20,13 +20,13 @@ void	render_mov(t_player *p)
 	const double xform = (xmov * MOV_SPEED * dt);
 	const double yform = (ymov * MOV_SPEED * dt);
 
-	if (xmov != 0 && !map_coord((int)(p->pos.x + xform * -p->dir.y), p->pos.y))
+	if (xmov != 0 && !map_coord(floor(p->pos.x + xform * -p->dir.y), floor(p->pos.y)))
 		p->pos.x += xform * -p->dir.y;
-	if (xmov != 0 && !map_coord(p->pos.x, (int)(p->pos.y + xform * p->dir.x)))
+	if (xmov != 0 && !map_coord(floor(p->pos.x), floor(p->pos.y + xform * p->dir.x)))
 		p->pos.y += xform * p->dir.x;
-	if (ymov != 0 && !map_coord((int)(p->pos.x + yform * p->dir.x), p->pos.y))
+	if (ymov != 0 && !map_coord(floor(p->pos.x + yform * p->dir.x), floor(p->pos.y)))
 		p->pos.x += yform * p->dir.x;
-	if (ymov != 0 && !map_coord(p->pos.x, (int)(p->pos.y + yform * p->dir.y)))
+	if (ymov != 0 && !map_coord(floor(p->pos.x), floor(p->pos.y + yform * p->dir.y)))
 		p->pos.y += yform * p->dir.y;
 /*	if (xmov != 0)
 		p->pos.x += xform * -p->dir.y;

@@ -13,22 +13,62 @@
 #include "../../includes/cub3d.h"
 
 void	verline(t_dda *dda, int y0, int y1, int color);
+static int	get_tex_x(t_dda *dda, t_data *tex);
+static void	get_tex_y(t_dda *dda, t_data *tex, t_point *tp, t_point *xsye);
 
-void	raydraw(t_dda *dda)
+static int	get_tex_x(t_dda *dda, t_data *tex)
+{
+	const t_fpoint	ppos = g()->player.pos;
+	double	wallx;
+	int		tpx;
+
+	if (dda->side == 0)
+		wallx = ppos.y + dda->wdist * dda->ray.y;
+	else
+		wallx = ppos.x + dda->wdist * dda->ray.x;
+	wallx -= floor(wallx);
+	tpx = trunc(wallx * (double)tex->width);
+	if ((dda->side == 0 && dda->ray.x < 0) ||
+		(dda->side == 1 && dda->ray.y > 0))
+		tpx = tex->width - tpx - 1;
+	return (tpx);
+}
+
+static void	get_tex_y(t_dda *dda, t_data *tex, t_point *tp, t_point *xsye)
+{
+	const int	lh = g()->frame.height / dda->wdist;
+	int	i;
+	int	color;
+
+	i = xsye->x;
+	while (i < xsye->y)
+	{
+		tp->y = (trunc(i + dda->offset - xsye->x) * tex->height / lh);
+		color = 0;
+		if (tp->y >= 0 && tp->y < tex->height)
+			color = *(int*)(tex->img +
+					(tp->y * tex->ll + tp->x * (tex->bpp >> 3)));
+		pixel_put(&g()->frame, dda->x, i++, darken(dda->side, color));
+	}
+}
+
+void	raydraw(t_dda *dda, t_data *tex)
 {
 	const int	h = g()->frame.height;
 	int		line_height;
-	int		dstart;
-	int		dend;
+	t_point	xsye;
+	t_point	tp;
 
 	line_height = (int)(h / dda->wdist);
-	dstart = fmax(-(line_height >> 1) + (h >> 1), 0);
-	dend = (line_height >> 1) + (h >> 1);
-	if (dend >= h)
-		dend = h - 1;
-	if (dstart == 0)
-		dstart = (-(line_height >> 1) + (h >> 1));
-	verline(dda, dstart, dend, HEX_RED);
+	xsye.x = fmax(-(line_height >> 1) + (h >> 1), 0);
+	xsye.y = fmin((line_height >> 1) + (h >> 1), h);
+	if (xsye.y >= h)
+		xsye.y = h - 1;
+	if (xsye.x == 0)
+		dda->offset = (-(line_height >> 1) + (h >> 1));
+	tp.x = get_tex_x(dda, tex);
+	get_tex_y(dda, tex, &tp, &xsye);
+	verline(dda, xsye.x, xsye.y, HEX_RED);
 }
 
 void	verline(t_dda *dda, int y0, int y1, int color)

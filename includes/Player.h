@@ -43,7 +43,7 @@ typedef struct s_dda
 	int			x;
 	int			touch;
 	float		wdist;
+	int			offset;
 }	t_dda;
-
 
 #endif
