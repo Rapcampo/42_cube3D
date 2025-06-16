@@ -43,7 +43,7 @@ static void	get_tex_y(t_dda *dda, t_data *tex, t_point *tp, t_point *xsye)
 	i = xsye->x;
 	while (i < xsye->y)
 	{
-		tp->y = (int)((i + dda->offset - xsye->x) * tex->height / lh);
+		tp->y = trunc((i + dda->offset - xsye->x) * tex->height / lh);
 		color = 0;
 		if (tp->y >= 0 && tp->y < tex->height)
 		{
@@ -61,7 +61,7 @@ void	raydraw(t_dda *dda, t_data *tex)
 	t_point		xsye;
 	t_point		tp;
 
-	line_height = (int)(h / dda->wdist);
+	line_height = trunc(h / dda->wdist);
 	xsye.x = fmax(-(line_height >> 1) + (h >> 1), 0);
 	xsye.y = fmin((line_height >> 1) + (h >> 1), h);
 	if (xsye.y >= h)

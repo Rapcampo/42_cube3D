@@ -52,8 +52,8 @@ static t_dda	cast_ray(int x, t_player *p)
 	dda.x = x;
 	dda.ray.x = p->dir.x + p->plane.x * camx;
 	dda.ray.y = p->dir.y + p->plane.y * camx;
-	dda.map.x = (int)(p->pos.x);
-	dda.map.y = (int)(p->pos.y);
+	dda.map.x = trunc(p->pos.x);
+	dda.map.y = trunc(p->pos.y);
 	dda.delta.x = fabs(1 / dda.ray.x);
 	dda.delta.y = fabs(1 / dda.ray.y);
 	return (*ray_angle(&dda, &p->pos));
