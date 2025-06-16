@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 21:45:47 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/14 12:01:10 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/16 21:49:52 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,31 @@
 
 static void	save_map(char *line, int row)
 {
-	int	line_size;
+	int		line_size;
+	char	*new_line_char;
 
 	if (g()->map.height == 0)
-		g()->map.map_data = create_map();
+		create_map();
 	else if (g()->map.height % 2 != 0)
-		g()->map.map_data = extend_map(g()->map.height, g()->map.map_data);
+		extend_map(g()->map.height);
 	line_size = ft_strlen(line);
-	g()->map.map_data[row] = malloc(line_size);
-	// This removes the line break character from the line
-	ft_strlcpy(g()->map.map_data[row], line, line_size);
+	new_line_char = ft_strchr(line, '\n');
+	if (new_line_char)
+	{
+		g()->map.map_data[row] = malloc(line_size);
+		if (g()->map.map_data[row] == NULL)
+			exit_log("Error: Memory allocation error\n");
+		// This removes the line break character from the line
+		ft_strlcpy(g()->map.map_data[row], line, line_size);
+	}
+	else
+	{
+		g()->map.map_data[row] = malloc(line_size + 1);
+		if (g()->map.map_data[row] == NULL)
+			exit_log("Error: Memory allocation error\n");
+		// This removes the line break character from the line
+		ft_strlcpy(g()->map.map_data[row], line, line_size + 1);
+	}
 	if ((line_size - 1) > g()->map.width)
 		g()->map.width = line_size - 1;
 	g()->map.height++;
@@ -36,8 +51,6 @@ static void	save_ceil_floor(char **arr)
 	char	**num;
 
 	num = ft_split(arr[1], ',');
-	clear_arr((void **) arr);
-	// TODO: Create clearing function
 	if (num == NULL)
 		exit_log("Error: Memory allocation error\n");	
 	if (ft_strncmp("C", arr[0], 1) == 0)
@@ -54,9 +67,10 @@ static void	save_ceil_floor(char **arr)
 	}
 	else
 		exit_log("Error: Incorrect scene description file\n");
-	clear_arr((void **) num);
+	clear_arr(num);
 }
 
+// TODO: Change function to save the texture in t_data (Raphael already has functions for that)
 static void	save_texture(char *line)
 {
 	char	**arr;
@@ -75,6 +89,7 @@ static void	save_texture(char *line)
 	else
 	{
 		save_ceil_floor(arr);
+		clear_arr(arr);
 		return ;
 	}
 	// arr[1] doesn't have to be freed because are using that pointer
@@ -85,10 +100,12 @@ static void	save_texture(char *line)
 
 static void	extract(char *line, int *nb)
 {
+	if (*line == '\n' && *nb > 6)
+		exit_log("Error: Invalid map\n");
 	if (*line == '\n')
 		return ;
 	else if (*nb >= 6)
-		save_map(line, *nb / 6 + *nb % 6 - 1);
+		save_map(line, (((*nb) / 6 - 1) * 6 + ((*nb) % 6)));
 	else
 		save_texture(line);
 	(*nb)++;
@@ -99,14 +116,9 @@ void	parsing(int	fd)
 	char	*line;
 	int		i;
 
-	if (g()->textures == NULL)
-	{
-		g()->textures = malloc(sizeof(t_textures));
-		if (g()->textures == NULL)
-			exit_log("Error: Memory allocation error\n");
-	}
+	create_textures();
 	line = get_next_line(fd);
-	i = 1;
+	i = 0;
 	while (line)
 	{
 		extract(line, &i);
@@ -115,4 +127,6 @@ void	parsing(int	fd)
 	}
 	free(line);
 	close(fd);
+	if (i <= 6)
+		exit_log("Error: Missing information on .cub file\n");
 }

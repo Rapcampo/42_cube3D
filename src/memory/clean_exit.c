@@ -6,7 +6,7 @@
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:11:09 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/21 22:06:08 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/15 15:31:28 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,31 @@ void	destroy_map(t_map *map)
 	int	i;
 
 	i = -1;
-	if (*map->map_data != 0)
+	if (map->map_data != 0)
 	{
 		while (map->map_data[++i] != NULL)
+		{
+			printf("%s\n", map->map_data[i]);
 			free(map->map_data[i]);
+		}
 		free(map->map_data);
 	}
 }
 
 static void	destroy_textures(t_textures *textures)
 {
-	if (textures->north)
-		free(textures->north);
-	if (textures->south)
-		free(textures->south);
-	if (textures->east)
-		free(textures->east);
-	if (textures->west)
-		free(textures->west);
-	free(textures);
+	if (textures)
+	{
+		if (textures->north)
+			free(textures->north);
+		if (textures->south)
+			free(textures->south);
+		if (textures->east)
+			free(textures->east);
+		if (textures->west)
+			free(textures->west);
+		free(textures);
+	}
 }
 
 void	destroy_game(void)
