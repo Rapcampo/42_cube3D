@@ -6,62 +6,109 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 22:03:34 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/14 11:58:21 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/16 22:50:28 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static inline int	check_col(int col)
+// TODO: Bug for when the next line is smaller than the current line
+static inline int	check_right_wall(int i, int col)
 {
-	int	i;
+	int	line_size;
+	int	next_line_size;
 
-	i = 0;
-	while (i < g()->map.height)
+	line_size = ft_strlen(g()->map.map_data[i]);
+	if (i < g()->map.height - 1)
+		next_line_size = ft_strlen(g()->map.map_data[i + 1]);
+	if (next_line_size < line_size)
+		return (-(i + 1));
+	while (i < g()->map.height - 1)
 	{
-		if (g()->map.map_data[i][col] != WALL)
-			exit_log("Error: Invalid map\n");
-		if (col > 0 && g()->map.map_data[i][col - 1] == WALL)
+		if (col < line_size - 1 && g()->map.map_data[i][col] != WALL)
+		{
+			printf("col right\n");
+			exit_log("Error: Invalid map (open)\n");
+		}
+		if (next_line_size > line_size)
+			return (i + 1);
+		else if (next_line_size < line_size)
 			return (-i);
-		else if (g()->map.map_data[i][col + 1] == WALL &&
-				g()->map.map_data[i + 1][col] != WALL)
+		i++;
+		line_size = next_line_size;
+		if (i < g()->map.height - 1)
+			next_line_size = ft_strlen(g()->map.map_data[i + 1]);
+	}
+	return (i);
+}
+
+static inline int	check_left_wall(int i, int col)
+{
+	int	line_size;
+
+	while (i < g()->map.height - 1)
+	{
+		line_size = ft_strlen(g()->map.map_data[i]);
+		if (g()->map.map_data[i][col] != WALL)
+		{
+			printf("col left\n");
+			exit_log("Error: Invalid map (open)\n");
+		}
+		if (col < line_size - 1 && g()->map.map_data[i + 1][col] != WALL &&
+			g()->map.map_data[i][col + 1] == WALL)
 			return (i);
+		else if (col > 0 && g()->map.map_data[i + 1][col] != WALL &&
+			g()->map.map_data[i][col - 1] == WALL)
+			return (-i);
 		i++;
 	}
 	return (i);
 }
 
+// TODO: Write functions for horizontal checking on the left wall
 static inline int	check_line_right(int line, int col)
 {
-	int	j;
+	int	line_size;
+	int	next_line_size;
 
-	j = (int) col;
-	while (j < g()->map.width)
+	if (line == g()->map.height - 1)
+		return (col);
+	line_size = ft_strlen(g()->map.map_data[line]);
+	if (line < g()->map.height - 1)
+		next_line_size = ft_strlen(g()->map.map_data[line + 1]);
+	while (col < line_size)
 	{
-		if (g()->map.map_data[line][j] != WALL)
-			exit_log("Error: Invalid map\n");
-		if (g()->map.map_data[line + 1][j] == WALL)
-			return (j);
-		j++;
+		if (g()->map.map_data[line][col] != WALL)
+		{
+			printf("right\n");
+			exit_log("Error: Invalid map (open)\n");
+		}
+		if (col == next_line_size - 1)
+			return (col);
+		col++;
 	}
-	return (j);
+	return (col - 1);
 }
 
 static inline int	check_line_left(int line, int col)
 {
-	int	j;
+	int	next_line_size;
 
-	j = col;
-	while (j > 0)
+	if (line < g()->map.height - 1)
+		next_line_size = ft_strlen(g()->map.map_data[line + 1]);
+	while (col >= 0 && line < g()->map.height - 1)
 	{
-		if (g()->map.map_data[line][j] != WALL)
-			exit_log("Error: Invalid map\n");
-		if (g()->map.map_data[line + 1][j] == WALL)
-			return (j);
-
-		j--;
+		printf("col: %d\n", col);
+		if (g()->map.map_data[line][col] != WALL)
+		{
+			printf("left\n");
+			exit_log("Error: Invalid map (open)\n");
+		}
+		if (col == next_line_size - 1)
+			return (col);
+		col--;
 	}
-	return (j);
+	return (col);
 }
 
 static inline int	*check_limit_lines(char *line)
@@ -82,60 +129,56 @@ static inline int	*check_limit_lines(char *line)
 	while (j < line_size)
 	{
 		if (line[j++] != WALL)
-			exit_log("Error: Invalid map\n");
+		{
+			free(map_info);
+			printf("limits\n");
+			exit_log("Error: Invalid map (open)\n");
+		}
 	}
-	map_info[1] = j;
+	map_info[1] = j - 1;
 	return (map_info);
 }
 
-// TODO: Change map saving functions
 void	map_checker(void)
 {
 	int	*bottom_corners;
 	int	i[2];
 	int	*j;
 
-	j = check_limit_lines(g()->map.map_data[0]);
 	bottom_corners = check_limit_lines(g()->map.map_data[g()->map.height - 1]);
-	i[0] = check_col(j[0]);
-	i[1] = check_col(j[1]);
-	while (i[0] < g()->map.height || i[1] < g()->map.height)
+	j = check_limit_lines(g()->map.map_data[0]);
+	i[0] = check_left_wall(0, j[0]);
+	i[1] = check_right_wall(0, j[1]);
+	while (i[0] < g()->map.height - 1 || i[1] < g()->map.height - 1)
 	{
+		printf("i[0]: %d i[1]: %d\n", i[0], i[1]);
 		if (i[0] < 0)
+		{
+			i[0] *= -1;
 			j[0] = check_line_left(i[0], j[0]);
-		else
+		}
+		else if (i[0] < g()->map.height - 1)
 			j[0] = check_line_right(i[0], j[0]);
 		if (i[1] < 0)
+		{
+			i[1] *= -1;
 			j[1] = check_line_left(i[1], j[1]);
-		else
+		}
+		else if (i[1] < g()->map.height - 1)
 			j[1] = check_line_right(i[1], j[1]);
-		if (i[0] < g()->map.height)
-			i[0] = check_col(i[0]);
-		if (i[1] < g()->map.height)
-			i[1] = check_col(i[1]);
+		printf("j[0]: %d j[1]: %d\n", j[0], j[1]);
+		if (i[0] < g()->map.height - 1 && -i[0] < g()->map.height)
+			i[0] = check_left_wall(i[0], j[0]);
+		if (i[1] < g()->map.height - 1 && -i[1] < g()->map.height)
+			i[1] = check_right_wall(i[1], j[1]);
+	}
+	printf("i[0]: %d i[1]: %d\n", i[0], i[1]);
+	if (j[0] != bottom_corners[0] || j[1] != bottom_corners[1])
+	{
+		free(j);
+		free(bottom_corners);
+		exit_log("Error: Invalid map (open)\n");
 	}
 	free(j);
 	free(bottom_corners);
 }
-
-// void	map_checker(void)
-// {
-// 	size_t	i;
-// 	size_t	map_col_size;
-// 	size_t	map_line_size;
-
-// 	map_col_size = map_size(g()->map);
-// 	i = 0;
-// 	while (g()->map[0][i] != 0)
-// 	{
-// 		if (g()->map[0][i] != WALL || g()->map[map_col_size][i] != WALL)
-// 			exit_log("Error: Invalid map\n");
-// 	}
-// 	map_line_size = i;
-// 	i = 0;
-// 	while (g()->map[i] != 0)
-// 	{
-// 		if (g()->map[i][0] != WALL || g()->map[i][map_line_size] != WALL)
-// 			exit_log("Error: Invalid map\n");
-// 	}
-// }
