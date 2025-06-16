@@ -40,12 +40,11 @@ static void	destroy_textures(t_game *game, t_textures *textures)
 		destroy_images(game, &textures->east);
 	if (textures->west.img)
 		destroy_images(game, &textures->west);
-//free(textures);
 }
 
 void	destroy_game(void)
 {
-	t_game *game;
+	t_game	*game;
 
 	game = g();
 	if (!game)
@@ -58,7 +57,8 @@ void	destroy_game(void)
 		destroy_textures(game, game->textures);
 	if (game->mlx.win)
 		mlx_destroy_window(game->mlx.ptr, game->mlx.win);
-	if (game->mlx.ptr){
+	if (game->mlx.ptr)
+	{
 		mlx_do_key_autorepeaton(g()->mlx.ptr);
 		mlx_destroy_display(game->mlx.ptr);
 	}

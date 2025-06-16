@@ -8,6 +8,7 @@
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
 //adding placeholder error message functions
 //window initialization should be working!
 
@@ -21,9 +22,9 @@ int	gameloop(t_game *gm)
 	static int	framesave;
 
 	get_time_delta(&gm->time);
-//	if (framesave == 6)
+	printf("Current FPS: %f\r", gm->time.fps);
+	if (framesave == 6)
 	{
-		printf("Current FPS: %f\r", gm->time.fps);
 		render_game(&gm->frame);
 		raycaster();
 //		render_frame(&gm->minimap);
@@ -33,6 +34,7 @@ int	gameloop(t_game *gm)
 	render_mov(&gm->player);
 	render_rot(&gm->player);
 	mlx_put_image_to_window(gm->mlx.ptr, gm->mlx.win, gm->frame.img, 0, 0);
+//	mlx_put_image_to_window(gm->mlx.ptr, gm->mlx.win, gm->minimap.img, 0, 0);
 	return (0);
 }
 

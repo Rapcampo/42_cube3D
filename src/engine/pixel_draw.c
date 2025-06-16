@@ -24,10 +24,10 @@ void	pixel_put(t_data *data, int x, int y, int color)
 
 static void	put_block(int start_x, int start_y, t_data *frame, int m)
 {
-	const int cell_h = (int)(frame->height / g()->map.height);
-	const int cell_w = (int)(frame->width/ g()->map.width);
-	int	h;
-	int	w;
+	const int	cell_h = (int)(frame->height / g()->map.height);
+	const int	cell_w = (int)(frame->width / g()->map.width);
+	int			h;
+	int			w;
 
 	h = -1;
 	while (++h <= cell_h)
@@ -46,29 +46,27 @@ static void	put_block(int start_x, int start_y, t_data *frame, int m)
 				pixel_put(frame, start_x + w, start_y + h, HEX_BLK);
 		}
 	}
-
 }
 
 void	put_player(int start_x, int start_y, t_data *frame, int color)
 {
 	const int	cell_h = (int)(frame->height / g()->map.height);
 	const int	cell_w = (int)(frame->height / g()->map.width);
-	const int	radius = cell_w >> 3;
-	int			h;
-	int			w;
-	int			dw;
-	int			dh;
+	const int	radius = cell_w >> 2;
+	t_point		cell;
+	t_point		delta;
 
-	h = -1;
-	while (++h < cell_h)
+	cell.y = -1;
+	while (++cell.y < cell_h)
 	{
-		w = -1;
-		while (++w < cell_w)
+		cell.x = -1;
+		while (++cell.x < cell_w)
 		{
-			dw = w - (cell_w >> 1);
-			dh = h - (cell_h >> 1);
-			if (((dw * dw) + (dh * dh)) <= (radius * radius))
-				pixel_put(frame, start_x + w, start_y + h, color);
+			delta.x = cell.x - (cell_w >> 1);
+			delta.y = cell.y - (cell_h >> 1);
+			if (((delta.x * delta.x) + (delta.y * delta.y))
+				<= (radius * radius))
+				pixel_put(frame, start_x + cell.x, start_y + cell.y, color);
 		}
 	}
 }
@@ -77,10 +75,10 @@ static void	player_pos_opt(int cell_w, int cell_h, t_player *p, t_data *frame)
 {
 	static t_fpoint	player;
 
-	put_player(player.x * cell_w, player.y * cell_h, frame,	HEX_BLK);
+	put_player(player.x * cell_w, player.y * cell_h, frame, HEX_BLK);
 	player.x = p->pos.x;
 	player.y = p->pos.y;
-	put_player(p->pos.x * cell_w, p->pos.y * cell_h, frame,HEX_RED);
+	put_player(p->pos.x * cell_w, p->pos.y * cell_h, frame, HEX_RED);
 }
 
 int	render_frame(t_data *frame)
@@ -91,39 +89,17 @@ int	render_frame(t_data *frame)
 	t_point			screen;
 
 	map = &g()->map;
-	screen.y = -1;	
+	screen.y = -1;
 	screen.x = -1;
-		while (++screen.y < map->height)
-		{
-			screen.x = -1;
-			while (++screen.x < map->width)
-				put_block(screen.x * cell_w, screen.y * cell_h,
-					frame, map->map_data[screen.y][screen.x]);
-		}
-		put_player(g()->player.pos.x * cell_w, g()->player.pos.y * cell_h,
-				frame,(HEX_TRN | HEX_RED));
-	player_pos_opt(cell_w,cell_h, &g()->player, frame);
-	return (0);
-}
-
-int	render_game(t_data *frame)
-{
-	const int	halfscreen = frame->height >> 1;
-	int			j;
-	int			i;
-	t_map		*m;
-
-	j = -1;
-	i = -1;
-	m = &g()->map;
-	while (++j < frame->height)
+	while (++screen.y < map->height)
 	{
-		while (++i < frame->width)
-			if (j < halfscreen)
-				pixel_put(frame, 0 + i, 0 + j, m->c_color);
-			else
-				pixel_put(frame, 0 + i,0 + j, m->f_color);
-		i = -1;
+		screen.x = -1;
+		while (++screen.x < map->width)
+			put_block(screen.x * cell_w, screen.y * cell_h,
+				frame, map->map_data[screen.y][screen.x]);
 	}
+	put_player(g()->player.pos.x * cell_w, g()->player.pos.y * cell_h,
+		frame, HEX_RED);
+	player_pos_opt(cell_w, cell_h, &g()->player, frame);
 	return (0);
 }

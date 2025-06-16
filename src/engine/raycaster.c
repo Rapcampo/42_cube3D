@@ -46,7 +46,7 @@ static t_dda	*ray_angle(t_dda *dda, t_fpoint *pos)
 static t_dda	cast_ray(int x, t_player *p)
 {
 	const float	camx = (x << 1) / (float)g()->frame.width - 1;	
-	t_dda	dda;
+	t_dda		dda;
 
 	ft_bzero(&dda, sizeof(t_dda));
 	dda.x = x;
@@ -57,13 +57,6 @@ static t_dda	cast_ray(int x, t_player *p)
 	dda.delta.x = fabs(1 / dda.ray.x);
 	dda.delta.y = fabs(1 / dda.ray.y);
 	return (*ray_angle(&dda, &p->pos));
-}
-
-void	put_los(t_data *minimap, t_dda *dda, t_map *map)
-{
-	const float	scale_x = minimap->width / map->width;
-	const float	scale_y = minimap->height / map->height;
-	pixel_put(minimap, dda->map.x * scale_x, dda->map.y * scale_y , HEX_GRN);
 }
 
 static void	ray_touch(t_dda *dda, t_player *p)
@@ -95,17 +88,17 @@ static void	ray_touch(t_dda *dda, t_player *p)
 static float	calculate_distance(t_dda *dda, t_player *p, int side)
 {
 	if (side == 0)
-		return ((dda->map.x - p->pos.x +
-					((1 - dda->step.x) >> 1)) / dda->ray.x);
+		return ((dda->map.x - p->pos.x
+				+ ((1 - dda->step.x) >> 1)) / dda->ray.x);
 	else
-		return ((dda->map.y - p->pos.y +
-					((1 - dda->step.y) >> 1)) / dda->ray.y);
+		return ((dda->map.y - p->pos.y
+				+ ((1 - dda->step.y) >> 1)) / dda->ray.y);
 }
 
 void	raycaster(void)
 {
-	t_dda	dda;
-	t_player *p;
+	t_dda		dda;
+	t_player	*p;
 
 	p = &g()->player;
 	ft_bzero(&dda, sizeof(t_dda));

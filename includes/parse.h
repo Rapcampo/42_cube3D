@@ -14,6 +14,7 @@
 # define PARSE_H
 
 /*============================ PARSING_FUNCTIONS ============================*/
-void	parsing(int	fd);
+
+void	parsing(int fd);
 
 #endif

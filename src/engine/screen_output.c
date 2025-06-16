@@ -21,7 +21,7 @@ int	init_frame(t_data *frame, t_mlx *mlx)
 			&frame->bpp, &frame->ll, &frame->endian);
 	return (0);
 }
- 
+
 int	init_minimap(t_data *minimap, t_mlx *mlx, t_data *frame)
 {
 	(void)mlx;
@@ -32,5 +32,36 @@ int	init_minimap(t_data *minimap, t_mlx *mlx, t_data *frame)
 	minimap->bpp = frame->bpp;
 	minimap->endian = frame->endian;
 	minimap->ll = frame->ll;
+	return (0);
+}
+
+void	put_los(t_data *minimap, t_dda *dda, t_map *map)
+{
+	const float	scale_x = minimap->width / map->width;
+	const float	scale_y = minimap->height / map->height;
+
+	pixel_put(minimap, dda->map.x * scale_x, dda->map.y * scale_y, HEX_GRN);
+}
+
+int	render_game(t_data *frame)
+{
+	const int	halfscreen = frame->height >> 1;
+	t_point		coor;
+	t_map		*m;
+
+	coor.y = -1;
+	coor.x = -1;
+	m = &g()->map;
+	while (++coor.y < frame->height)
+	{
+		while (++coor.x < frame->width)
+		{
+			if (coor.y < halfscreen)
+				pixel_put(frame, 0 + coor.x, 0 + coor.y, m->c_color);
+			else
+				pixel_put(frame, 0 + coor.x, 0 + coor.y, m->f_color);
+		}
+		coor.x = -1;
+	}
 	return (0);
 }

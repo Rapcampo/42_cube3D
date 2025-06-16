@@ -21,8 +21,8 @@ typedef struct s_point
 
 typedef struct s_fpoint
 {
-	float x;
-	float y;
+	float	x;
+	float	y;
 }	t_fpoint;
 
 typedef struct s_player
@@ -45,5 +45,10 @@ typedef struct s_dda
 	float		wdist;
 	int			offset;
 }	t_dda;
+
+struct	s_data;
+struct	s_map;
+
+void	put_los(struct s_data *minimap, t_dda *dda, struct s_map *map);
 
 #endif

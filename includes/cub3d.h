@@ -53,8 +53,8 @@ typedef struct s_mlx
 
 typedef struct s_time
 {
-	double fps;
-	double delta;
+	double	fps;
+	double	delta;
 }	t_time;
 
 //acessed through g() function;
@@ -106,7 +106,6 @@ typedef enum e_event
 	E_KEYLIFT	= 3,
 	E_DESTROY	= 17
 }	t_event;
-
 
 /*============================= struct access ================================*/
 
