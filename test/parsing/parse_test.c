@@ -34,4 +34,5 @@ int	main(int argc, char **argv)
 	// else
 	// 	cmp_arr(invalid_map_array(argv[1]));
 	map_checker();
+	clean_exit();
 }

@@ -6,7 +6,7 @@
 #    By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/06 13:52:55 by rapcampo          #+#    #+#              #
-#    Updated: 2025/06/14 11:59:40 by tialbert         ###   ########.fr        #
+#    Updated: 2025/06/15 15:19:47 by tialbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SOURCE	= $(SOURCE_DIR)
 TESTER	= parse_test.c
 PARSER	= parse.c
 MEMORY	= fail_exit.c clean_exit.c clean_array.c
-UTILS	= global.c file_checks.c map_utils.c
+UTILS	= global.c file_checks.c map_utils.c texture_utils.c
 MAP		= map_checker.c
 OBJS	= $(addprefix $(OBJS_DIR), $(SOURCE_LST:.c=.o))
 LIBFT	= -L ../../libft
@@ -43,7 +43,7 @@ RM			= rm -rf
 #AR			= ar -rcs
 FLAGS		= -Wall -Wextra -Werror
 LEAKS		= -g -fsanitize=address
-#DEBUG		= -DDEBUG
+DEBUG		= -DDEBUG
 MAKE_FLAG	= --no-print-directory
 LDLIBS		= -lft
 MLX_FLAGS	= -lmlx -lX11 -lXext -lm
@@ -70,13 +70,13 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	echo "[$(PURPLE)$(BLINK)Compiling...$(RESET)] $(YELLOW)libft$(RESET)"
 	make $(MAKE_FLAG) -C $(LIBFT_DIR)
-	echo "[$(PURPLE)$(BLINK)Compiling...$(RESET)] $(YELLOW)minilibx$(RESET)"
-	make $(MAKE_FLAG) -sC $(MLX_DIR)
+	# echo "[$(PURPLE)$(BLINK)Compiling...$(RESET)] $(YELLOW)minilibx$(RESET)"
+	# make $(MAKE_FLAG) -sC $(MLX_DIR)
 	echo "[$(CYAN)$(BLINK)Linking...$(RESET)]"
 ifdef debug
 	$(CC) $(FLAGS) $(LEAKS) $(LIBFT) $(MLX) -o $@ $^ $(LDLIBS) $(MLX_FLAGS)
 else
-	$(CC) $(FLAGS) $(LIBFT) $(MLX) -o $@ $^ $(LDLIBS) $(MLX_FLAGS)
+	$(CC) $(FLAGS) $(LIBFT) $(MLX) -g -o $@ $^ $(LDLIBS) $(MLX_FLAGS)
 endif
 	echo "\n*************************$(GREEN)$(BLINK)    "\
 		"[Compilation Sucessfull!]    $(RESET)*************************\n"
@@ -87,7 +87,7 @@ $(OBJS):
 ifdef debug
 	$(CC) $(FLAGS) $(LEAKS) -c $(SOURCE_DIR) -I $(HEADERS) $(DEBUG)
 else
-	$(CC) $(FLAGS) -c $(SOURCE_DIR) -I $(HEADERS)
+	$(CC) $(FLAGS) -g -c $(SOURCE_DIR) -I $(HEADERS)
 endif
 	mv $(SOURCE_LST:.c=.o) $(OBJS_DIR)
 
