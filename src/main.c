@@ -21,7 +21,7 @@ int	gameloop(t_game *gm)
 	static int	framesave;
 
 	get_time_delta(&gm->time);
-	if (framesave == 6)
+//	if (framesave == 6)
 	{
 		printf("Current FPS: %f\r", gm->time.fps);
 		render_game(&gm->frame);
@@ -52,14 +52,16 @@ static void	start_mlx_win(void)
 static void	init_game(t_game *g)
 {
 	t_mlx	*mlx;
+	t_textures tex = {0};
 
 	mlx = &g->mlx;
+	g->textures = &tex;
 	start_mlx_win();
 	temp_map(&g->map);
 	init_frame(&g->frame, mlx);
 	init_minimap(&g->minimap, mlx, &g->frame);
 	//need to load images here
-//	set_skybox(&g->textures);
+	//set_skybox(&g->textures);
 	mlx_do_key_autorepeatoff(g->mlx.ptr);
 	mlx_hook(mlx->win, E_KEYPRESS, KEYPRESS_MASK, &event_keypress, g);
 	mlx_hook(mlx->win, E_KEYLIFT, KEYLIFT_MASK, &event_keylift, g);

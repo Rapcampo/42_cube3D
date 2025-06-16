@@ -12,6 +12,8 @@
 
 #include "../../includes/cub3d.h"
 
+void	assign_img(struct s_data *tex, char *img_path);
+
 int	map_coord(int x, int y)
 {
 	if (x < 0 || x >= g()->map.width || y < 0 || y >= g()->map.height)
@@ -89,7 +91,11 @@ int	temp_map(t_map *map)
 	char **	map_data = ft_calloc(size, sizeof(char*) + 1);
 	int	i;
 	t_point	pos;
-	t_textures tex = {0};
+	static t_textures tex = {0};
+	char	*nimg = "/home/raphael/42-common-core/cub3d/assets/north.xpm";
+	char	*simg = "/home/raphael/42-common-core/cub3d/assets/south.xpm";
+	char	*eimg = "/home/raphael/42-common-core/cub3d/assets/east.xpm";
+	char	*wimg = "/home/raphael/42-common-core/cub3d/assets/west.xpm";
 
 	tex.ceil[0] = get_red(HEX_COB);
 	tex.ceil[1] = get_green(HEX_COB);
@@ -113,5 +119,11 @@ int	temp_map(t_map *map)
 	pos.y = 12;
 	set_skybox(&tex);
 	set_player(&g()->player, &pos, 'S');
+	assign_img(&tex.north, nimg);
+	assign_img(&tex.south, simg);
+	assign_img(&tex.east, eimg);
+	assign_img(&tex.west, wimg);
+	g()->textures = &tex;
+
 	return (0);
 }

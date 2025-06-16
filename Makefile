@@ -18,7 +18,7 @@ SOURCE	= $(SOURCE_DIR)
 ENGINE	= key_events.c screen_output.c pixel_draw.c raycaster.c raydraw.c \
 		  colours.c
 MEMORY	= fail_exit.c clean_exit.c clean_array.c
-UTILS	= global.c time.c map.c bfi.c
+UTILS	= global.c time.c map.c bfi.c img_conversion.c
 OBJS	= $(addprefix $(OBJS_DIR), $(SOURCE_LST:.c=.o))
 LIBFT	= -L ./libft
 MLX		= -L ./mlx
@@ -40,7 +40,7 @@ MLX_DIR		= ./mlx/
 CC			= cc
 RM			= rm -rf
 #AR			= ar -rcs
-FLAGS		= -Wall -Wextra -Werror -O3 #-g -pg
+FLAGS		= -Wall -Wextra -Werror #-O3 #-g -pg
 LEAKS		= -g -fsanitize=address
 DEBUG		= -DDEBUG
 MAKE_FLAG	= --no-print-directory
