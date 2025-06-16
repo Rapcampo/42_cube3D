@@ -24,11 +24,11 @@ typedef struct s_data
 {
 	void	*img;
 	char	*addr;
-	int	bpp;
-	int	ll;
-	int	endian;
-	int	height;
-	int	width;
+	int		bpp;
+	int		ll;
+	int		endian;
+	int		height;
+	int		width;
 }	t_data;
 
 typedef struct s_map

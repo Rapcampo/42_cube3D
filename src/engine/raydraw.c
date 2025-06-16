@@ -39,15 +39,18 @@ static void	get_tex_y(t_dda *dda, t_data *tex, t_point *tp, t_point *xsye)
 	const int	lh = g()->frame.height / dda->wdist;
 	int	i;
 	int	color;
+	int	factor;
 
 	i = xsye->x;
 	while (i < xsye->y)
 	{
-		tp->y = (trunc(i + dda->offset - xsye->x) * tex->height / lh);
+		tp->y = (int)((i + dda->offset - xsye->x) * tex->height / lh);
 		color = 0;
 		if (tp->y >= 0 && tp->y < tex->height)
-			color = *(int*)(tex->img +
-					(tp->y * tex->ll + tp->x * (tex->bpp >> 3)));
+		{
+			factor = (tp->y * tex->ll + tp->x * (tex->bpp >> 3));
+			color = *(int *)(tex->addr + factor);
+		}
 		pixel_put(&g()->frame, dda->x, i++, darken(dda->side, color));
 	}
 }
@@ -65,13 +68,12 @@ void	raydraw(t_dda *dda, t_data *tex)
 	if (xsye.y >= h)
 		xsye.y = h - 1;
 	if (xsye.x == 0)
-		dda->offset = (-(line_height >> 1) + (h >> 1));
+		dda->offset = -((-line_height >> 1) + (h >> 1));
 	tp.x = get_tex_x(dda, tex);
 	get_tex_y(dda, tex, &tp, &xsye);
-//	verline(dda, xsye.x, xsye.y, HEX_RED);
 }
 
-void	verline(t_dda *dda, int y0, int y1, int color)
+/*void	verline(t_dda *dda, int y0, int y1, int color)
 {
 	t_data *frame;
 
@@ -88,4 +90,4 @@ void	verline(t_dda *dda, int y0, int y1, int color)
 		y1 = frame->height;
 	while (y0 < y1)
 		pixel_put(frame, dda->x, y0++, darken(dda->side, color));
-}
+}*/

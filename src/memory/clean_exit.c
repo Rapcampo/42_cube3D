@@ -30,17 +30,17 @@ void	destroy_map(void **map)
 	}
 }
 
-static void	destroy_textures(t_textures *textures)
+static void	destroy_textures(t_game *game, t_textures *textures)
 {
-	if (textures->north)
-		free(textures->north);
-	if (textures->south)
-		free(textures->south);
-	if (textures->east)
-		free(textures->east);
-	if (textures->west)
-		free(textures->west);
-	free(textures);
+	if (textures->north.img)
+		destroy_images(game, &textures->north);
+	if (textures->south.img)
+		destroy_images(game, &textures->south);
+	if (textures->east.img)
+		destroy_images(game, &textures->east);
+	if (textures->west.img)
+		destroy_images(game, &textures->west);
+//free(textures);
 }
 
 void	destroy_game(void)
@@ -55,9 +55,7 @@ void	destroy_game(void)
 	if (game->frame.img != NULL)
 		destroy_images(game, &game->frame);
 	if (game->textures)
-		destroy_textures(game->textures);
-//	if (game->assets)
-//		destroy_images(game);
+		destroy_textures(game, game->textures);
 	if (game->mlx.win)
 		mlx_destroy_window(game->mlx.ptr, game->mlx.win);
 	if (game->mlx.ptr){
