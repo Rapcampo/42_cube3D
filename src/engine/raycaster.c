@@ -115,6 +115,13 @@ void	raycaster(void)
 	{
 		dda = cast_ray(dda.x, p);
 		ray_touch(&dda, p);
-		raydraw(&dda);
+		if (dda.side == 0 && dda.ray.x > 0)
+			raydraw(&dda, g()->textures->north);
+		else if (dda.side == 0 && dda.ray.x < 0)
+			raydraw(&dda, g()->textures->south);
+		else if (dda.side == 1 && dda.ray.y > 0)
+			raydraw(&dda, g()->textures->east);
+		else if (dda.side == 1 && dda.ray.y < 0)
+			raydraw(&dda, g()->textures->west);
 	}
 }

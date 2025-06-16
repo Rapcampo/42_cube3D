@@ -68,7 +68,7 @@ void	raydraw(t_dda *dda, t_data *tex)
 		dda->offset = (-(line_height >> 1) + (h >> 1));
 	tp.x = get_tex_x(dda, tex);
 	get_tex_y(dda, tex, &tp, &xsye);
-	verline(dda, xsye.x, xsye.y, HEX_RED);
+//	verline(dda, xsye.x, xsye.y, HEX_RED);
 }
 
 void	verline(t_dda *dda, int y0, int y1, int color)
