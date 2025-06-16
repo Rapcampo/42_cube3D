@@ -12,15 +12,14 @@
 
 #include "../../includes/cub3d.h"
 
-void	verline(t_dda *dda, int y0, int y1, int color);
 static int	get_tex_x(t_dda *dda, t_data *tex);
 static void	get_tex_y(t_dda *dda, t_data *tex, t_point *tp, t_point *xsye);
 
 static int	get_tex_x(t_dda *dda, t_data *tex)
 {
 	const t_fpoint	ppos = g()->player.pos;
-	double	wallx;
-	int		tpx;
+	double			wallx;
+	int				tpx;
 
 	if (dda->side == 0)
 		wallx = ppos.y + dda->wdist * dda->ray.y;
@@ -28,8 +27,8 @@ static int	get_tex_x(t_dda *dda, t_data *tex)
 		wallx = ppos.x + dda->wdist * dda->ray.x;
 	wallx -= floor(wallx);
 	tpx = trunc(wallx * (double)tex->width);
-	if ((dda->side == 0 && dda->ray.x < 0) ||
-		(dda->side == 1 && dda->ray.y > 0))
+	if ((dda->side == 0 && dda->ray.x < 0)
+		|| (dda->side == 1 && dda->ray.y > 0))
 		tpx = tex->width - tpx - 1;
 	return (tpx);
 }
@@ -37,9 +36,9 @@ static int	get_tex_x(t_dda *dda, t_data *tex)
 static void	get_tex_y(t_dda *dda, t_data *tex, t_point *tp, t_point *xsye)
 {
 	const int	lh = g()->frame.height / dda->wdist;
-	int	i;
-	int	color;
-	int	factor;
+	int			i;
+	int			color;
+	int			factor;
 
 	i = xsye->x;
 	while (i < xsye->y)
@@ -58,9 +57,9 @@ static void	get_tex_y(t_dda *dda, t_data *tex, t_point *tp, t_point *xsye)
 void	raydraw(t_dda *dda, t_data *tex)
 {
 	const int	h = g()->frame.height;
-	int		line_height;
-	t_point	xsye;
-	t_point	tp;
+	int			line_height;
+	t_point		xsye;
+	t_point		tp;
 
 	line_height = (int)(h / dda->wdist);
 	xsye.x = fmax(-(line_height >> 1) + (h >> 1), 0);

@@ -16,9 +16,9 @@
 # define MOV_SPEED 3 
 # define ROT_SPEED 4
 
-struct s_mlx;
-struct s_game;
-struct s_dda;
+struct	s_mlx;
+struct	s_game;
+struct	s_dda;
 
 typedef struct s_data
 {

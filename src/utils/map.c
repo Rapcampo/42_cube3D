@@ -52,8 +52,8 @@ void	set_skybox(t_textures *tex)
 	int	c;
 	int	f;
 
-	c = get_argb(0x00, tex->ceil[0], tex->ceil[1],tex->ceil[2]);
-	f = get_argb(0x00, tex->floor[0], tex->floor[1],tex->floor[2]);
+	c = get_argb(0x00, tex->ceil[0], tex->ceil[1], tex->ceil[2]);
+	f = get_argb(0x00, tex->floor[0], tex->floor[1], tex->floor[2]);
 	g()->map.c_color = c;
 	g()->map.f_color = f;
 }

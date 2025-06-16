@@ -12,8 +12,9 @@
 
 #include "../../includes/cub3d.h"
 
-t_game *g(void)
+t_game	*g(void)
 {
 	static t_game	g = {0};
+
 	return (&g);
 }

@@ -53,4 +53,3 @@ typedef enum s_hex
 }	t_hex;
 
 #endif
-
