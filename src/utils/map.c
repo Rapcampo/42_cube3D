@@ -16,9 +16,12 @@ void	assign_img(struct s_data *tex, char *img_path);
 
 int	map_coord(int x, int y)
 {
-	if (x < 0 || x >= g()->map.width || y < 0 || y >= g()->map.height)
+	t_map	*map;
+
+	map = &g()->map;
+	if (x < 0 || x >= map->width || y < 0 || y >= map->height)
 		return (-1);
-	return (g()->map.map_data[y][x]);
+	return (map->map_data[y][x]);
 }
 
 void	set_player(t_player *p, t_point *pos, char dir)
@@ -118,7 +121,7 @@ int	temp_map(t_map *map)
 	pos.x = 12;
 	pos.y = 12;
 	set_skybox(&tex);
-	set_player(&g()->player, &pos, 'N');
+	set_player(&g()->player, &pos, 'S');
 	assign_img(&tex.north, nimg);
 	assign_img(&tex.south, simg);
 	assign_img(&tex.east, eimg);

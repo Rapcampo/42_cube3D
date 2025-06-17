@@ -24,4 +24,6 @@ void	assign_img(t_data *tex, char *img_path)
 	if (tex->img == NULL || tex->height == 0 || tex->width == 0)
 		exit_log("Error: Could not access image file\n");
 	tex->addr = mlx_get_data_addr(tex->img, &tex->bpp, &tex->ll, &tex->endian);
+	if (tex->addr == NULL)
+		exit_log("Error: image address has not been set correctly\n");
 }

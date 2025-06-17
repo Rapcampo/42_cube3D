@@ -12,27 +12,6 @@
 
 #include "../../includes/cub3d.h"
 
-int		mouse_rot(t_game *g)
-{
-	static int	last_pos_x;
-	t_point		mouse = {0};
-	mlx_mouse_get_pos(g->mlx.ptr, g->mlx.win, &mouse.x, &mouse.y);
-	if (last_pos_x == mouse.x)
-	{
-		if (g->key[1] == 1 || g->key[2] == 1)
-		{
-			g->key[1] = 0;
-			g->key[2] = 0;
-		}
-		return (0);
-	}
-	if (mouse.x < last_pos_x && (mouse.x < WIDTH))
-		g->key[2] = 1;
-	else if (mouse.x > last_pos_x && (mouse.x < WIDTH))
-		g->key[1] = 1;
-	return (0);
-}
-
 void	render_mov(t_player *p)
 {
 	const float		xmov = g()->key[D] - g()->key[A];
