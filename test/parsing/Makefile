@@ -6,7 +6,7 @@
 #    By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/06 13:52:55 by rapcampo          #+#    #+#              #
-#    Updated: 2025/06/15 15:19:47 by tialbert         ###   ########.fr        #
+#    Updated: 2025/06/17 21:25:16 by tialbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ TESTER	= parse_test.c
 PARSER	= parse.c
 MEMORY	= fail_exit.c clean_exit.c clean_array.c
 UTILS	= global.c file_checks.c map_utils.c texture_utils.c
-MAP		= map_checker.c
+MAP		= map_checker.c map_left_wall.c map_right_wall.c
 OBJS	= $(addprefix $(OBJS_DIR), $(SOURCE_LST:.c=.o))
 LIBFT	= -L ../../libft
 # MLX		= -L ./mlx
