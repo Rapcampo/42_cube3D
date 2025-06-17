@@ -18,10 +18,10 @@ void	assign_img(t_data *tex, char *img_path)
 
 	mlx = &g()->mlx;
 	if (img_path == NULL)
-		exit_log("Error: image path does not exist");
+		exit_log("Error: image path does not exist\n");
 	tex->img = mlx_xpm_file_to_image(mlx->ptr,
 			img_path, &tex->width, &tex->height);
 	if (tex->img == NULL || tex->height == 0 || tex->width == 0)
-		exit_log("Error: Could not access image file");
+		exit_log("Error: Could not access image file\n");
 	tex->addr = mlx_get_data_addr(tex->img, &tex->bpp, &tex->ll, &tex->endian);
 }

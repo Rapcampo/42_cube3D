@@ -92,10 +92,10 @@ int	temp_map(t_map *map)
 	int	i;
 	t_point	pos;
 	static t_textures tex = {0};
-	char	*nimg = "/home/raphael/42-common-core/cub3d/assets/north.xpm";
-	char	*simg = "/home/raphael/42-common-core/cub3d/assets/south.xpm";
-	char	*eimg = "/home/raphael/42-common-core/cub3d/assets/east.xpm";
-	char	*wimg = "/home/raphael/42-common-core/cub3d/assets/west.xpm";
+	char	*nimg = "/home/harbinger/42/common_core/cube3D/assets/north.xpm";
+	char	*simg = "/home/harbinger/42/common_core/cube3D/assets/south.xpm";
+	char	*eimg = "/home/harbinger/42/common_core/cube3D/assets/east.xpm";
+	char	*wimg = "/home/harbinger/42/common_core/cube3D/assets/west.xpm";
 
 	tex.ceil[0] = get_red(HEX_COB);
 	tex.ceil[1] = get_green(HEX_COB);
@@ -118,7 +118,7 @@ int	temp_map(t_map *map)
 	pos.x = 12;
 	pos.y = 12;
 	set_skybox(&tex);
-	set_player(&g()->player, &pos, 'S');
+	set_player(&g()->player, &pos, 'N');
 	assign_img(&tex.north, nimg);
 	assign_img(&tex.south, simg);
 	assign_img(&tex.east, eimg);
