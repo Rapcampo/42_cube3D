@@ -23,6 +23,7 @@ int	gameloop(t_game *gm)
 
 	get_time_delta(&gm->time);
 	printf("Current FPS: %f\r", gm->time.fps);
+	char *fps = ft_itoa((int)gm->time.fps);
 	if (framesave == 6)
 	{
 		render_game(&gm->frame);
@@ -34,7 +35,8 @@ int	gameloop(t_game *gm)
 	render_mov(&gm->player);
 	render_rot(&gm->player);
 	mlx_put_image_to_window(gm->mlx.ptr, gm->mlx.win, gm->frame.img, 0, 0);
-//	mlx_put_image_to_window(gm->mlx.ptr, gm->mlx.win, gm->minimap.img, 0, 0);
+	mlx_string_put(gm->mlx.ptr, gm->mlx.win, WIDTH - 50, HEIGHT - 30, HEX_WHT, fps);
+	free(fps);
 	return (0);
 }
 
@@ -65,6 +67,7 @@ static void	init_game(t_game *g)
 	//need to load images here
 	//set_skybox(&g->textures);
 	mlx_do_key_autorepeatoff(g->mlx.ptr);
+//	mlx_mouse_hook(mlx->win, &mouse_rot, g);
 	mlx_hook(mlx->win, E_KEYPRESS, KEYPRESS_MASK, &event_keypress, g);
 	mlx_hook(mlx->win, E_KEYLIFT, KEYLIFT_MASK, &event_keylift, g);
 	mlx_hook(mlx->win, E_DESTROY, SUBNOTE_MASK, &clean_exit, g);

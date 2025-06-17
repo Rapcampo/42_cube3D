@@ -20,7 +20,7 @@ void	get_time_delta(struct s_time *time)
 	if (gettimeofday(&c_tv, NULL) < 0)
 		exit_log(RED ERR_TIME RST);
 	time->delta = (c_tv.tv_sec - p_tv.tv_sec) + (c_tv.tv_usec - p_tv.tv_usec)
-		/ 1000000.0;
+		/ 1000000.f;
 	if (time->delta > 0)
 		time->fps = 1.0 / time->delta;
 	else
