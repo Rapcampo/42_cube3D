@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 21:45:47 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/16 21:49:52 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/17 21:36:27 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,14 @@ static void	save_texture(char *line)
 		g()->textures->west = arr[1];
 	else if (ft_strncmp("EA", arr[0], 2) == 0)
 		g()->textures->east = arr[1];
-	else
+	else if (arr[0][0] == 'F' || arr[0][0] == 'C')
 	{
 		save_ceil_floor(arr);
 		clear_arr(arr);
 		return ;
 	}
+	else
+		free(arr[1]);
 	// arr[1] doesn't have to be freed because are using that pointer
 	// in the texture struct
 	free(arr[0]);
