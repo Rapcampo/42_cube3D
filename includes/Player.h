@@ -48,6 +48,7 @@ typedef struct s_dda
 
 struct	s_data;
 struct	s_map;
+struct	s_game;
 
 void	put_los(struct s_data *minimap, t_dda *dda, struct s_map *map);
 

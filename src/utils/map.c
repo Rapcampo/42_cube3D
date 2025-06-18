@@ -16,9 +16,12 @@ void	assign_img(struct s_data *tex, char *img_path);
 
 int	map_coord(int x, int y)
 {
-	if (x < 0 || x >= g()->map.width || y < 0 || y >= g()->map.height)
+	t_map	*map;
+
+	map = &g()->map;
+	if (x < 0 || x >= map->width || y < 0 || y >= map->height)
 		return (-1);
-	return (g()->map.map_data[y][x]);
+	return (map->map_data[y][x]);
 }
 
 void	set_player(t_player *p, t_point *pos, char dir)
@@ -92,16 +95,16 @@ int	temp_map(t_map *map)
 	int	i;
 	t_point	pos;
 	static t_textures tex = {0};
-	char	*nimg = "/home/raphael/42-common-core/cub3d/assets/north.xpm";
-	char	*simg = "/home/raphael/42-common-core/cub3d/assets/south.xpm";
-	char	*eimg = "/home/raphael/42-common-core/cub3d/assets/east.xpm";
-	char	*wimg = "/home/raphael/42-common-core/cub3d/assets/west.xpm";
+	char	*nimg = "/home/harbinger/42/common_core/cube3D/assets/n1.xpm";
+	char	*simg = "/home/harbinger/42/common_core/cube3D/assets/s1.xpm";
+	char	*eimg = "/home/harbinger/42/common_core/cube3D/assets/e1.xpm";
+	char	*wimg = "/home/harbinger/42/common_core/cube3D/assets/w1.xpm";
 
 	tex.ceil[0] = get_red(HEX_COB);
 	tex.ceil[1] = get_green(HEX_COB);
 	tex.ceil[2] = get_blue(HEX_COB);
 	tex.floor[0] = get_red(HEX_GRN);
-	tex.floor[1] = get_green(HEX_GRN);
+	tex.floor[1] = get_green(HEX_GRN >> 1);
 	tex.floor[2] = get_blue(HEX_GRN);
 	i = -1;
 	if (!map_data)

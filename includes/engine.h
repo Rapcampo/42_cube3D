@@ -13,7 +13,7 @@
 #ifndef ENGINE_H
 # define ENGINE_H
 
-# define MOV_SPEED 3 
+# define MOV_SPEED 4 
 # define ROT_SPEED 4
 
 struct	s_mlx;

@@ -40,7 +40,7 @@ MLX_DIR		= ./mlx/
 CC			= cc
 RM			= rm -rf
 #AR			= ar -rcs
-FLAGS		= -Wall -Wextra -Werror -O3 #-g -pg
+FLAGS		= -Wall -Wextra -Werror #-O3 #-g -pg
 LEAKS		= -g -fsanitize=address
 DEBUG		= -DDEBUG
 MAKE_FLAG	= --no-print-directory
