@@ -34,7 +34,14 @@ int	get_argb(int t, int r, int g, int b)
 
 int	darken(int side, int color)
 {
+	int	r;
+	int	g;
+	int	b;
+
+	r = get_red(color) >> 1;
+	g = get_green(color) >> 1;
+	b = get_blue(color) >> 1;
 	if (side == 1)
-		return (color >> 1);
+		return (get_argb(0, r, g, b));
 	return (color);
 }

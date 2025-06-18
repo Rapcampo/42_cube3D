@@ -95,10 +95,10 @@ int	temp_map(t_map *map)
 	int	i;
 	t_point	pos;
 	static t_textures tex = {0};
-	char	*nimg = "/home/harbinger/42/common_core/cube3D/assets/north.xpm";
-	char	*simg = "/home/harbinger/42/common_core/cube3D/assets/south.xpm";
-	char	*eimg = "/home/harbinger/42/common_core/cube3D/assets/east.xpm";
-	char	*wimg = "/home/harbinger/42/common_core/cube3D/assets/west.xpm";
+	char	*nimg = "/home/harbinger/42/common_core/cube3D/assets/n1.xpm";
+	char	*simg = "/home/harbinger/42/common_core/cube3D/assets/s1.xpm";
+	char	*eimg = "/home/harbinger/42/common_core/cube3D/assets/e1.xpm";
+	char	*wimg = "/home/harbinger/42/common_core/cube3D/assets/w1.xpm";
 
 	tex.ceil[0] = get_red(HEX_COB);
 	tex.ceil[1] = get_green(HEX_COB);
