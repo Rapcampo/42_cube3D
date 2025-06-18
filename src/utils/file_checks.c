@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:00:04 by tialbert          #+#    #+#             */
-/*   Updated: 2025/05/08 22:09:32 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/18 22:18:01 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,13 @@ int	check_file_exten(char *file)
 	{
 		if (*(dot_loc++) != *(ext++))
 		{
-			printf("Incorrect file type! Please, provide a '.cub' file");
+			printf("Error: Incorrect file type! \
+				  Please, provide a '.cub' file\n");
 			exit(1);
 		}
 	}
 	if (!*dot_loc && !*ext)
 		return (open_file(file));
-	printf("Incorrect file type! Please, provide a '.cub' file");
+	printf("Error: Incorrect file type! Please, provide a '.cub' file\n");
 	exit(1);
 }
