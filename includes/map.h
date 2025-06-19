@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 22:14:57 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/17 22:10:39 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/19 17:02:15 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 /*============================= MAP_FUNCTIONS ===============================*/
 
 void	map_checker(void);
-int	check_right_wall(int i, int col);
-int	right_wall_right_line(int line, int col);
-int	right_wall_left_line(int line, int col);
-int	check_left_wall(int i, int col);
-int	left_wall_right_line(int line, int col);
-int	left_wall_left_line(int line, int col);
+int		check_right_wall(int i, int col, int *j_vert, int *bot_vert);
+int		right_wall_right_line(int line, int col, int *j_vert, int *bot_vert);
+int		right_wall_left_line(int line, int col, int *j_vert, int *bot_vert);
+int		check_left_wall(int i, int col, int *j_vert, int *bot_vert);
+int		left_wall_right_line(int line, int col, int *j_vert, int *bot_vert);
+int		left_wall_left_line(int line, int col, int *j_vert, int *bot_vert);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 22:03:34 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/17 22:10:11 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/19 12:05:50 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static inline int	*check_limit_lines(char *line)
+static inline int	*check_line_limits(char *line, int *vert)
 {
 	int	j;
 	int	line_size;
@@ -31,6 +31,8 @@ static inline int	*check_limit_lines(char *line)
 	{
 		if (line[j++] != WALL)
 		{
+			if (vert)
+				free(vert);
 			free(map_info);
 			exit_log("Error: Invalid map (open)\n");
 		}
@@ -41,41 +43,42 @@ static inline int	*check_limit_lines(char *line)
 
 void	map_checker(void)
 {
-	int	*bottom_corners;
+	int	*bot_vert;
 	int	i[2];
 	int	*j;
 
-	bottom_corners = check_limit_lines(g()->map.map_data[g()->map.height - 1]);
-	j = check_limit_lines(g()->map.map_data[0]);
-	i[0] = check_left_wall(0, j[0]);
-	i[1] = check_right_wall(0, j[1]);
+	bot_vert = check_line_limits(g()->map.map_data[g()->map.height - 1], NULL);
+	j = check_line_limits(g()->map.map_data[0], bot_vert);
+	i[0] = check_left_wall(0, j[0], j, bot_vert);
+	i[1] = check_right_wall(0, j[1], j, bot_vert);
 	while (i[0] < g()->map.height - 1 || i[1] < g()->map.height - 1)
 	{
 		if (i[0] < 0)
 		{
 			i[0] *= -1;
-			j[0] = left_wall_left_line(i[0], j[0]);
+			j[0] = left_wall_left_line(i[0], j[0], j, bot_vert);
 		}
 		else if (i[0] < g()->map.height - 1)
-			j[0] = left_wall_right_line(i[0], j[0]);
+			j[0] = left_wall_right_line(i[0], j[0], j, bot_vert);
 		if (i[1] < 0)
 		{
 			i[1] *= -1;
-			j[1] = right_wall_left_line(i[1], j[1]);
+			j[1] = right_wall_left_line(i[1], j[1], j, bot_vert);
 		}
 		else if (i[1] < g()->map.height - 1)
-			j[1] = right_wall_right_line(i[1], j[1]);
-		if (i[0] < g()->map.height - 1 && -i[0] < g()->map.height)
-			i[0] = check_left_wall(i[0], j[0]);
-		if (i[1] < g()->map.height - 1 && -i[1] < g()->map.height)
-			i[1] = check_right_wall(i[1], j[1]);
+			j[1] = right_wall_right_line(i[1], j[1], j, bot_vert);
+		if (i[0] < g()->map.height - 1)
+			i[0] = check_left_wall(i[0], j[0], j, bot_vert);
+		if (i[1] < g()->map.height - 1)
+			i[1] = check_right_wall(i[1], j[1], j, bot_vert);
 	}
-	if (j[0] != bottom_corners[0] || j[1] != bottom_corners[1])
+	if (j[0] != bot_vert[0] || j[1] != bot_vert[1])
 	{
 		free(j);
-		free(bottom_corners);
+		free(bot_vert);
 		exit_log("Error: Invalid map (open)\n");
 	}
 	free(j);
-	free(bottom_corners);
+	free(bot_vert);
+	find_player();
 }

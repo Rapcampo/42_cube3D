@@ -6,13 +6,13 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 21:20:35 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/17 22:23:33 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/19 12:08:58 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-inline int	check_right_wall(int i, int col)
+inline int	check_right_wall(int i, int col, int *j_vert, int *bot_vert)
 {
 	int	line_size;
 	int	next_line_size;
@@ -26,6 +26,10 @@ inline int	check_right_wall(int i, int col)
 	{
 		if (col < line_size - 1 && g()->map.map_data[i][col] != WALL)
 		{
+			if (j_vert)
+				free(j_vert);
+			if (bot_vert)
+				free(bot_vert);
 			exit_log("Error: Invalid map (open)\n");
 		}
 		if (next_line_size > line_size)
@@ -40,7 +44,8 @@ inline int	check_right_wall(int i, int col)
 	return (i);
 }
 
-inline int	right_wall_right_line(int line, int col)
+inline int	right_wall_right_line(int line, int col,
+								 int *j_vert, int *bot_vert)
 {
 	int	line_size;
 	int	next_line_size;
@@ -54,6 +59,10 @@ inline int	right_wall_right_line(int line, int col)
 	{
 		if (g()->map.map_data[line][col] != WALL)
 		{
+			if (j_vert)
+				free(j_vert);
+			if (bot_vert)
+				free(bot_vert);
 			exit_log("Error: Invalid map (open)\n");
 		}
 		if (col == next_line_size - 1)
@@ -63,7 +72,7 @@ inline int	right_wall_right_line(int line, int col)
 	return (col - 1);
 }
 
-inline int	right_wall_left_line(int line, int col)
+inline int	right_wall_left_line(int line, int col, int *j_vert, int *bot_vert)
 {
 	int	next_line_size;
 
@@ -73,6 +82,10 @@ inline int	right_wall_left_line(int line, int col)
 	{
 		if (g()->map.map_data[line][col] != WALL)
 		{
+			if (j_vert)
+				free(j_vert);
+			if (bot_vert)
+				free(bot_vert);
 			exit_log("Error: Invalid map (open)\n");
 		}
 		if (col == next_line_size - 1)

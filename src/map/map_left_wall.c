@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 21:20:18 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/17 22:23:55 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/19 12:07:53 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static inline int	find_wall(char *line)
 }
 
 // TODO: Test weird formats on the left wall
-inline int	check_left_wall(int i, int col)
+inline int	check_left_wall(int i, int col, int *j_vert, int *bot_vert)
 {
 	int	next_wall_col;
 
@@ -36,6 +36,10 @@ inline int	check_left_wall(int i, int col)
 		next_wall_col = find_wall(g()->map.map_data[i + 1]);
 		if (g()->map.map_data[i][col] != WALL)
 		{
+			if (j_vert)
+				free(j_vert);
+			if (bot_vert)
+				free(bot_vert);
 			exit_log("Error: Invalid map (open)\n");
 		}
 		if (next_wall_col > col)
@@ -49,7 +53,7 @@ inline int	check_left_wall(int i, int col)
 	return (i);
 }
 
-inline int	left_wall_right_line(int line, int col)
+inline int	left_wall_right_line(int line, int col, int *j_vert, int *bot_vert)
 {
 	int	line_size;
 	int	next_wall_col;
@@ -63,6 +67,10 @@ inline int	left_wall_right_line(int line, int col)
 	{
 		if (g()->map.map_data[line][col] != WALL)
 		{
+			if (j_vert)
+				free(j_vert);
+			if (bot_vert)
+				free(bot_vert);
 			exit_log("Error: Invalid map (open)\n");
 		}
 		if (col == next_wall_col)
@@ -72,7 +80,7 @@ inline int	left_wall_right_line(int line, int col)
 	return (col - 1);
 }
 
-inline int	left_wall_left_line(int line, int col)
+inline int	left_wall_left_line(int line, int col, int *j_vert, int *bot_vert)
 {
 	int	next_wall_col;
 
@@ -84,6 +92,10 @@ inline int	left_wall_left_line(int line, int col)
 	{
 		if (g()->map.map_data[line][col] != WALL)
 		{
+			if (j_vert)
+				free(j_vert);
+			if (bot_vert)
+				free(bot_vert);
 			exit_log("Error: Invalid map (open)\n");
 		}
 		if (col == next_wall_col)
