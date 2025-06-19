@@ -6,7 +6,7 @@
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:11:09 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/06/15 15:31:28 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/19 17:02:38 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ void	destroy_map(t_map *map)
 	if (map->map_data != 0)
 	{
 		while (map->map_data[++i] != NULL)
-		{
-			printf("%s\n", map->map_data[i]);
 			free(map->map_data[i]);
-		}
 		free(map->map_data);
 	}
 }

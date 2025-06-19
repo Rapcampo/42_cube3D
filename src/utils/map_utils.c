@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:33:23 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/19 11:29:09 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/19 12:20:08 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,4 @@ void	extend_map(size_t nb_lines)
 		new_map[i++] = NULL;
 	free(g()->map.map_data);
 	g()->map.map_data = new_map;
-}
-
-size_t	map_size(char **map)
-{
-	size_t	i;
-
-	i = 0;
-	if (map == NULL)
-		return (i);
-	while (map[i] != NULL)
-		i++;
-	return (i);
 }
