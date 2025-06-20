@@ -17,8 +17,12 @@ int	init_frame(t_data *frame, t_mlx *mlx)
 	frame->height = HEIGHT;
 	frame->width = WIDTH;
 	frame->img = mlx_new_image(mlx->ptr, frame->width, frame->height);
+	if (frame->img == NULL)
+		exit_log(RED ERR_IMG RST);
 	frame->addr = mlx_get_data_addr(frame->img,
 			&frame->bpp, &frame->ll, &frame->endian);
+	if (frame->addr == NULL)
+		exit_log(RED ERR_ADDR RST);
 	return (0);
 }
 
@@ -35,12 +39,32 @@ int	init_minimap(t_data *minimap, t_mlx *mlx, t_data *frame)
 	return (0);
 }
 
-void	put_los(t_data *minimap, t_dda *dda, t_map *map)
+void	put_los(t_data *minimap, t_dda *dda, t_map *map, int print)
 {
 	const float	scale_x = minimap->width / map->width;
 	const float	scale_y = minimap->height / map->height;
+	static int	x[15000];
+	static int	y[15000];
+	static int	i;
 
-	pixel_put(minimap, dda->map.x * scale_x, dda->map.y * scale_y, HEX_GRN);
+	if (print == 0 && i < 15000)
+	{
+		x[i] = dda->map.x;
+		y[i] = dda->map.y;
+		i++;
+	}
+	else if (print == 1)
+	{
+		i = 0;
+		while (i < 15000)
+		{
+			pixel_put(minimap, x[i] * scale_x, y[i] * scale_y, 0x0000FF00);
+			x[i] = 0;
+			y[i] = 0;
+			i++;
+		}
+		i = 0;
+	}
 }
 
 int	render_game(t_data *frame)

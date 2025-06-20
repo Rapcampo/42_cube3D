@@ -18,7 +18,7 @@ SOURCE	= $(SOURCE_DIR)
 ENGINE	= key_events.c screen_output.c pixel_draw.c raycaster.c raydraw.c \
 		  colours.c
 MEMORY	= fail_exit.c clean_exit.c clean_array.c
-UTILS	= global.c time.c map.c bfi.c img_conversion.c
+UTILS	= global.c time.c map.c img_conversion.c
 OBJS	= $(addprefix $(OBJS_DIR), $(SOURCE_LST:.c=.o))
 LIBFT	= -L ./libft
 MLX		= -L ./mlx

@@ -1,12 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 19:23:58 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/08 22:18:47 by tialbert         ###   ########.fr       */
+/*   Created: 2025/06/20 14:27:07 by rapcampo          #+#    #+#             */
+/*   Updated: 2025/06/20 14:27:14 by rapcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../includes/cub3d.h"
 
 //adding placeholder error message functions
@@ -20,22 +22,25 @@
 int	gameloop(t_game *gm)
 {
 	static int	framesave;
+	char		*fps;
 
 	get_time_delta(&gm->time);
 	printf("Current FPS: %f\r", gm->time.fps);
-	char *fps = ft_itoa((int)gm->time.fps);
+	fps = ft_itoa((int)gm->time.fps);
 	if (framesave == 6)
 	{
 		render_game(&gm->frame);
 		raycaster();
-//		render_frame(&gm->minimap);
+		render_frame(&gm->minimap);
+		put_los(&gm->minimap, NULL, &gm->map, 1);
 		framesave = 0;
 	}
 	framesave++;
 	render_mov(&gm->player);
 	render_rot(&gm->player);
 	mlx_put_image_to_window(gm->mlx.ptr, gm->mlx.win, gm->frame.img, 0, 0);
-	mlx_string_put(gm->mlx.ptr, gm->mlx.win, WIDTH - 50, HEIGHT - 30, HEX_WHT, fps);
+	mlx_string_put(gm->mlx.ptr, gm->mlx.win,
+		WIDTH - 50, HEIGHT - 30, HEX_WHT, fps);
 	free(fps);
 	return (0);
 }
@@ -57,17 +62,16 @@ static void	start_mlx_win(void)
 
 static void	init_game(t_game *g)
 {
-	t_mlx	*mlx;
-	t_textures tex = {0};
+	t_mlx		*mlx;
+	t_textures	tex;
 
+	ft_bzero(&tex, sizeof(tex));
 	mlx = &g->mlx;
 	g->textures = &tex;
 	start_mlx_win();
 	temp_map(&g->map);
 	init_frame(&g->frame, mlx);
 	init_minimap(&g->minimap, mlx, &g->frame);
-	//need to load images here
-	//set_skybox(&g->textures);
 	mlx_do_key_autorepeatoff(g->mlx.ptr);
 	mlx_hook(mlx->win, E_KEYPRESS, KEYPRESS_MASK, &event_keypress, g);
 	mlx_hook(mlx->win, E_KEYLIFT, KEYLIFT_MASK, &event_keylift, g);
@@ -75,13 +79,15 @@ static void	init_game(t_game *g)
 	mlx_loop_hook(mlx->ptr, &gameloop, g);
 	mlx_loop(mlx->ptr);
 }
+	//need to load images here
+	//set_skybox(&g->textures);
 
+	//	check_file_exten(argv[1]);
 int	main(int argc, char **argv)
 {
 	(void)argv;
 	if (argc != 2)
 		exit_log(YLW WRNG_USE CLR BLU USE_FORMAT RST);
-	//	check_file_exten(argv[1]);
 	init_game(g());
 	clean_exit();
 }

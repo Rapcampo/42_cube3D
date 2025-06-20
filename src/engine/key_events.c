@@ -59,6 +59,8 @@ void	render_rot(t_player *player)
 
 int	event_keypress(int keycode, t_game *g)
 {
+	if (g == NULL)
+		return (-1);
 	if (keycode < 0xFF)
 		g->key[keycode & 0xFF] = 1;
 	if (keycode == LEFT)
@@ -70,6 +72,8 @@ int	event_keypress(int keycode, t_game *g)
 
 int	event_keylift(int keycode, t_game *g)
 {
+	if (g == NULL)
+		return (-1);
 	if (keycode == ESC)
 		clean_exit();
 	if (keycode < 0xFF)
