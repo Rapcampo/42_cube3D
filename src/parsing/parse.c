@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 21:45:47 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/19 17:16:32 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/20 15:43:47 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static void	save_map(char *line, int row)
 	g()->map.height++;
 }
 
-// TODO: Check if the ints to describe the colour can also be separated by spaces
 // TODO: The strncmp function has been changed to avoid past errors. Make sure it actually works correctly
 static void	save_ceil_floor(char **arr, char *line)
 {
@@ -158,4 +157,5 @@ void	parsing(int	fd)
 	close(fd);
 	if (i <= 6)
 		exit_log("Error: Missing information on .cub file\n");
+	resize_map();
 }

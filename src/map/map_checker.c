@@ -1,84 +1,107 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_checker.c                                      :+:      :+:    :+:   */
+/*   map_checker_rec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/20 22:03:34 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/19 12:05:50 by tialbert         ###   ########.fr       */
+/*   Created: 2025/06/19 21:13:36 by tialbert          #+#    #+#             */
+/*   Updated: 2025/06/20 22:50:21 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static inline int	*check_line_limits(char *line, int *vert)
+static inline void	check_line(char *line, int i, int *players)
 {
 	int	j;
 	int	line_size;
-	int	*map_info;
 
 	j = 0;
-	line_size = ft_strlen(line);
-	map_info = malloc(sizeof(int) * 2);
-	if (map_info == NULL)
-		exit_log("Error: Memory allocation failed\n");
-	bzero(map_info, 2);
-	while (line[j] == EMPTY && j < line_size)
-		j++;
-	map_info[0] = j;
+	line_size = g()->map.width;
 	while (j < line_size)
 	{
-		if (line[j++] != WALL)
+		if (j == 0 && !(line[j] == WALL || line[j] == EMPTY))
+			exit_log("Error\nInvalid map (open)\n");
+		if (j == line_size - 1 && !(line[j] == WALL || line[j] == EMPTY))
+			exit_log("Error\nInvalid map (open)\n");
+		if (!check_chr(line[j], i, j, players))
+			exit_log("Error\nInvalid character in map\n");
+		if (line[j] == 0)
 		{
-			if (vert)
-				free(vert);
-			free(map_info);
-			exit_log("Error: Invalid map (open)\n");
+			if (j > 0 && line[j - 1] != WALL)
+				exit_log("Error\nInvalid map (open)\n");
+			while (line[j] == EMPTY)
+				j++;
+			if (line[j] && line[j] != WALL)
+				exit_log("Error\nInvalid map (open)\n");
 		}
+		if (j < line_size)
+			j++;
 	}
-	map_info[1] = j - 1;
-	return (map_info);
+}
+
+static inline void	hor_ver(t_map map, int *players)
+{
+	int	i;
+
+	i = 0;
+	while (i < g()->map.height)
+	{
+		check_line(map.map_data[i], i, players);
+		i++;
+	}
+}
+
+static inline void	check_col(char **map, int j, int *players)
+{
+	int	i;
+	int	map_height;
+
+	i = 0;
+	map_height = g()->map.height;
+	while (i < map_height)
+	{
+		if (i == 0 && !(map[i][j] == WALL || map[i][j] == EMPTY))
+			exit_log("Error\nInvalid map (open)\n");
+		if (i == map_height - 1 && !(map[i][j] == WALL || map[i][j] == EMPTY))
+			exit_log("Error\nInvalid map (open)\n");
+		if (!check_chr(map[i][j], i, j, players))
+			exit_log("Error\nInvalid character in map\n");
+		if (map[i][j] == 0)
+		{
+			if (i > 0 && map[i - 1][j] != WALL)
+				exit_log("Error\nInvalid map (open)\n");
+			while (map[i][j] == EMPTY)
+				i++;
+			if (map[i][j] && map[i][j] != WALL)
+				exit_log("Error\nInvalid map (open)\n");
+		}
+		if (i < map_height)
+			i++;
+	}
+}
+
+static inline void	vert_ver(t_map map, int *players)
+{
+	int	j;
+
+	j = 0;
+	while (j < g()->map.width)
+		check_col(map.map_data, j++, players);
 }
 
 void	map_checker(void)
 {
-	int	*bot_vert;
-	int	i[2];
-	int	*j;
+	t_map	map;
+	int		players;
 
-	bot_vert = check_line_limits(g()->map.map_data[g()->map.height - 1], NULL);
-	j = check_line_limits(g()->map.map_data[0], bot_vert);
-	i[0] = check_left_wall(0, j[0], j, bot_vert);
-	i[1] = check_right_wall(0, j[1], j, bot_vert);
-	while (i[0] < g()->map.height - 1 || i[1] < g()->map.height - 1)
-	{
-		if (i[0] < 0)
-		{
-			i[0] *= -1;
-			j[0] = left_wall_left_line(i[0], j[0], j, bot_vert);
-		}
-		else if (i[0] < g()->map.height - 1)
-			j[0] = left_wall_right_line(i[0], j[0], j, bot_vert);
-		if (i[1] < 0)
-		{
-			i[1] *= -1;
-			j[1] = right_wall_left_line(i[1], j[1], j, bot_vert);
-		}
-		else if (i[1] < g()->map.height - 1)
-			j[1] = right_wall_right_line(i[1], j[1], j, bot_vert);
-		if (i[0] < g()->map.height - 1)
-			i[0] = check_left_wall(i[0], j[0], j, bot_vert);
-		if (i[1] < g()->map.height - 1)
-			i[1] = check_right_wall(i[1], j[1], j, bot_vert);
-	}
-	if (j[0] != bot_vert[0] || j[1] != bot_vert[1])
-	{
-		free(j);
-		free(bot_vert);
-		exit_log("Error: Invalid map (open)\n");
-	}
-	free(j);
-	free(bot_vert);
-	find_player();
+	players = 0;
+	map = g()->map;
+	hor_ver(map, &players);
+	vert_ver(map, &players);
+	// There are "2 players" because we find
+	// the position vertically and horizontally
+	if (players != 2)
+		exit_log("Error\nWrong number of players\n");
 }

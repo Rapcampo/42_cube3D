@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:03:17 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/19 12:19:57 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/20 22:53:23 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	create_textures(void);
 
 /*======================== PLAYER_UTIL_FUNCTIONS ============================*/
 void	find_player(void);
+int		check_chr(char c, int i, int j, int *players);
 
 /*========================= ARRAY_UTIL_FUNCTIONS ============================*/
 size_t	array_size(char **arr);
