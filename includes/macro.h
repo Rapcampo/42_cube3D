@@ -23,6 +23,10 @@
 # define ER_MLX_INIT "Error: mlx_init failed!\n"
 # define ER_MLX_WIN "Error: mlx_win failed to initialize!\n"
 # define ERR_TIME "Error: gettimeofday failure\n"
+# define ERR_PATH "Error: Image path does not lead to a valid file\n"
+# define ERR_OPEN "Error MLX could not access image file\n"
+# define ERR_ADDR "Error: Image address has not been correctly set!\n"
+# define ERR_IMG "Error: MLX could not create image file\n"
 
 /*============================= Ansi colours =================================*/
 

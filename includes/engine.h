@@ -53,8 +53,7 @@ int		map_coord(int x, int y);
 void	raycaster(void);
 void	put_player(int x, int y, t_data *frame, int color);
 int		render_game(t_data *frame);
-void	bfi(t_data *frame);
 void	raydraw(struct s_dda *dda, t_data *tex);
-void	verline(struct s_dda *dda, int y0, int y1, int color);
+//void	verline(struct s_dda *dda, int y0, int y1, int color);
 
 #endif

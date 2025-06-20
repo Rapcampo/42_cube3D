@@ -17,8 +17,12 @@ int	init_frame(t_data *frame, t_mlx *mlx)
 	frame->height = HEIGHT;
 	frame->width = WIDTH;
 	frame->img = mlx_new_image(mlx->ptr, frame->width, frame->height);
+	if (frame->img == NULL)
+		exit_log(RED ERR_IMG RST);
 	frame->addr = mlx_get_data_addr(frame->img,
 			&frame->bpp, &frame->ll, &frame->endian);
+	if (frame->addr == NULL)
+		exit_log(RED ERR_ADDR RST);
 	return (0);
 }
 
