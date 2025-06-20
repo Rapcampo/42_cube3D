@@ -6,14 +6,15 @@
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:40:13 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/06/07 09:08:25 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/20 23:00:55 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-t_game *g(void)
+t_game	*g(void)
 {
-	static t_game	g = {};
+	static t_game	g = {0};
+
 	return (&g);
 }

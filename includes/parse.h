@@ -14,7 +14,8 @@
 # define PARSE_H
 
 /*============================ PARSING_FUNCTIONS ============================*/
-void	parsing(int	fd);
+
+void	parsing(int fd);
 
 /*========================= MAP_RESIZING_FUNCTIONS ==========================*/
 void	resize_map(void);

@@ -6,14 +6,12 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 22:14:57 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/20 14:36:20 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/20 23:04:26 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_H
 # define MAP_H
-
-# include "cub3d.h"
 
 /*============================ MAP_DEFINITIONS ==============================*/
 # define CORR '0'
@@ -26,7 +24,6 @@
 
 /*============================= MAP_FUNCTIONS ===============================*/
 
-// void	map_checker(void);
 void	map_checker(void);
 int		check_right_wall(int i, int col, int *j_vert, int *bot_vert);
 int		right_wall_right_line(int line, int col, int *j_vert, int *bot_vert);

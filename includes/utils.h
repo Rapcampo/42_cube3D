@@ -6,20 +6,22 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:03:17 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/20 22:53:23 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/20 23:04:56 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef UTILS_H
 # define UTILS_H
 
 # include <stdlib.h>
 
+struct	s_time;
+
 /*============================ UTIL_FUNCTIONS ===============================*/
 
 int		check_file_exten(char *file);
-void	get_time_delta(void);
+void	get_time_delta(struct s_time *time);
+int		darken(int side, int color);
 
 /*========================== MAP_UTIL_FUNCTIONS =============================*/
 void	extend_map(size_t nb_lines);

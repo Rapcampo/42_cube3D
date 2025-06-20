@@ -13,13 +13,18 @@
 #ifndef TEXTURES_H
 # define TEXTURES_H
 
-typedef struct s_textures {
-	char	*north;
-	char	*south;
-	char	*east;
-	char	*west;
+# include "engine.h"
+
+typedef struct s_textures
+{
+	t_data	north;
+	t_data	south;
+	t_data	east;
+	t_data	west;
 	int		floor[3];
 	int		ceil[3];
 }			t_textures;
+
+void	assign_img(t_data *tex, char *img_path);
 
 #endif

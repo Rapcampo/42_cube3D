@@ -12,68 +12,80 @@
 
 #include "../../includes/cub3d.h"
 
-//static void	create_frame();
-
-int	init_frame(t_data *frame)
+int	init_frame(t_data *frame, t_mlx *mlx)
 {
 	frame->height = HEIGHT;
 	frame->width = WIDTH;
-	frame->img = mlx_new_image(g()->mlx.ptr, frame->width, frame->height);
+	frame->img = mlx_new_image(mlx->ptr, frame->width, frame->height);
+	if (frame->img == NULL)
+		exit_log(RED ERR_IMG RST);
 	frame->addr = mlx_get_data_addr(frame->img,
 			&frame->bpp, &frame->ll, &frame->endian);
-	render_frame(frame);
+	if (frame->addr == NULL)
+		exit_log(RED ERR_ADDR RST);
 	return (0);
 }
 
-void	render_mov()
+int	init_minimap(t_data *minimap, t_mlx *mlx, t_data *frame)
 {
-	const	int xmov = g()->key[D] - g()->key[A];
-	const	int ymov = g()->key[S] - g()->key[W];
-	t_player *p;
-
-	p = &g()->player;
-	if (xmov != 0)
-		p->pos.x += xmov * MOV_SPEED * g()->time.delta;
-	if (ymov != 0)
-		p->pos.y += ymov * MOV_SPEED * g()->time.delta;
+	(void)mlx;
+	minimap->height = HEIGHT >> 2;
+	minimap->width = WIDTH >> 2;
+	minimap->img = frame->img;
+	minimap->addr = frame->addr;
+	minimap->bpp = frame->bpp;
+	minimap->endian = frame->endian;
+	minimap->ll = frame->ll;
+	return (0);
 }
 
-void	render_rot()
+void	put_los(t_data *minimap, t_dda *dda, t_map *map, int print)
 {
-	const float	rot_dir = g()->key[1] - g()->key[2];
-	const float	velo = rot_dir * ROT_SPEED * g()->time.delta;
-	const float	org_dx = g()->player.dir.x;
-	const float	org_px = g()->player.plane.x;
+	const float	scale_x = minimap->width / map->width;
+	const float	scale_y = minimap->height / map->height;
+	static int	x[15000];
+	static int	y[15000];
+	static int	i;
 
-	g()->player.dir.x = org_dx * cos(velo) - g()->player.dir.y * sin(velo);
-	g()->player.dir.y = org_dx * sin(velo) + g()->player.dir.y * cos(velo);
-	g()->player.plane.x = org_px * cos(velo) - g()->player.plane.y * sin(velo);
-	g()->player.plane.y = org_px * sin(velo) + g()->player.plane.y * cos(velo);
-}
-
-/*void	render_mov(){
-	int		j;
-	int		i;
-	t_data *frame;
-
-	if (g()->key[A] || g()->key[S] || g()->key[W] || g()->key[D]){
-		frame = &g()->frame;
-		j = -1;
-		i = -1;
-		while (++j < HEIGHT >> 1)
-		{
-			pixel_put(frame, 0, 0 + j, 0x0087ceeb >> 1);
-			while (++i < WIDTH)
-				pixel_put(frame, 0 + i, j, 0x0087ceeb >> 1);
-			i = -1;
-		}
-		j = (HEIGHT >> 1) - 1;
-		while (++j < HEIGHT)
-		{
-			pixel_put(frame, 0, 0 + j, FLOOR >> 1);
-			while (++i < WIDTH)
-				pixel_put(frame, 0 + i, j, FLOOR >> 1);
-			i = -1;
-		}
+	if (print == 0 && i < 15000)
+	{
+		x[i] = dda->map.x;
+		y[i] = dda->map.y;
+		i++;
 	}
-}*/
+	else if (print == 1)
+	{
+		i = 0;
+		while (i < 15000)
+		{
+			pixel_put(minimap, x[i] * scale_x, y[i] * scale_y, 0x0000FF00);
+			x[i] = 0;
+			y[i] = 0;
+			i++;
+		}
+		i = 0;
+	}
+}
+
+int	render_game(t_data *frame)
+{
+	const int	halfscreen = frame->height >> 1;
+	t_point		coor;
+	t_map		*m;
+
+	coor.y = -1;
+	coor.x = -1;
+	m = &g()->map;
+	while (++coor.y < frame->height)
+	{
+		while (++coor.x < frame->width)
+		{
+			if (coor.y < halfscreen)
+				pixel_put(frame, 0 + coor.x, 0 + coor.y, m->c_color);
+			else
+				pixel_put(frame, 0 + coor.x, 0 + coor.y, m->f_color);
+		}
+		coor.x = -1;
+	}
+	return (0);
+}

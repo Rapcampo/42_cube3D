@@ -24,7 +24,7 @@
 # include "../mlx/mlx.h"
 # include <math.h>
 
-# define WIDTH 800
+# define WIDTH 800 
 # define HEIGHT	600
 
 /*============================ Custom Libraries ==============================*/
@@ -41,6 +41,9 @@
 
 /*=========================== main game struct ===============================*/
 
+//NOTE N = dirx = 0, diry = -1; S x = 0, y = 1; E x = 1, y = 0; W x = -1, y = 0
+//NOTE plane N x = 0.66; S x = -0.66; E y = 0.66; W y = -0.66
+
 typedef struct s_mlx
 {
 	void	*ptr;
@@ -52,8 +55,8 @@ typedef struct s_mlx
 
 typedef struct s_time
 {
-	float	fps;
-	float	delta;
+	double	fps;
+	double	delta;
 }	t_time;
 
 //acessed through g() function;
@@ -65,6 +68,7 @@ typedef struct s_game
 	int			debug;
 	t_map		map;
 	t_data		frame;
+	t_data		minimap;
 	t_time		time;
 	int			key[0xFF];
 }	t_game;
@@ -105,13 +109,18 @@ typedef enum e_event
 	E_DESTROY	= 17
 }	t_event;
 
-
 /*============================= struct access ================================*/
 
 t_game	*g(void);
+int		gameloop(t_game *gm);
+void	set_skybox(t_textures *tex);
+void	set_player(t_player *p, t_point *pos, char dir);
 
-/*============================= testing ================================*/
-
+/*============================= game =========================================*/
+int		get_red(int argb);
+int		get_green(int argb);
+int		get_blue(int argb);
+int		get_argb(int t, int r, int g, int b);
 int		temp_map(t_map *imap);
 
 #endif
