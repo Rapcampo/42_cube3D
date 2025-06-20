@@ -100,11 +100,11 @@ int	temp_map(t_map *map)
 	char	*eimg = "/home/harbinger/42/common_core/cube3D/assets/e1.xpm";
 	char	*wimg = "/home/harbinger/42/common_core/cube3D/assets/w1.xpm";
 
-	tex.ceil[0] = get_red(HEX_COB);
-	tex.ceil[1] = get_green(HEX_COB);
-	tex.ceil[2] = get_blue(HEX_COB);
+	tex.ceil[0] = get_red(HEX_CRM) * .6;
+	tex.ceil[1] = get_green(HEX_CRM);
+	tex.ceil[2] = get_blue(HEX_CRM);
 	tex.floor[0] = get_red(HEX_GRN);
-	tex.floor[1] = get_green(HEX_GRN >> 1);
+	tex.floor[1] = get_green(HEX_GRN);
 	tex.floor[2] = get_blue(HEX_GRN);
 	i = -1;
 	if (!map_data)

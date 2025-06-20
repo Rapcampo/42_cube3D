@@ -76,7 +76,7 @@ static void	ray_touch(t_dda *dda, t_player *p)
 			dda->map.y += dda->step.y;
 			dda->side = 1;
 		}
-		put_los(&g()->minimap, dda, &g()->map);
+		put_los(&g()->minimap, dda, &g()->map, 0);
 		if (map_coord(dda->map.x, dda->map.y) > 0)
 			dda->touch = 1;
 		else if (map_coord(dda->map.x, dda->map.y) < 0)
@@ -103,7 +103,6 @@ void	raycaster(void)
 	p = &g()->player;
 	ft_bzero(&dda, sizeof(t_dda));
 	dda.x = -1;
-	render_frame(&g()->minimap);
 	while (++dda.x < g()->frame.width)
 	{
 		dda = cast_ray(dda.x, p);
