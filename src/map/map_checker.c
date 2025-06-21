@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_checker_rec.c                                  :+:      :+:    :+:   */
+/*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:13:36 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/20 22:50:21 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/21 21:05:40 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ void	map_checker(void)
 	map = g()->map;
 	hor_ver(map, &players);
 	vert_ver(map, &players);
-	// There are "2 players" because we find
-	// the position vertically and horizontally
-	if (players != 2)
+	if (players != 1)
 		exit_log("Error\nWrong number of players\n");
 }

@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 21:45:47 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/20 15:43:47 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/21 15:50:14 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ static void	save_ceil_floor(char **arr, char *line)
 	clear_arr(num);
 }
 
-// TODO: Change function to save the texture in t_data (Raphael already has functions for that)
 static int	save_texture(char *line)
 {
 	char	**arr;
@@ -94,14 +93,14 @@ static int	save_texture(char *line)
 		clear_arr(arr);
 		exit_log("Error: Texture information format is wrong\n");
 	}
-	if (ft_strncmp("SO", arr[0], 2) == 0 && !g()->textures->south)
-		g()->textures->south = arr[1];
-	else if (ft_strncmp("NO", arr[0], 2) == 0 && !g()->textures->north)
-		g()->textures->north = arr[1];
-	else if (ft_strncmp("WE", arr[0], 2) == 0 && !g()->textures->west)
-		g()->textures->west = arr[1];
-	else if (ft_strncmp("EA", arr[0], 2) == 0 && !g()->textures->east)
-		g()->textures->east = arr[1];
+	if (ft_strncmp("SO", arr[0], 2) == 0 && !g()->textures->south.img)
+		assign_img(&g()->textures->south, arr[1]);
+	else if (ft_strncmp("NO", arr[0], 2) == 0 && !g()->textures->north.img)
+		assign_img(&g()->textures->north, arr[1]);
+	else if (ft_strncmp("WE", arr[0], 2) == 0 && !g()->textures->west.img)
+		assign_img(&g()->textures->west, arr[1]);
+	else if (ft_strncmp("EA", arr[0], 2) == 0 && !g()->textures->east.img)
+		assign_img(&g()->textures->east, arr[1]);
 	else if (arr[0][0] == 'F' || arr[0][0] == 'C')
 	{
 		save_ceil_floor(arr, line);
@@ -113,10 +112,7 @@ static int	save_texture(char *line)
 		clear_arr(arr);
 		return (0);
 	}
-	// arr[1] doesn't have to be freed because we are using that pointer
-	// in the texture struct
-	free(arr[0]);
-	free(arr);
+	clear_arr(arr);
 	return (1);
 }
 

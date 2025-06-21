@@ -6,7 +6,7 @@
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 19:04:17 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/30 19:15:49 by rapcampo         ###   ########.fr       */
+/*   Updated: 2025/06/21 20:44:19 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	ray_touch(t_dda *dda, t_player *p)
 			dda->side = 1;
 		}
 		put_los(&g()->minimap, dda, &g()->map, 0);
-		if (map_coord(dda->map.x, dda->map.y) > 0)
+		if (map_coord(dda->map.x, dda->map.y) != CORR)
 			dda->touch = 1;
 		else if (map_coord(dda->map.x, dda->map.y) < 0)
 			break ;

@@ -6,7 +6,7 @@
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 11:48:56 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/31 20:49:57 by rapcampo         ###   ########.fr       */
+/*   Updated: 2025/06/21 17:36:50 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)offset = color;
 }
 
-static void	put_block(int start_x, int start_y, t_data *frame, int m)
+static void	put_block(int start_x, int start_y, t_data *frame, char m)
 {
 	const int	cell_h = (int)(frame->height / g()->map.height);
 	const int	cell_w = (int)(frame->width / g()->map.width);
@@ -35,7 +35,7 @@ static void	put_block(int start_x, int start_y, t_data *frame, int m)
 		w = -1;
 		while (++w <= cell_w)
 		{
-			if (m == 1)
+			if (m == WALL)
 			{
 				if (h == 0 || h == cell_h || w == 0 || w == cell_w)
 					pixel_put(frame, start_x + w, start_y + h, HEX_WHT);

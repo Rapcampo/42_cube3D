@@ -6,7 +6,7 @@
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:37:55 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/23 18:11:31 by rapcampo         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:21:15 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,72 +61,72 @@ void	set_skybox(t_textures *tex)
 	g()->map.f_color = f;
 }
 
-int	temp_map(t_map *map)
-{
-	const int size = 24;
-	const char imap[24][24] = {
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,1,0,1,0,1,0,0,0,1},
-  {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1},
-  {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,1,1,0,1,1,0,0,0,0,1,0,1,0,1,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1},
-  {1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-};
-	const size_t	map_size = size * size;
-	char **	map_data = ft_calloc(size, sizeof(char*) + 1);
-	int	i;
-	t_point	pos;
-	static t_textures tex = {0};
-	char	*nimg = "/home/harbinger/42/common_core/cube3D/assets/n1.xpm";
-	char	*simg = "/home/harbinger/42/common_core/cube3D/assets/s1.xpm";
-	char	*eimg = "/home/harbinger/42/common_core/cube3D/assets/e1.xpm";
-	char	*wimg = "/home/harbinger/42/common_core/cube3D/assets/w1.xpm";
+// int	temp_map(t_map *map)
+// {
+// 	const int size = 24;
+// 	const char imap[24][24] = {
+//   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+//   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//   {1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,1,0,1,0,1,0,0,0,1},
+//   {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//   {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1},
+//   {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//   {1,0,0,0,0,0,1,1,0,1,1,0,0,0,0,1,0,1,0,1,0,0,0,1},
+//   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//   {1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//   {1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,1},
+//   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1},
+//   {1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//   {1,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//   {1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1},
+//   {1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//   {1,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//   {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//   {1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+// };
+// 	const size_t	map_size = size * size;
+// 	char **	map_data = ft_calloc(size, sizeof(char*) + 1);
+// 	int	i;
+// 	t_point	pos;
+// 	static t_textures tex = {0};
+// 	char	*nimg = "/home/harbinger/42/common_core/cube3D/assets/n1.xpm";
+// 	char	*simg = "/home/harbinger/42/common_core/cube3D/assets/s1.xpm";
+// 	char	*eimg = "/home/harbinger/42/common_core/cube3D/assets/e1.xpm";
+// 	char	*wimg = "/home/harbinger/42/common_core/cube3D/assets/w1.xpm";
 
-	tex.ceil[0] = get_red(HEX_CRM) * .6;
-	tex.ceil[1] = get_green(HEX_CRM);
-	tex.ceil[2] = get_blue(HEX_CRM);
-	tex.floor[0] = get_red(HEX_GRN);
-	tex.floor[1] = get_green(HEX_GRN >> 1);
-	tex.floor[2] = get_blue(HEX_GRN);
-	i = -1;
-	if (!map_data)
-		return (-1);
-	while (++i < size)
-	{
-		map_data[i] = ft_calloc(size + 1, sizeof(char));
-		ft_memcpy(map_data[i], imap[i], sizeof(char) * size);
-	}
-	map->map_data = map_data;
-	map->height = size;
-	map->width = size;
-	map->map_size = map_size;
-	pos.x = 12;
-	pos.y = 12;
-	set_skybox(&tex);
-	set_player(&g()->player, &pos, 'S');
-	assign_img(&tex.north, nimg);
-	assign_img(&tex.south, simg);
-	assign_img(&tex.east, eimg);
-	assign_img(&tex.west, wimg);
-	g()->textures = &tex;
+// 	tex.ceil[0] = get_red(HEX_CRM) * .6;
+// 	tex.ceil[1] = get_green(HEX_CRM);
+// 	tex.ceil[2] = get_blue(HEX_CRM);
+// 	tex.floor[0] = get_red(HEX_GRN);
+// 	tex.floor[1] = get_green(HEX_GRN >> 1);
+// 	tex.floor[2] = get_blue(HEX_GRN);
+// 	i = -1;
+// 	if (!map_data)
+// 		return (-1);
+// 	while (++i < size)
+// 	{
+// 		map_data[i] = ft_calloc(size + 1, sizeof(char));
+// 		ft_memcpy(map_data[i], imap[i], sizeof(char) * size);
+// 	}
+// 	map->map_data = map_data;
+// 	map->height = size;
+// 	map->width = size;
+// 	map->map_size = map_size;
+// 	pos.x = 12;
+// 	pos.y = 12;
+// 	set_skybox(&tex);
+// 	set_player(&g()->player, &pos, 'S');
+// 	assign_img(&tex.north, nimg);
+// 	assign_img(&tex.south, simg);
+// 	assign_img(&tex.east, eimg);
+// 	assign_img(&tex.west, wimg);
+// 	g()->textures = &tex;
 
-	return (0);
-}
+// 	return (0);
+// }

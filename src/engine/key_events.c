@@ -6,7 +6,7 @@
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 11:56:37 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/08 12:00:46 by rapcampo         ###   ########.fr       */
+/*   Updated: 2025/06/21 20:53:06 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ void	render_mov(t_player *p)
 	const double	yform = (ymov * MOV_SPEED * dt);
 
 	if (xmov != 0
-		&& !map_coord(floor(p->pos.x + xform * -p->dir.y), floor(p->pos.y)))
+		&& map_coord(floor(p->pos.x + xform * -p->dir.y), floor(p->pos.y)) == CORR)
 		p->pos.x += xform * -p->dir.y;
 	if (xmov != 0
-		&& !map_coord(floor(p->pos.x), floor(p->pos.y + xform * p->dir.x)))
+		&& map_coord(floor(p->pos.x), floor(p->pos.y + xform * p->dir.x)) == CORR)
 		p->pos.y += xform * p->dir.x;
 	if (ymov != 0
-		&& !map_coord(floor(p->pos.x + yform * p->dir.x), floor(p->pos.y)))
+		&& map_coord(floor(p->pos.x + yform * p->dir.x), floor(p->pos.y)) == CORR)
 		p->pos.x += yform * p->dir.x;
 	if (ymov != 0
-		&& !map_coord(floor(p->pos.x), floor(p->pos.y + yform * p->dir.y)))
+		&& map_coord(floor(p->pos.x), floor(p->pos.y + yform * p->dir.y)) == CORR)
 		p->pos.y += yform * p->dir.y;
 }
 

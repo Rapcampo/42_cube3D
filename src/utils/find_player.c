@@ -6,35 +6,26 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 22:19:16 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/20 21:56:45 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/21 21:04:56 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-// TODO: Use function that Raphael made (after merge)
-static inline void	save_dir(char c)
-{
-	if (c == EAST)
-		g()->player.dir.y = 1.0;
-	else if (c == WEST)
-		g()->player.dir.y = -1.0;
-	else if (c == NORTH)
-		g()->player.dir.x = 1.0;
-	else if (c == SOUTH)
-		g()->player.dir.x = -1.0;
-
-}
-
 inline int	check_chr(char c, int i, int j, int *players)
 {
+	t_point	pos;
+
+	pos.x = 0;
+	pos.y = 0;
 	if (c == WALL || c == EMPTY || c == CORR)
 		return (1);
 	else if (c == EAST || c == WEST || c == NORTH || c == SOUTH)
 	{
-		g()->player.pos.x = j;
-		g()->player.pos.y = i;
-		save_dir(c);
+		pos.x = j;
+		pos.y = i;
+		set_player(&g()->player, &pos, c);
+		g()->map.map_data[i][j] = CORR;
 		(*players)++;
 		return (1);
 	}

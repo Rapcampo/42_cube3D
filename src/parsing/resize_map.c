@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 15:44:16 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/20 21:50:12 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/21 17:26:54 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,15 @@ void	resize_map(void)
 {
 	char	**map;
 	size_t	map_width;
+	int		i;
 
 	map = g()->map.map_data;
 	map_width = g()->map.width;
-	while (*map)
+	i = 0;
+	while (map[i])
 	{
-		if (ft_strlen(*map) < map_width)
-			*map = resize_line(*map, map_width);
-		map++;
+		if (ft_strlen(map[i]) < map_width)
+			map[i] = resize_line(map[i], map_width);
+		i++;
 	}
 }

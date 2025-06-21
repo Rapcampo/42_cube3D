@@ -6,7 +6,7 @@
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:27:07 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/06/20 14:27:14 by rapcampo         ###   ########.fr       */
+/*   Updated: 2025/06/21 17:23:17 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/cub3d.h"
@@ -60,7 +60,7 @@ static void	start_mlx_win(void)
 		exit_log(RED ER_MLX_WIN RST);
 }
 
-static void	init_game(t_game *g)
+static void	init_game(t_game *g, char *file)
 {
 	t_mlx		*mlx;
 	t_textures	tex;
@@ -69,7 +69,10 @@ static void	init_game(t_game *g)
 	mlx = &g->mlx;
 	g->textures = &tex;
 	start_mlx_win();
-	temp_map(&g->map);
+	// temp_map(&g->map);
+	parsing(check_file_exten(file));
+	map_checker();
+	set_skybox(g->textures);
 	init_frame(&g->frame, mlx);
 	init_minimap(&g->minimap, mlx, &g->frame);
 	mlx_do_key_autorepeatoff(g->mlx.ptr);
@@ -80,14 +83,12 @@ static void	init_game(t_game *g)
 	mlx_loop(mlx->ptr);
 }
 	//need to load images here
-	//set_skybox(&g->textures);
 
-	//	check_file_exten(argv[1]);
 int	main(int argc, char **argv)
 {
 	(void)argv;
 	if (argc != 2)
 		exit_log(YLW WRNG_USE CLR BLU USE_FORMAT RST);
-	init_game(g());
+	init_game(g(), argv[1]);
 	clean_exit();
 }

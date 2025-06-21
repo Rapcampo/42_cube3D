@@ -6,7 +6,7 @@
 #    By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/06 13:52:55 by rapcampo          #+#    #+#              #
-#    Updated: 2025/05/02 22:56:50 by rapcampo         ###   ########.fr        #
+#    Updated: 2025/06/21 14:48:14 by tialbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,13 @@
 
 NAME	= cub3d
 SOURCE	= $(SOURCE_DIR)
-#PARSER	= asda
+PARSER	= parse.c resize_map.c
 ENGINE	= key_events.c screen_output.c pixel_draw.c raycaster.c raydraw.c \
 		  colours.c
 MEMORY	= fail_exit.c clean_exit.c clean_array.c
-UTILS	= global.c time.c map.c img_conversion.c
+UTILS	= global.c time.c map.c img_conversion.c file_checks.c map_utils.c \
+		  texture_utils.c find_player.c array_utils.c
+MAP		= map_checker.c
 OBJS	= $(addprefix $(OBJS_DIR), $(SOURCE_LST:.c=.o))
 LIBFT	= -L ./libft
 MLX		= -L ./mlx
@@ -29,9 +31,11 @@ HEADERS		= ./includes/
 SOURCE_DIR	= $(addprefix ./src/, main.c) \
 			  $(addprefix ./src/utils/, $(UTILS)) \
 			  $(addprefix ./src/engine/, $(ENGINE)) \
-			  $(addprefix ./src/memory/, $(MEMORY)) 
+			  $(addprefix ./src/memory/, $(MEMORY)) \
+			  $(addprefix ./src/parsing/, $(PARSER)) \
+			  $(addprefix ./src/map/, $(MAP)) 
 OBJS_DIR	= ./objs/
-SOURCE_LST	= main.c $(ENGINE) $(MEMORY) $(UTILS)
+SOURCE_LST	= main.c $(ENGINE) $(MEMORY) $(UTILS) $(PARSER) $(MAP)
 LIBFT_DIR	= ./libft/
 MLX_DIR		= ./mlx/
 

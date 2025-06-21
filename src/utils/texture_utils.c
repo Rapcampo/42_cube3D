@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:16:06 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/15 15:17:52 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/21 15:23:28 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ void	create_textures(void)
 		g()->textures = malloc(sizeof(t_textures));
 		if (g()->textures == NULL)
 			exit_log("Error: Memory allocation error\n");
-		g()->textures->north = NULL;
-		g()->textures->south = NULL;
-		g()->textures->east = NULL;
-		g()->textures->west = NULL;
 	}
+	g()->textures->north.img = NULL;
+	g()->textures->north.addr = NULL;
+	g()->textures->south.img = NULL;
+	g()->textures->south.addr = NULL;
+	g()->textures->west.img = NULL;
+	g()->textures->west.addr = NULL;
+	g()->textures->east.img = NULL;
+	g()->textures->east.addr = NULL;
 }
