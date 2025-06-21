@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:03:17 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/21 11:30:03 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/21 22:05:23 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,9 @@ int		check_chr(char c, int i, int j, int *players);
 
 /*========================= ARRAY_UTIL_FUNCTIONS ============================*/
 size_t	array_size(char **arr);
+
+/*========================= PARSE_UTIL_FUNCTIONS ============================*/
+int		text_dist(char **arr);
+void	save_line(char *line, int line_size, int row);
 
 #endif

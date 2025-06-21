@@ -6,12 +6,13 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 21:45:47 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/21 15:50:14 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/21 22:04:52 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+// ft_strlcpy functions remove the line break character from the line
 static void	save_map(char *line, int row)
 {
 	int		line_size;
@@ -24,27 +25,9 @@ static void	save_map(char *line, int row)
 	line_size = ft_strlen(line);
 	new_line_char = ft_strchr(line, '\n');
 	if (new_line_char)
-	{
-		g()->map.map_data[row] = malloc(line_size);
-		if (g()->map.map_data[row] == NULL)
-		{
-			free(line);
-			exit_log("Error: Memory allocation error\n");
-		}
-		// This removes the line break character from the line
-		ft_strlcpy(g()->map.map_data[row], line, line_size);
-	}
+		save_line(line, line_size, row);
 	else
-	{
-		g()->map.map_data[row] = malloc(line_size + 1);
-		if (g()->map.map_data[row] == NULL)
-		{
-			free(line);
-			exit_log("Error: Memory allocation error\n");
-		}
-		// This removes the line break character from the line
-		ft_strlcpy(g()->map.map_data[row], line, line_size + 1);
-	}
+		save_line(line, line_size + 1, row);
 	if ((line_size - 1) > g()->map.width)
 		g()->map.width = line_size - 1;
 	g()->map.height++;
@@ -57,7 +40,7 @@ static void	save_ceil_floor(char **arr, char *line)
 
 	num = ft_split(arr[1], ',');
 	if (num == NULL)
-		exit_log("Error: Memory allocation error\n");	
+		exit_log("Error: Memory allocation error\n");
 	if (array_size(num) != 3)
 	{
 		free(line);
@@ -86,34 +69,26 @@ static int	save_texture(char *line)
 
 	arr = ft_split(line, ' ');
 	if (arr == NULL)
-		exit_log("Error: Memory allocation error\n");	
+		exit_log("Error: Memory allocation error\n");
 	if (array_size(arr) != 2)
 	{
 		free(line);
 		clear_arr(arr);
 		exit_log("Error: Texture information format is wrong\n");
 	}
-	if (ft_strncmp("SO", arr[0], 2) == 0 && !g()->textures->south.img)
-		assign_img(&g()->textures->south, arr[1]);
-	else if (ft_strncmp("NO", arr[0], 2) == 0 && !g()->textures->north.img)
-		assign_img(&g()->textures->north, arr[1]);
-	else if (ft_strncmp("WE", arr[0], 2) == 0 && !g()->textures->west.img)
-		assign_img(&g()->textures->west, arr[1]);
-	else if (ft_strncmp("EA", arr[0], 2) == 0 && !g()->textures->east.img)
-		assign_img(&g()->textures->east, arr[1]);
-	else if (arr[0][0] == 'F' || arr[0][0] == 'C')
+	if (arr[0][0] == 'F' || arr[0][0] == 'C')
 	{
 		save_ceil_floor(arr, line);
 		clear_arr(arr);
 		return (1);
 	}
-	else
+	else if (text_dist(arr))
 	{
 		clear_arr(arr);
-		return (0);
+		return (1);
 	}
 	clear_arr(arr);
-	return (1);
+	return (0);
 }
 
 static void	extract(char *line, int *nb)
@@ -135,7 +110,7 @@ static void	extract(char *line, int *nb)
 	(*nb)++;
 }
 
-void	parsing(int	fd)
+void	parsing(int fd)
 {
 	char	*line;
 	int		i;

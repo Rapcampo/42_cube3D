@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 22:19:16 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/21 21:04:56 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/21 21:33:12 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,3 @@ inline int	check_chr(char c, int i, int j, int *players)
 		exit_log("Error: Invalid character in map.\n");
 	return (0);
 }
-
-// // TODO: Realocate the map to have a constant width (fill empty char with wall)
-// void	find_player(void)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		count_players;
-// 	char	**map;
-
-// 	i = 0;
-// 	count_players = 0;
-// 	map = g()->map.map_data;
-// 	while (map[i])
-// 	{
-// 		j = 0;
-// 		while (map[i][j])
-// 		{
-// 			count_players += check_chr(map[i][j], i, j);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	if (count_players != 1)
-// 		exit_log("Error: Incorrect amount of players in the map\n");
-// }

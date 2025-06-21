@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 21:37:29 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/21 20:24:32 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/21 21:28:18 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ struct	s_map;
 struct	s_game;
 
 void	put_los(struct s_data *minimap, t_dda *dda,
-			 struct s_map *map, int print);
+			struct s_map *map, int print);
 
 #endif

@@ -6,13 +6,11 @@
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:37:55 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/06/21 11:21:15 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/21 22:41:14 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-void	assign_img(struct s_data *tex, char *img_path);
 
 int	map_coord(int x, int y)
 {

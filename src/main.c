@@ -6,7 +6,7 @@
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:27:07 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/06/21 17:23:17 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/21 21:47:08 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/cub3d.h"
@@ -69,7 +69,6 @@ static void	init_game(t_game *g, char *file)
 	mlx = &g->mlx;
 	g->textures = &tex;
 	start_mlx_win();
-	// temp_map(&g->map);
 	parsing(check_file_exten(file));
 	map_checker();
 	set_skybox(g->textures);

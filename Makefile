@@ -6,7 +6,7 @@
 #    By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/06 13:52:55 by rapcampo          #+#    #+#              #
-#    Updated: 2025/06/21 14:48:14 by tialbert         ###   ########.fr        #
+#    Updated: 2025/06/21 22:12:42 by tialbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ ENGINE	= key_events.c screen_output.c pixel_draw.c raycaster.c raydraw.c \
 		  colours.c
 MEMORY	= fail_exit.c clean_exit.c clean_array.c
 UTILS	= global.c time.c map.c img_conversion.c file_checks.c map_utils.c \
-		  texture_utils.c find_player.c array_utils.c
+		  texture_utils.c find_player.c array_utils.c parse_utils.c
 MAP		= map_checker.c
 OBJS	= $(addprefix $(OBJS_DIR), $(SOURCE_LST:.c=.o))
 LIBFT	= -L ./libft
