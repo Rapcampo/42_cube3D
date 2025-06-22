@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:13:36 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/21 21:05:40 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/22 21:51:22 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@ static inline void	check_line(char *line, int i, int *players)
 	while (j < line_size)
 	{
 		if (j == 0 && !(line[j] == WALL || line[j] == EMPTY))
-			exit_log("Error\nInvalid map (open)\n");
+			exit_log(RED ERR_MAP_OPEN RST);
 		if (j == line_size - 1 && !(line[j] == WALL || line[j] == EMPTY))
-			exit_log("Error\nInvalid map (open)\n");
+			exit_log(RED ERR_MAP_OPEN RST);
 		if (!check_chr(line[j], i, j, players))
-			exit_log("Error\nInvalid character in map\n");
-		if (line[j] == 0)
+			exit_log(RED ERR_INV_CHR RST);
+		if (line[j] == EMPTY)
 		{
 			if (j > 0 && line[j - 1] != WALL)
-				exit_log("Error\nInvalid map (open)\n");
-			while (line[j] == EMPTY)
+				exit_log(RED ERR_MAP_OPEN RST);
+			while (j < line_size - 1 && line[j] == EMPTY)
 				j++;
-			if (line[j] && line[j] != WALL)
-				exit_log("Error\nInvalid map (open)\n");
+			if (line[j] && line[j] != WALL && line[j] != EMPTY)
+				exit_log(RED ERR_MAP_OPEN RST);
 		}
 		if (j < line_size)
 			j++;
@@ -63,19 +63,19 @@ static inline void	check_col(char **map, int j, int *players)
 	while (i < map_height)
 	{
 		if (i == 0 && !(map[i][j] == WALL || map[i][j] == EMPTY))
-			exit_log("Error\nInvalid map (open)\n");
+			exit_log(RED ERR_MAP_OPEN RST);
 		if (i == map_height - 1 && !(map[i][j] == WALL || map[i][j] == EMPTY))
-			exit_log("Error\nInvalid map (open)\n");
+			exit_log(RED ERR_MAP_OPEN RST);
 		if (!check_chr(map[i][j], i, j, players))
-			exit_log("Error\nInvalid character in map\n");
-		if (map[i][j] == 0)
+			exit_log(RED ERR_INV_CHR RST);
+		if (map[i][j] == EMPTY)
 		{
 			if (i > 0 && map[i - 1][j] != WALL)
-				exit_log("Error\nInvalid map (open)\n");
-			while (map[i][j] == EMPTY)
+				exit_log(RED ERR_MAP_OPEN RST);
+			while (i < map_height - 1 && map[i][j] == EMPTY)
 				i++;
-			if (map[i][j] && map[i][j] != WALL)
-				exit_log("Error\nInvalid map (open)\n");
+			if (map[i][j] && map[i][j] != WALL && map[i][j] != EMPTY)
+				exit_log(RED ERR_MAP_OPEN RST);
 		}
 		if (i < map_height)
 			i++;
@@ -101,5 +101,5 @@ void	map_checker(void)
 	hor_ver(map, &players);
 	vert_ver(map, &players);
 	if (players != 1)
-		exit_log("Error\nWrong number of players\n");
+		exit_log(RED ERR_PLR RST);
 }

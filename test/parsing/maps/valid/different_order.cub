@@ -1,11 +1,11 @@
-EA IMG/Wolfenstein/redbrick.png
+EA assets/e1.xpm
 
-SO IMG/Wolfenstein/greystone.png
+SO assets/s1.xpm
 
-WE IMG/Wolfenstein/wood.png
+WE assets/w1.xpm
 F 220,100,0
 C 225,30,0
-NO IMG/Wolfenstein/bluestone.png
+NO assets/n1.xpm
 
 11111
 10001

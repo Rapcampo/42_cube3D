@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:00:04 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/21 21:35:39 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/22 10:55:57 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ static int	open_file(char *file)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-	{
-		perror(strerror(errno));
-		exit(errno);
-	}
+		exit_log(RED ERR_FILE RST);
 	return (fd);
 }
 
@@ -34,17 +31,10 @@ int	check_file_exten(char *file)
 
 	ext = ".cub";
 	dot_loc = ft_strrchr(file, '.');
-	while (*dot_loc && *ext)
-	{
-		if (*(dot_loc++) != *(ext++))
-		{
-			printf("Error: Incorrect file type! \
-				  Please, provide a '.cub' file\n");
-			exit(1);
-		}
-	}
-	if (!*dot_loc && !*ext)
+	if (!dot_loc)
+		exit_log(RED ERR_EXT RST);
+	if (!ft_strncmp(dot_loc, ext, ft_strlen(ext)))
 		return (open_file(file));
-	printf("Error: Incorrect file type! Please, provide a '.cub' file\n");
-	exit(1);
+	exit_log(RED ERR_EXT RST);
+	return (-1);
 }

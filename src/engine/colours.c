@@ -6,7 +6,7 @@
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 17:07:15 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/16 17:49:12 by rapcampo         ###   ########.fr       */
+/*   Updated: 2025/06/22 18:09:07 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ int	get_blue(int argb)
 
 int	get_argb(int t, int r, int g, int b)
 {
+	if (r < 0 || g < 0 || b < 0)
+		exit_log(RED ERR_NEG_COL RST);
+	else if (r > 255 || g > 255 || b > 255)
+		exit_log(RED ERR_HIGH_COL RST);
 	return ((t << 24) | (r << 16) | (g << 8) | b);
 }
 

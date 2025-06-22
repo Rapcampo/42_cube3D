@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 15:44:16 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/21 17:26:54 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/22 11:07:02 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static inline char	*resize_line(char *line, int width)
 
 	new_line = malloc(width + 1);
 	if (!new_line)
-		exit_log("Error\n Memory allocation\n");
+		exit_log(RED ERR_MEM RST);
 	bzero(new_line, width + 1);
 	i = -1;
 	while (line[++i])

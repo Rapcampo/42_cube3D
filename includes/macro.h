@@ -6,7 +6,7 @@
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 11:25:22 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/05/08 11:33:13 by rapcampo         ###   ########.fr       */
+/*   Updated: 2025/06/22 20:33:26 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,27 @@
 
 /*============================= Error Logs ===================================*/
 
-# define ER_MLX_INIT "Error: mlx_init failed!\n"
-# define ER_MLX_WIN "Error: mlx_win failed to initialize!\n"
-# define ERR_TIME "Error: gettimeofday failure\n"
-# define ERR_PATH "Error: Image path does not lead to a valid file\n"
-# define ERR_OPEN "Error MLX could not access image file\n"
-# define ERR_ADDR "Error: Image address has not been correctly set!\n"
-# define ERR_IMG "Error: MLX could not create image file\n"
+# define ER_MLX_INIT "Error\nmlx_init failed!\n"
+# define ER_MLX_WIN "Error\nmlx_win failed to initialize!\n"
+# define ERR_TIME "Error\ngettimeofday failure\n"
+# define ERR_PATH "Error\nImage path does not lead to a valid file\n"
+# define ERR_OPEN "Error\nMLX could not access image file\n"
+# define ERR_ADDR "Error\nImage address has not been correctly set!\n"
+# define ERR_IMG "Error\nMLX could not create image file\n"
+# define ERR_EXT "Error\nIncorrect file type! Provide a '.cub' file\n"
+# define ERR_FILE "Error\nError opening map information file\n"
+# define ERR_MEM "Error\nMemory allocation error\n"
+# define ERR_COL "Error\nIncorrect format for colours (floor and ceiling)\n"
+# define ERR_NEG_COL "Error\nNegative value in colour\n"
+# define ERR_HIGH_COL "Error\nColour value too high\n"
+# define ERR_TEX "Error\nTexture information format is wrong\n"
+# define ERR_TEX_REP "Error\nIdentifier is repeated\n"
+# define ERR_MAP_LINE "Error\nInvalid map (empty line)\n"
+# define ERR_MAP_OPEN "Error\nInvalid map (open)\n"
+# define ERR_MISS "Error\nMissing information on .cub file\n"
+# define ERR_INV_CHR "Error\nInvalid character in map.\n"
+# define ERR_PLR "Error\nWrong number of players\n"
+# define ERR_INV_LINE "Error\nInvalid line in .cub file\n"
 
 /*============================= Ansi colours =================================*/
 

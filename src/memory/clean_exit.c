@@ -6,7 +6,7 @@
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:11:09 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/06/21 21:18:57 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/22 15:26:47 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,17 @@ void	destroy_map(void **map)
 
 static void	destroy_textures(t_game *game, t_textures *textures)
 {
-	if (textures->north.img)
-		destroy_images(game, &textures->north);
-	if (textures->south.img)
-		destroy_images(game, &textures->south);
-	if (textures->east.img)
-		destroy_images(game, &textures->east);
-	if (textures->west.img)
-		destroy_images(game, &textures->west);
+	if (textures)
+	{
+		if (textures->north.img)
+			destroy_images(game, &textures->north);
+		if (textures->south.img)
+			destroy_images(game, &textures->south);
+		if (textures->east.img)
+			destroy_images(game, &textures->east);
+		if (textures->west.img)
+			destroy_images(game, &textures->west);
+	}
 }
 
 void	destroy_game(void)

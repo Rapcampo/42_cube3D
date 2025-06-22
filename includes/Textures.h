@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 21:00:37 by tialbert          #+#    #+#             */
-/*   Updated: 2025/05/10 21:01:56 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/22 17:58:54 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ typedef struct s_textures
 	int		ceil[3];
 }			t_textures;
 
-void	assign_img(t_data *tex, char *img_path);
+int	assign_img(t_data *tex, char **img_arr, char *line);
 
 #endif

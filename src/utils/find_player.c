@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 22:19:16 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/21 21:33:12 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/22 11:02:13 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,5 @@ inline int	check_chr(char c, int i, int j, int *players)
 		(*players)++;
 		return (1);
 	}
-	else
-		exit_log("Error: Invalid character in map.\n");
 	return (0);
 }

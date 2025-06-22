@@ -1,45 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_alt_split.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rapcampo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 17:10:24 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/06/22 21:22:45 by tialbert         ###   ########.fr       */
+/*   Created: 2025/06/22 20:49:10 by tialbert          #+#    #+#             */
+/*   Updated: 2025/06/22 21:28:27 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/cub3d.h"
 
-static int	ft_wordcount(char const *s, char c)
+static int	ft_wordlen(char const *s, char c, int j)
 {
-	int	count;
 	int	i;
 
 	i = 0;
-	count = 0;
-	while (s[i])
+	if (j == 0)
 	{
-		if (s[i] != c)
-		{
-			count++;
-			while (s[i] && s[i] != c)
-				i++;
-		}
-		else
+		while (s[i] && s[i] != c)
 			i++;
 	}
-	return (count);
-}
-
-static int	ft_wordlen(char const *s, char c)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] && s[i] != c)
-		i++;
+	else
+	{
+		while (s[i])
+			i++;
+	}
 	return (i);
 }
 
@@ -54,7 +41,7 @@ static char	**ft_freeup(char **str, int i)
 	return (NULL);
 }
 
-char	**ft_split(const char *s, char c)
+char	**ft_alt_split(const char *s, char c)
 {
 	char	**str;
 	int		i;
@@ -62,18 +49,18 @@ char	**ft_split(const char *s, char c)
 
 	i = 0;
 	j = 0;
-	str = (char **)malloc(sizeof(char *) * (ft_wordcount(s, c) + 1));
+	str = (char **)malloc(sizeof(char *) * (2 + 1));
 	if (!s || !str)
 		return (NULL);
-	while (s[i])
+	while (s[i] && j < 2)
 	{
 		if (s[i] != c)
 		{
-			str[j] = ft_substr(s, i, ft_wordlen(&s[i], c));
+			str[j] = ft_substr(s, i, ft_wordlen(&s[i], c, j));
 			if (!str[j])
 				return (ft_freeup(str, j));
+			i += ft_wordlen(&s[i], c, j);
 			j++;
-			i += ft_wordlen(&s[i], c);
 		}
 		else
 			i++;

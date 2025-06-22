@@ -23,11 +23,24 @@
 // 		i++;
 // 	}
 // }
+static void	start_mlx_win(void)
+{
+	t_mlx	*mlx;
+
+	mlx = &g()->mlx;
+	mlx->ptr = mlx_init();
+	if (!mlx->ptr)
+		exit_log(RED ER_MLX_INIT RST);
+	mlx->win = mlx_new_window(mlx->ptr, WIDTH, HEIGHT, "cub3d");
+	if (!mlx->win)
+		exit_log(RED ER_MLX_WIN RST);
+}
 
 int	main(int argc, char **argv)
 {
 	if (argc != 2)
 		exit_log("Wrong number of arguments\n");
+	start_mlx_win();
 	parsing(check_file_exten(argv[1]));
 	// if (ft_strcmp(argv[1], "../../valid/") == 0)
 	// 	cmp_arr(valid_map_array(argv[1]));

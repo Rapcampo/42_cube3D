@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 21:45:47 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/21 22:04:52 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/22 21:29:00 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,32 +33,27 @@ static void	save_map(char *line, int row)
 	g()->map.height++;
 }
 
-// TODO: The strncmp function has been changed to avoid past errors. Make sure it actually works correctly
 static void	save_ceil_floor(char **arr, char *line)
 {
 	char	**num;
 
 	num = ft_split(arr[1], ',');
 	if (num == NULL)
-		exit_log("Error: Memory allocation error\n");
+		exit_log(RED ERR_MEM RST);
 	if (array_size(num) != 3)
 	{
-		free(line);
-		clear_arr(arr);
 		clear_arr(num);
-		exit_log("Error: Incorrect format for colours (floor and ceiling)\n");
+		clean_mem(RED ERR_COL RST, arr, line, NULL);
 	}
-	if (ft_strncmp("C", arr[0], 1) == 0)
+	if (!save_ceil(arr[0], num, g()->textures))
 	{
-		g()->textures->ceil[0] = ft_atoi(num[0]);
-		g()->textures->ceil[1] = ft_atoi(num[1]);
-		g()->textures->ceil[2] = ft_atoi(num[2]);
+		clear_arr(num);
+		clean_mem(RED ERR_COL RST, arr, line, NULL);
 	}
-	else if (ft_strncmp("F", arr[0], 1) == 0)
+	if (!save_floor(arr[0], num, g()->textures))
 	{
-		g()->textures->floor[0] = ft_atoi(num[0]);
-		g()->textures->floor[1] = ft_atoi(num[1]);
-		g()->textures->floor[2] = ft_atoi(num[2]);
+		clear_arr(num);
+		clean_mem(RED ERR_COL RST, arr, line, NULL);
 	}
 	clear_arr(num);
 }
@@ -67,36 +62,40 @@ static int	save_texture(char *line)
 {
 	char	**arr;
 
-	arr = ft_split(line, ' ');
+	arr = ft_alt_split(line, ' ');
 	if (arr == NULL)
-		exit_log("Error: Memory allocation error\n");
+		exit_log(RED ERR_MEM RST);
 	if (array_size(arr) != 2)
-	{
-		free(line);
-		clear_arr(arr);
-		exit_log("Error: Texture information format is wrong\n");
-	}
-	if (arr[0][0] == 'F' || arr[0][0] == 'C')
+		clean_mem(RED ERR_TEX RST, arr, line, NULL);
+	if (!ft_strncmp(arr[0], "F", ft_strlen(arr[0]))
+		|| !ft_strncmp(arr[0], "C", ft_strlen(arr[0])))
 	{
 		save_ceil_floor(arr, line);
 		clear_arr(arr);
 		return (1);
 	}
-	else if (text_dist(arr))
+	else if (text_dist(arr, line))
 	{
 		clear_arr(arr);
 		return (1);
 	}
 	clear_arr(arr);
+	free(line);
+	exit_log(RED ERR_INV_LINE RST);
 	return (0);
 }
 
 static void	extract(char *line, int *nb)
 {
+	if (check_id(line) && *nb >= 6)
+	{
+		free(line);
+		exit_log(RED ERR_TEX_REP RST);
+	}
 	if (*line == '\n' && *nb > 6)
 	{
 		free(line);
-		exit_log("Error: Invalid map (empty line)\n");
+		exit_log(RED ERR_MAP_LINE RST);
 	}
 	if (*line == '\n')
 		return ;
@@ -127,6 +126,6 @@ void	parsing(int fd)
 	free(line);
 	close(fd);
 	if (i <= 6)
-		exit_log("Error: Missing information on .cub file\n");
+		exit_log(RED ERR_MISS RST);
 	resize_map();
 }

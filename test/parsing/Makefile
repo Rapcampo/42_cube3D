@@ -6,7 +6,7 @@
 #    By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/06 13:52:55 by rapcampo          #+#    #+#              #
-#    Updated: 2025/06/21 22:18:29 by tialbert         ###   ########.fr        #
+#    Updated: 2025/06/22 20:52:01 by tialbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ TESTER	= parse_test.c
 PARSER	= parse.c resize_map.c
 MEMORY	= fail_exit.c clean_exit.c clean_array.c
 UTILS	= global.c file_checks.c map_utils.c texture_utils.c find_player.c \
-		  array_utils.c parse_utils.c img_conversion.c map.c
+		  array_utils.c parse_utils.c img_conversion.c map.c ft_alt_split.c
 MAP		= map_checker.c
 OBJS	= $(addprefix $(OBJS_DIR), $(SOURCE_LST:.c=.o))
 LIBFT	= -L ../../libft

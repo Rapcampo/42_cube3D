@@ -1,7 +1,7 @@
 NO hi.png
-SO IMG/Wolfenstein/greystone.png
-WE IMG/Wolfenstein/wood.png
-EA IMG/Wolfenstein/redbrick.png
+SO assets/s1.xpm
+WE assets/w1.xpm
+EA assets/e1.xpm
 
 F 220,100,0
 C 225,30,0

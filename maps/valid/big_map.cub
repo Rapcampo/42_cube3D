@@ -1,7 +1,7 @@
-NO /home/tiago/42/rank4/cube3D/assets/n1.xpm
-SO /home/tiago/42/rank4/cube3D/assets/s1.xpm
-WE /home/tiago/42/rank4/cube3D/assets/w1.xpm
-EA /home/tiago/42/rank4/cube3D/assets/e1.xpm
+NO assets/n1.xpm
+SO assets/s1.xpm
+WE assets/w1.xpm
+EA assets/e1.xpm
 
 F 220,100,0
 C 225,30,0
