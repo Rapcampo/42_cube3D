@@ -24,8 +24,8 @@ int	map_coord(int x, int y)
 
 void	set_player(t_player *p, t_point *pos, char dir)
 {
-	p->pos.x = pos->x;
-	p->pos.y = pos->y;
+	p->pos.x = pos->x + 0.5;
+	p->pos.y = pos->y + 0.5;
 	if (dir == 'N')
 	{
 		p->dir.y = -1;

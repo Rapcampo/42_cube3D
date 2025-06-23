@@ -48,8 +48,8 @@ int	init_frame(t_data *frame, t_mlx *mlx)
 int	init_minimap(t_data *minimap, t_mlx *mlx, t_data *frame)
 {
 	(void)mlx;
-	minimap->height = HEIGHT >> 2;
-	minimap->width = WIDTH >> 2;
+	minimap->height = HEIGHT * .4;
+	minimap->width = WIDTH * .4;
 	minimap->img = frame->img;
 	minimap->addr = frame->addr;
 	minimap->bpp = frame->bpp;
@@ -61,8 +61,8 @@ int	init_minimap(t_data *minimap, t_mlx *mlx, t_data *frame)
 
 void	put_los(t_data *minimap, t_dda *dda, t_map *map, int print)
 {
-	const float	scale_x = g()->cell.x;
-	const float	scale_y = g()->cell.y;
+	const float	scale_x = floor(g()->cell.x);
+	const float	scale_y = floor(g()->cell.y);
 	static int	x[15000];
 	static int	y[15000];
 	static int	i;
