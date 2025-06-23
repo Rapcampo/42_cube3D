@@ -71,16 +71,6 @@ void	put_player(int start_x, int start_y, t_data *frame, int color)
 	}
 }
 
-static void	player_pos_opt(int cell_w, int cell_h, t_player *p, t_data *frame)
-{
-	static t_fpoint	player;
-
-	put_player(player.x * cell_w, player.y * cell_h, frame, HEX_BLK);
-	player.x = p->pos.x;
-	player.y = p->pos.y;
-	put_player(p->pos.x * cell_w, p->pos.y * cell_h, frame, HEX_RED);
-}
-
 int	render_frame(t_data *frame)
 {
 	const int	cell_h = (int)g()->cell.y;
@@ -100,6 +90,5 @@ int	render_frame(t_data *frame)
 	}
 	put_player(g()->player.pos.x * cell_w, g()->player.pos.y * cell_h,
 		frame, HEX_RED);
-	player_pos_opt(cell_w, cell_h, &g()->player, frame);
 	return (0);
 }
