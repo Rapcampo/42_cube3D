@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:00:04 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/22 10:55:57 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/23 22:02:17 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,22 @@ static int	open_file(char *file)
 	return (fd);
 }
 
-// TODO: Verify if the extension check works properly with paths using more '.'
-// Example: "../../maps/valid/42.cub" or "./maps/valid/42.cub"
-int	check_file_exten(char *file)
+int	check_file_exten(char *file, char *ext, int opt)
 {
-	char	*ext;
 	char	*dot_loc;
 
-	ext = ".cub";
 	dot_loc = ft_strrchr(file, '.');
 	if (!dot_loc)
 		exit_log(RED ERR_EXT RST);
-	if (!ft_strncmp(dot_loc, ext, ft_strlen(ext)))
+	if (!ft_strncmp(dot_loc, ext, ft_strlen(ext)) && opt)
 		return (open_file(file));
-	exit_log(RED ERR_EXT RST);
+	else if (!ft_strncmp(dot_loc, ext, ft_strlen(ext)) && !opt)
+		return (1);
+	if (!opt)
+	{
+		free(file);
+		exit_log(RED ERR_EXT_I RST);
+	}
+	exit_log(RED ERR_EXT_C RST);
 	return (-1);
 }

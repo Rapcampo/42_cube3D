@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:03:17 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/22 21:31:34 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/23 21:51:27 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ struct	s_textures;
 
 /*============================ UTIL_FUNCTIONS ===============================*/
 
-int		check_file_exten(char *file);
+int		check_file_exten(char *file, char *ext, int opt);
 void	get_time_delta(struct s_time *time);
 int		darken(int side, int color);
 void	clean_mem(char *msg, char **arr, char *str, char *path);
