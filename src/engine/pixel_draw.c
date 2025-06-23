@@ -24,8 +24,8 @@ void	pixel_put(t_data *data, int x, int y, int color)
 
 static void	put_block(int start_x, int start_y, t_data *frame, char m)
 {
-	const int	cell_h = (int)(frame->height / g()->map.height);
-	const int	cell_w = (int)(frame->width / g()->map.width);
+	const int	cell_h = (int)g()->cell.y;
+	const int	cell_w = (int)g()->cell.x;
 	int			h;
 	int			w;
 
@@ -50,8 +50,8 @@ static void	put_block(int start_x, int start_y, t_data *frame, char m)
 
 void	put_player(int start_x, int start_y, t_data *frame, int color)
 {
-	const int	cell_h = (int)(frame->height / g()->map.height);
-	const int	cell_w = (int)(frame->height / g()->map.width);
+	const int	cell_h = (int)g()->cell.y;
+	const int	cell_w = (int)g()->cell.x;
 	const int	radius = cell_w >> 2;
 	t_point		cell;
 	t_point		delta;
@@ -66,7 +66,7 @@ void	put_player(int start_x, int start_y, t_data *frame, int color)
 			delta.y = cell.y - (cell_h >> 1);
 			if (((delta.x * delta.x) + (delta.y * delta.y))
 				<= (radius * radius))
-				pixel_put(frame, start_x + cell.x, start_y + cell.y, color);
+				pixel_put(frame, start_x + delta.x, start_y + delta.y, color);
 		}
 	}
 }
@@ -83,10 +83,10 @@ static void	player_pos_opt(int cell_w, int cell_h, t_player *p, t_data *frame)
 
 int	render_frame(t_data *frame)
 {
-	const int		cell_h = (int)(frame->height / g()->map.height);
-	const int		cell_w = (int)(frame->width / g()->map.width);
-	t_map			*map;
-	t_point			screen;
+	const int	cell_h = (int)g()->cell.y;
+	const int	cell_w = (int)g()->cell.x;
+	t_map		*map;
+	t_point		screen;
 
 	map = &g()->map;
 	screen.y = -1;

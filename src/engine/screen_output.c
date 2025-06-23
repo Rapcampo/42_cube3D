@@ -12,6 +12,25 @@
 
 #include "../../includes/cub3d.h"
 
+t_fpoint	scalling_factor(t_game *g, t_fpoint *scale)
+{
+	t_fpoint	aspect;
+
+	aspect.x = (float)g->minimap.width / (float)g->minimap.height;
+	aspect.y = (float)g->map.width / (float)g->map.height;
+	if (aspect.x > aspect.y)
+	{
+		scale->x = (float)g->minimap.height / (float)g->map.height;
+		scale->y = scale->x;
+	}
+	else
+	{
+		scale->y = (float)g->minimap.width / (float)g->map.width;
+		scale->x = scale->y;
+	}
+	return (*scale);
+}
+
 int	init_frame(t_data *frame, t_mlx *mlx)
 {
 	frame->height = HEIGHT;
@@ -36,17 +55,19 @@ int	init_minimap(t_data *minimap, t_mlx *mlx, t_data *frame)
 	minimap->bpp = frame->bpp;
 	minimap->endian = frame->endian;
 	minimap->ll = frame->ll;
+	g()->cell = scalling_factor(g(), &g()->cell);
 	return (0);
 }
 
 void	put_los(t_data *minimap, t_dda *dda, t_map *map, int print)
 {
-	const float	scale_x = minimap->width / map->width;
-	const float	scale_y = minimap->height / map->height;
+	const float	scale_x = g()->cell.x;
+	const float	scale_y = g()->cell.y;
 	static int	x[15000];
 	static int	y[15000];
 	static int	i;
 
+	(void)map;
 	if (print == 0 && i < 15000)
 	{
 		x[i] = dda->map.x;

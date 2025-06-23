@@ -69,6 +69,7 @@ typedef struct s_game
 	t_map		map;
 	t_data		frame;
 	t_data		minimap;
+	t_fpoint	cell;
 	t_time		time;
 	int			key[0xFF];
 }	t_game;
@@ -111,16 +112,17 @@ typedef enum e_event
 
 /*============================= struct access ================================*/
 
-t_game	*g(void);
-int		gameloop(t_game *gm);
-void	set_skybox(t_textures *tex);
-void	set_player(t_player *p, t_point *pos, char dir);
+t_game		*g(void);
+int			gameloop(t_game *gm);
+void		set_skybox(t_textures *tex);
+void		set_player(t_player *p, t_point *pos, char dir);
 
 /*============================= game =========================================*/
-int		get_red(int argb);
-int		get_green(int argb);
-int		get_blue(int argb);
-int		get_argb(int t, int r, int g, int b);
-int		temp_map(t_map *imap);
+int			get_red(int argb);
+int			get_green(int argb);
+int			get_blue(int argb);
+int			get_argb(int t, int r, int g, int b);
+int			temp_map(t_map *imap);
+t_fpoint	scalling_factor(t_game *g, t_fpoint *scale);
 
 #endif
