@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:00:04 by tialbert          #+#    #+#             */
-/*   Updated: 2025/06/23 22:02:17 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/23 22:19:42 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ int	check_file_exten(char *file, char *ext, int opt)
 	else if (!ft_strncmp(dot_loc, ext, ft_strlen(ext)) && !opt)
 		return (1);
 	if (!opt)
-	{
-		free(file);
-		exit_log(RED ERR_EXT_I RST);
-	}
+		return (0);
 	exit_log(RED ERR_EXT_C RST);
 	return (-1);
 }
