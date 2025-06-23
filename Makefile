@@ -12,7 +12,7 @@
 
 # ================================= Files ======================================
 
-NAME	= cub3d
+NAME	= cub3D
 SOURCE	= $(SOURCE_DIR)
 PARSER	= parse.c resize_map.c
 ENGINE	= key_events.c screen_output.c pixel_draw.c raycaster.c raydraw.c \

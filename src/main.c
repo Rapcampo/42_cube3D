@@ -22,11 +22,9 @@
 int	gameloop(t_game *gm)
 {
 	static int	framesave;
-	char		*fps;
 
 	get_time_delta(&gm->time);
 	printf("Current FPS: %f\r", gm->time.fps);
-	fps = ft_itoa((int)gm->time.fps);
 	if (framesave == 6)
 	{
 		render_game(&gm->frame);
@@ -39,9 +37,6 @@ int	gameloop(t_game *gm)
 	render_mov(&gm->player);
 	render_rot(&gm->player);
 	mlx_put_image_to_window(gm->mlx.ptr, gm->mlx.win, gm->frame.img, 0, 0);
-	mlx_string_put(gm->mlx.ptr, gm->mlx.win,
-		WIDTH - 50, HEIGHT - 30, HEX_WHT, fps);
-	free(fps);
 	return (0);
 }
 //todo: check later
