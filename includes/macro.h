@@ -6,7 +6,7 @@
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 11:25:22 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/06/22 20:33:26 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/23 22:03:02 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@
 # define ERR_OPEN "Error\nMLX could not access image file\n"
 # define ERR_ADDR "Error\nImage address has not been correctly set!\n"
 # define ERR_IMG "Error\nMLX could not create image file\n"
-# define ERR_EXT "Error\nIncorrect file type! Provide a '.cub' file\n"
+# define ERR_EXT "Error\nFile with no extension\n"
+# define ERR_EXT_C "Error\nIncorrect file type! Provide a '.cub' file\n"
+# define ERR_EXT_I "Error\nIncorrect image file type! Provide a '.xpm' file\n"
 # define ERR_FILE "Error\nError opening map information file\n"
 # define ERR_MEM "Error\nMemory allocation error\n"
 # define ERR_COL "Error\nIncorrect format for colours (floor and ceiling)\n"

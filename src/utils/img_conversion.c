@@ -6,7 +6,7 @@
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 13:40:02 by rapcampo          #+#    #+#             */
-/*   Updated: 2025/06/22 17:59:03 by tialbert         ###   ########.fr       */
+/*   Updated: 2025/06/23 22:19:53 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	assign_img(t_data *tex, char **img_arr, char *line)
 	if (!path)
 		clean_mem(RED ERR_MEM RST, img_arr, line, NULL);
 	ft_strlcpy(path, img_arr[1], ft_strlen(img_arr[1]));
+	if (!check_file_exten(path, ".xpm", 0))
+		clean_mem(RED ERR_EXT_I RST, img_arr, line, path);
 	mlx = &g()->mlx;
 	tex->img = mlx_xpm_file_to_image(mlx->ptr,
 			path, &tex->width, &tex->height);
