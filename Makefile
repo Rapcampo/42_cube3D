@@ -45,7 +45,7 @@ MLX_DIR		= ./mlx/
 CC			= cc
 RM			= rm -rf
 #AR			= ar -rcs
-FLAGS		= -Wall -Wextra -Werror #-O3 #-g -pg
+FLAGS		= -Wall -Wextra -Werror -O3 #-g -pg
 LEAKS		= -g -fsanitize=address
 DEBUG		= -DDEBUG
 MAKE_FLAG	= --no-print-directory
@@ -113,10 +113,11 @@ fclean: clean
 re: fclean all
 
 leak: all
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) test.cub
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) \
+		maps/valid/test.cub
 
 run: re
-	./$(NAME) test.cub
+	./$(NAME) maps/valid/test.cub
 
 .SILENT:
 
