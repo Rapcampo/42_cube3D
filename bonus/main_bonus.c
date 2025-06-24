@@ -29,6 +29,8 @@ int	gameloop(t_game *gm)
 	{
 		render_game(&gm->frame);
 		raycaster();
+		render_frame(&gm->minimap);
+		put_los(&gm->minimap, NULL, &gm->map, 1);
 		framesave = 0;
 	}
 	framesave++;
