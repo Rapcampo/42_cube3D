@@ -158,7 +158,10 @@ fclean: clean
 re: fclean all
 
 leak: all
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) \
+	valgrind --leak-check=full --show-leak-kinds=all ./$(name) \
+		maps/valid/test.cub
+bleak: bonus 
+	valgrind --leak-check=full --show-leak-kinds=all ./$(BONUS) \
 		maps/valid/test.cub
 
 run: re
